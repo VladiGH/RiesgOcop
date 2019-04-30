@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RiesgOcop</string>
+    <string name="ingresa_tu_carnet">Ingresa tu carnet</string>
+    <string name= "enter_your_id">Enter your Student ID</string>
+    <string name="entrar">ENTRAR</string>
+    <string name="enter">ENTER</string>
 </resources>

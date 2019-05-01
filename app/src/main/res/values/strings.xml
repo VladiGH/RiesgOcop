@@ -4,4 +4,10 @@
     <string name= "enter_your_id">Enter your Student ID</string>
     <string name="entrar">ENTRAR</string>
     <string name="enter">ENTER</string>
+    <string name="riesgocop">RiesgOcop</string>
+    <string name="riesgocop">RiesgOcop</string>
+    <string name="ingresa_tu_contrase_a">Ingresa tu contraseña</string>
+    <string name="bienvenido">Bienvenido!</string>
+    <string name="estudiante">ESTUDIANTE</string>
+    <string name="encargado_uca">ENCARGADO UCA</string>
 </resources>

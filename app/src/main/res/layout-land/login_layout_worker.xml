@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/degradado_inicial">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameapp_login"
+            android:text="@string/riesgocop"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#FFFF"
+            android:textSize="35sp"
+            android:layout_gravity="center"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_gravity="center_horizontal"/>
+
+    <EditText
+            android:id="@+id/et_carnet_worker"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ingresa_tu_carnet"
+            android:layout_marginTop="20dp"
+            android:padding="15dp"
+            android:layout_gravity="center_horizontal"/>
+
+    <EditText
+            android:id="@+id/et_pass_worker"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/ingresa_tu_contrase_a"
+            android:layout_marginTop="5dp"
+            android:padding="15dp"
+            android:layout_gravity="center_horizontal"/>
+    <Button
+            android:id="@+id/bt_worker_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/entrar"
+            android:layout_gravity="center"/>
+
+</LinearLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/degradado_inicial">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameapp"
+        android:text="@string/riesgocop"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"
+        android:textColor="#FFFF"
+        android:textSize="40sp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bienvenido"
+        android:textSize="30sp"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:id="@+id/container_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="35dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/to_student_layout"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="@string/estudiante"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:background="#a2b8cb"
+            />
+
+        <TextView
+            android:id="@+id/to_worker_layout"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="@string/encargado_uca"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:background="#5c82a4"/>
+
+    </LinearLayout>
+
+</LinearLayout>

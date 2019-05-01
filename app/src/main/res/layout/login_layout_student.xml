@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/degradado_inicial">
-
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/degradado_inicial">
     <TextView
-        android:id="@+id/nameapp_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RiesgOcop"
-        android:layout_marginTop="30dp"
+        android:id="@+id/nameapp_login"
+        android:text="@string/riesgocop"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:textColor="#FFFF"
-        android:textSize="40dp"
+        android:textSize="40sp"
         android:layout_gravity="center"/>
     <ImageView
         android:layout_width="wrap_content"
@@ -36,4 +35,6 @@
         android:layout_marginTop="50dp"
         android:text="@string/entrar"
         android:layout_gravity="center"/>
+
+
 </LinearLayout>

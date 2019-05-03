@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">RiesgOcop</string>
     <string name="ingresa_tu_carnet">Ingresa tu carnet</string>
-    <string name= "enter_your_id">Enter your Student ID</string>
+    <string name="enter_your_id">Enter your Student ID</string>
     <string name="entrar">ENTRAR</string>
     <string name="enter">ENTER</string>
     <string name="riesgocop">RiesgOcop</string>
@@ -9,4 +9,7 @@
     <string name="bienvenido">Bienvenido!</string>
     <string name="estudiante">ESTUDIANTE</string>
     <string name="encargado_uca">ENCARGADO UCA</string>
+    <string name="suba">Suba una fotografica</string>
+    <string name="take_pic">Tomar Foto</string>
+    <string name="upload">subir</string>
 </resources>

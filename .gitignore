@@ -11,3 +11,9 @@
 /build
 /captures
 .externalNativeBuild
+
+\.idea/codeStyles/codeStyleConfig\.xml
+
+\.idea/codeStyles/Project\.xml
+
+\.idea/misc\.xml

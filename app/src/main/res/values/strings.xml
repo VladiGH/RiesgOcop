@@ -1,15 +1,12 @@
 <resources>
-    <string name="app_name">RiesgOcop</string>
-    <string name="ingresa_tu_carnet">Ingresa tu carnet</string>
-    <string name="enter_your_id">Enter your Student ID</string>
-    <string name="entrar">ENTRAR</string>
-    <string name="enter">ENTER</string>
-    <string name="riesgocop">RiesgOcop</string>
-    <string name="ingresa_tu_contrase_a">Ingresa tu contraseña</string>
-    <string name="bienvenido">Bienvenido!</string>
-    <string name="estudiante">ESTUDIANTE</string>
-    <string name="encargado_uca">ENCARGADO UCA</string>
-    <string name="suba">Suba una fotografica</string>
-    <string name="take_pic">Tomar Foto</string>
-    <string name="upload">subir</string>
+    <string name="app_name" translatable="false">RiesgoCop</string>
+    <string name="enter_your_id">Enter your student ID</string>
+    <string name="enter">Enter</string>
+    <string name="password">Enter your password</string>
+    <string name="welcome">Welcome</string>
+    <string name="student">Student</string>
+    <string name="upload_picture">Upload a picture</string>
+    <string name="take_pic">Take a picture</string>
+    <string name="upload">Upload</string>
+    <string name="admin">Administrator</string>
 </resources>

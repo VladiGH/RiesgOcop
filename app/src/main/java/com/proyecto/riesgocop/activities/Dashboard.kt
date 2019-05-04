@@ -2,6 +2,7 @@ package com.proyecto.riesgocop.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.proyecto.riesgocop.R
 
 class Dashboard : AppCompatActivity() {
 

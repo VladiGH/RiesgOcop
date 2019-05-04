@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/nameapp"
-        android:text="@string/riesgocop"
+        android:text="@string/app_name"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:textColor="#FFFF"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/bienvenido"
+        android:text="@string/welcome"
         android:textSize="30sp"
         android:layout_gravity="center" />
 
@@ -36,7 +36,7 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/estudiante"
+            android:text="@string/student"
             android:textSize="25sp"
             android:gravity="center"
             android:background="#a2b8cb"
@@ -47,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
-            android:text="@string/encargado_uca"
+            android:text="@string/admin"
             android:textSize="25sp"
             android:gravity="center"
             android:background="#5c82a4"/>

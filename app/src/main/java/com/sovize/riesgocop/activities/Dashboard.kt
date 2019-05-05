@@ -1,8 +1,8 @@
-package com.proyecto.riesgocop.activities
+package com.sovize.riesgocop.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.proyecto.riesgocop.R
+import com.sovize.riesgocop.R
 
 class Dashboard : AppCompatActivity() {
 

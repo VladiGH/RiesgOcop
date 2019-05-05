@@ -1,10 +1,10 @@
-package com.proyecto.riesgocop.activities
+package com.sovize.riesgocop.activities
 
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.proyecto.riesgocop.R
-import com.proyecto.riesgocop.system.PermissionRequester
+import com.sovize.riesgocop.R
+import com.sovize.riesgocop.system.PermissionRequester
 
 class ReportActivity : AppCompatActivity() {
 

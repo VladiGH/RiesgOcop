@@ -1,4 +1,4 @@
-package com.proyecto.riesgocop
+package com.sovize.riesgocop
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.proyecto.riesgocop", appContext.packageName)
+        assertEquals("com.sovize.riesgocop", appContext.packageName)
     }
 }

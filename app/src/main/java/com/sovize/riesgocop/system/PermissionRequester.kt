@@ -1,4 +1,4 @@
-package com.proyecto.riesgocop.system
+package com.sovize.riesgocop.system
 
 import android.Manifest
 import android.app.Activity

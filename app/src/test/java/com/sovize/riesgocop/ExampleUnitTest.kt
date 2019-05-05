@@ -1,4 +1,4 @@
-package com.proyecto.riesgocop
+package com.sovize.riesgocop
 
 import org.junit.Test
 

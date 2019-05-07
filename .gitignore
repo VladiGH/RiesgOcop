@@ -17,3 +17,5 @@
 \.idea/codeStyles/Project\.xml
 
 \.idea/misc\.xml
+
+app/google-services\.json

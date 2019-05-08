@@ -9,4 +9,9 @@
     <string name="take_pic">Take a picture</string>
     <string name="upload">Upload</string>
     <string name="admin">Administrator</string>
+    <string name="error_login_default_username">Error during authentication process</string>
+    <string name="instructions">Please sing in to the application with your UCA education Google  account</string>
+    <string name="application_logo">Application logo</string>
+    <string name="user_not_found">User not found</string>
+    <string name="log_out">Log out</string>
 </resources>

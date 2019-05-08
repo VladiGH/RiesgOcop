@@ -9,4 +9,9 @@
     <string name="upload">Subir</string>
     <string name="take_pic">Tomar Foto</string>
     <string name="admin">Administrador</string>
+    <string name="error_login_default_username">Error durante el proceso de autenticacion</string>
+    <string name="instructions">Por favor ingrese en la aplicacion con su cuenta UCA educativa de Google</string>
+    <string name="application_logo">Logo de la aplicacion</string>
+    <string name="log_out">Cerrar sesion</string>
+    <string name="user_not_found">Usuario no encontrado</string>
 </resources>

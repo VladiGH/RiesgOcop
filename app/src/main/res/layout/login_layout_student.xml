@@ -28,13 +28,8 @@
         android:layout_marginTop="30dp"
         android:padding="15dp"
         android:layout_gravity="center_horizontal"/>
-    <Button
-        android:id="@+id/bt_student_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/enter"
-        android:layout_gravity="center"/>
+
+
 
 
 </LinearLayout>

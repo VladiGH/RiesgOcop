@@ -1,3 +1,3 @@
 package com.sovize.riesgocop.models
 
-data class Report (val title: String = "N/A", val danger: Double = 0.0)
+data class Report (val id: String, val title: String = "N/A", val danger: String = "0")

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -77,17 +78,16 @@
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
-            <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="#fff"
-                    android:clickable="true"
-                    android:elevation="4dp"
-                    android:padding="20dp"
-                    android:text="Aca irian los reportes" />
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rv_reports_profile"
+                    tools:listitem="@layout/item_list_report">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
 
 
         </LinearLayout>
     </RelativeLayout>
-</ScrollView>
+</LinearLayout>

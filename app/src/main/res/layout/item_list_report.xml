@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/report_state"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/n_a"
+            android:text="@string/n_a_value"
             android:textSize="20sp"/>
         <TextView
             android:id="@+id/tv_report_danger"
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_report_title"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/n_a"
+            android:text="@string/n_a_value"
             android:textSize="18sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

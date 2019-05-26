@@ -65,7 +65,7 @@
                     android:layout_below="@+id/user_profile_name"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="12dp"
-                    android:text="@string/estos_son_tus_reportes"
+                    android:text="@string/tus_reportes"
                     android:textColor="#fff"
                     android:textSize="14sp" />
         </RelativeLayout>

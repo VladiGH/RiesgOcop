@@ -67,7 +67,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/user_profile_name"
                     android:layout_marginStart="30dp"
-                    android:text="@string/estos_son_tus_reportes"
+                    android:text="@string/tus_reportes"
                     android:textColor="#fff"
                     android:textSize="18sp" />
         </RelativeLayout>

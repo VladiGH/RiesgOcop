@@ -10,20 +10,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Llena el formulario"
+            android:fontFamily="@font/robotoregular"
             android:id="@+id/formTitle"
-
             android:textSize="25sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_name_report"
+        android:layout_below="@+id/formTitle"
+        android:hint="Nombre del reporte"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_descripcion_report"
+        android:layout_below="@+id/et_name_report"
+        android:hint="Descripción"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_ubicacion_report"
+        android:layout_below="@+id/et_descripcion_report"
+        android:hint="Ubicación"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_peligro_report"
+        android:layout_below="@+id/et_ubicacion_report"
+        android:inputType="number"
+        android:hint="Peligro"/>
+
     <Button
             android:id="@+id/takePicture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/formTitle"
+            android:layout_below="@+id/et_peligro_report"
             android:text="@string/take_pic"/>
     <Button
             android:id="@+id/upload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/formTitle"
+            android:layout_below="@+id/takePicture"
             android:text="@string/upload"/>
 
 

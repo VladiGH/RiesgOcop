@@ -17,4 +17,8 @@
     <string name="n_a_value">N/A</string>
     <string name="username">Username</string>
     <string name="tus_reportes">Tus reportes</string>
+    <string name="newIssue">New</string>
+    <string name="in_process">in process</string>
+    <string name="close">close</string>
+    <string name="Zero">0</string>
 </resources>

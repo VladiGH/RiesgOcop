@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.item_list_report.view.*
 
 class ReportAdapter(val items: List<Report>, val clickListener: (Report)-> Unit)
     : RecyclerView.Adapter<ReportAdapter.ViewHolder> (){
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_list_report, parent, false)
@@ -29,7 +30,7 @@ class ReportAdapter(val items: List<Report>, val clickListener: (Report)-> Unit)
 
         fun bind(item: Report, clickListener: (Report) -> Unit)= with(itemView){
             tv_report_title.text = item.title
-            tv_report_danger.text = item.danger.toString()
+            tv_report_danger.text = item.danger
             this.setOnClickListener { clickListener(item) }
 
         }

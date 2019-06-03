@@ -21,4 +21,6 @@
     <string name="in_process">in process</string>
     <string name="close">close</string>
     <string name="Zero">0</string>
+    <string name="title">title</string>
+    <string name="date">date</string>
 </resources>

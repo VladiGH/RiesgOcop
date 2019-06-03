@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.user_profile.*
 class MainActivity : AppCompatActivity() {
 
     private val tag = "MainActivity"
-    private val quickBar = QuickBar.newInstance("hola", "adios")
     private var reportsDB = FirebaseFirestore.getInstance()
     private var reportList = mutableListOf<Report>()
     private lateinit var viewAdapter: ReportAdapter
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         getReportsData()
-        supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
     }
 
     fun getReportsData() {
@@ -54,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                     Log.w(ContentValues.TAG, "Error getting documents.", task.exception)
 
                 }
+                val quickBar = QuickBar.newInstance((reportList.size-3).toString(), (reportList.size-1).toString(), reportList.size.toString())
+                supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
             }
     }
 

@@ -5,7 +5,7 @@
     <string name="enter_your_id">Ingresa tu carnet de estudiante</string>
     <string name="student">Estudiante</string>
     <string name="password">contraseña</string>
-    <string name="upload_picture">Suba una fotografica</string>
+    <string name="upload_picture">Suba una fotografia</string>
     <string name="upload">Subir</string>
     <string name="take_pic">Tomar Foto</string>
     <string name="admin">Administrador</string>
@@ -14,4 +14,13 @@
     <string name="application_logo">Logo de la aplicacion</string>
     <string name="log_out">Cerrar sesion</string>
     <string name="user_not_found">Usuario no encontrado</string>
+    <string name="Zero">0</string>
+    <string name="close">cerrar</string>
+    <string name="date">fecha</string>
+    <string name="in_process">en proceso</string>
+    <string name="n_a_value">N/A</string>
+    <string name="newIssue">nuevos</string>
+    <string name="title">titulo</string>
+    <string name="tus_reportes">Tus reportes</string>
+    <string name="username">usuario</string>
 </resources>

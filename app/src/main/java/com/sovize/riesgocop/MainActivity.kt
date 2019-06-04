@@ -4,12 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
+import com.sovize.riesgocop.views.fragments.IssuesList
 import com.sovize.riesgocop.views.fragments.QuickBar
 
 
 class MainActivity : AppCompatActivity() {
 
     private val quickBar = QuickBar()
+    private val issueFragment = IssuesList()
     private lateinit var vmMain: ViewModelMainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
         supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
     }
 
 }

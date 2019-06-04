@@ -1,4 +1,4 @@
-package com.sovize.riesgocop.adapters
+package com.sovize.riesgocop.views.adapters
 
 import android.view.LayoutInflater
 import android.view.View

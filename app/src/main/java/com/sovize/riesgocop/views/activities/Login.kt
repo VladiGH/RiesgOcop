@@ -1,4 +1,4 @@
-package com.sovize.riesgocop.activities
+package com.sovize.riesgocop.views.activities
 
 import android.content.Intent
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.sovize.riesgocop.network
+package com.sovize.riesgocop.controlers.network
 
 import android.content.Context
 import android.widget.ImageView

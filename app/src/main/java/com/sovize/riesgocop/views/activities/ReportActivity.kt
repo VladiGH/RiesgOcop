@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.firebase.ReportDao
 import com.sovize.riesgocop.models.Report
@@ -16,8 +17,9 @@ import com.sovize.riesgocop.utilities.system.PermissionRequester
 class ReportActivity : AppCompatActivity() {
 
     private val permission = PermissionRequester()
-    val reportDao = ReportDao()
+    private val reportDao = ReportDao()
     private lateinit var view: View
+    private val user = FirebaseAuth.getInstance().currentUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

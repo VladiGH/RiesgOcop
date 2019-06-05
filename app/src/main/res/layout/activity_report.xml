@@ -9,7 +9,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Llena el formulario"
+            android:text="@string/fill_the_form"
             android:fontFamily="@font/robotoregular"
             android:id="@+id/formTitle"
             android:textSize="25sp"/>
@@ -19,20 +19,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/et_name_report"
         android:layout_below="@+id/formTitle"
-        android:hint="Nombre del reporte"/>
+        android:hint="@string/report_title"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_descripcion_report"
         android:layout_below="@+id/et_name_report"
-        android:hint="Descripción"/>
+        android:hint="@string/description"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/et_ubicacion_report"
         android:layout_below="@+id/et_descripcion_report"
-        android:hint="Ubicación"/>
+        android:hint="@string/location"/>
 
     <EditText
         android:layout_width="wrap_content"

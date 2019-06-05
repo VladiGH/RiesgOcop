@@ -23,4 +23,8 @@
     <string name="Zero">0</string>
     <string name="title">title</string>
     <string name="date">date</string>
+    <string name="fill_the_form">Fill the form</string>
+    <string name="report_title">Report title</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
 </resources>

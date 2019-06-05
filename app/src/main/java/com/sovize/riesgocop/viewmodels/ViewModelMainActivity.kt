@@ -30,8 +30,9 @@ class ViewModelMainActivity : ViewModel() {
                         Log.d(ContentValues.TAG, "id: " + document.id + " => " + document.data)
                         results.add(
                             Report(
-                                document.get("id").toString(), document.get("title").toString(),
-                                document.get("danger").toString()
+                                document.get("id").toString(),
+                                document.get("title").toString(),
+                                document.get("danger").toString().toLong()
                             )
                         )
                         reportList.value = results

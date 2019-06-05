@@ -30,7 +30,7 @@ class ReportAdapter(val items: List<Report>, val clickListener: (Report)-> Unit)
 
         fun bind(item: Report, clickListener: (Report) -> Unit)= with(itemView){
             tv_report_title.text = item.title
-            tv_report_danger.text = item.danger
+            tv_report_danger.text = item.danger.toString()
             this.setOnClickListener { clickListener(item) }
 
         }

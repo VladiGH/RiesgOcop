@@ -6,4 +6,5 @@ object AppLogger {
     const val viewModelMainActivity = "ViewModelActivity"
     const val issuesFragment = "IssuesFragment"
     const val reportActivity = "ReportActivity"
+    const val reportDao = "ReportDao"
 }

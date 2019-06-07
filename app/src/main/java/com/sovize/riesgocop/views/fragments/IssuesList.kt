@@ -1,5 +1,6 @@
 package com.sovize.riesgocop.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.models.Report
+import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
+import com.sovize.riesgocop.views.activities.ReportDetail
 import com.sovize.riesgocop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.report_dash_list.*
 
@@ -36,7 +39,10 @@ class IssuesList : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
         vmMain.reportList.observe(this, observer)
-        return inflater.inflate(R.layout.report_dash_list, container, false)
+
+        val view  =  inflater.inflate(R.layout.report_dash_list, container, false)
+
+        return view
     }
 
     private fun initRecycler(report: MutableList<Report>) {
@@ -50,8 +56,12 @@ class IssuesList : Fragment() {
     }
 
     private fun reportItemClicked(item: Report) {
-        Log.d(AppLogger.issuesFragment, item.title)
+        Log.d(AppLogger.issuesFragment, "${item.title} + ${item.description}")
         callbackMethod(item)
+        val intent = Intent(activity, ReportDetail::class.java)
+        intent.putExtra(AppKey.reportInfo,item)
+        startActivity(intent)
         //activity?.supportFragmentManager.beginTransaction().replace().commit()
     }
+
 }

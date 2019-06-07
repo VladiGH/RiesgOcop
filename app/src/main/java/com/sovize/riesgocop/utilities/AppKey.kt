@@ -5,4 +5,5 @@ object AppKey {
     const val offIt = "off"
     const val newIt = "new"
     const val activity = "activity"
+    const val reportInfo = "report"
 }

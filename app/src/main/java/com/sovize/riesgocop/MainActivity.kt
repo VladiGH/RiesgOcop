@@ -2,6 +2,7 @@ package com.sovize.riesgocop
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -31,14 +32,19 @@ class MainActivity : AppCompatActivity() {
         vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
         supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
         supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
+        //If horizonrtal caragar tu fragmento,
+        //raplace for report deatisl
+        //
         findViewById<FloatingActionButton>(R.id.plus).setOnClickListener {
             if (user == null) {
                 onPLus()
             } else {
-                //esto es solo para probar el logui, cada ves q ue la app empieza te deslogea
                 FirebaseAuth.getInstance().signOut()
             }
 
+        }
+        issueFragment.callbackMethod = { report ->
+            //myfragment.setFata(report)
         }
     }
 

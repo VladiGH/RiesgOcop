@@ -30,6 +30,7 @@ class IssuesList : Fragment() {
         }
 
     }
+    lateinit var callbackMethod : (Report) -> Unit
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,5 +51,7 @@ class IssuesList : Fragment() {
 
     private fun reportItemClicked(item: Report) {
         Log.d(AppLogger.issuesFragment, item.title)
+        callbackMethod(item)
+        //activity?.supportFragmentManager.beginTransaction().replace().commit()
     }
 }

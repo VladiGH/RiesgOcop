@@ -9,7 +9,7 @@ import com.sovize.riesgocop.models.Report
 import kotlinx.android.synthetic.main.item_list_report.view.*
 
 
-class ReportAdapter(val items: List<Report>, val clickListener: (Report)-> Unit)
+class ReportAdapter(val items: List<Report>, private val clickListener: (Report)-> Unit)
     : RecyclerView.Adapter<ReportAdapter.ViewHolder> (){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

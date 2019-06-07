@@ -2,15 +2,13 @@ package com.sovize.riesgocop
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.widget.ImageView
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.sovize.riesgocop.utilities.AppKey
-import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.Login
@@ -19,7 +17,7 @@ import com.sovize.riesgocop.views.fragments.QuickBar
 import com.sovize.riesgocop.views.activities.ReportActivity
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val quickBar = QuickBar()
     private val issueFragment = IssuesList()
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
         supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
         supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
+        setSupportActionBar(findViewById(R.id.mainBar))
         //If horizonrtal caragar tu fragmento,
         //raplace for report deatisl
         //
@@ -46,6 +45,16 @@ class MainActivity : AppCompatActivity() {
         issueFragment.callbackMethod = { report ->
             //myfragment.setFata(report)
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            0 -> {
+
+            }
+
+        }
+        return true
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

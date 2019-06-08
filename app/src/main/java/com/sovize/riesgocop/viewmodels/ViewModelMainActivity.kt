@@ -32,7 +32,10 @@ class ViewModelMainActivity : ViewModel() {
                             Report(
                                 document.get("id").toString(),
                                 document.get("title").toString(),
-                                document.get("danger").toString().toLong()
+                                document.get("danger").toString().toLong(),
+                                document.get("description").toString(),
+                                document.get("location").toString()
+                                //TODO: falta por aca la lista de fotos
                             )
                         )
                         reportList.value = results

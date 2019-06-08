@@ -33,8 +33,6 @@ class IssuesList : Fragment() {
         }
 
     }
-    lateinit var callbackMethod : (Report) -> Unit
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
@@ -57,11 +55,9 @@ class IssuesList : Fragment() {
 
     private fun reportItemClicked(item: Report) {
         Log.d(AppLogger.issuesFragment, "${item.title} + ${item.description}")
-        callbackMethod(item)
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)
         startActivity(intent)
-        //activity?.supportFragmentManager.beginTransaction().replace().commit()
     }
 
 }

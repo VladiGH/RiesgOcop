@@ -27,4 +27,7 @@
     <string name="report_title">Report title</string>
     <string name="description">Description</string>
     <string name="location">Location</string>
+    <string name="user_profile">user profile</string>
+    <string name="menu">menu</string>
+    <string name="privacy_policy"><u>Privacy policy</u></string>
 </resources>

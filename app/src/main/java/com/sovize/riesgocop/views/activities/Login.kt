@@ -2,8 +2,10 @@ package com.sovize.riesgocop.views.activities
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -16,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.sovize.riesgocop.R
+import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 
 class Login : AppCompatActivity() {
@@ -36,6 +39,10 @@ class Login : AppCompatActivity() {
         findViewById<SignInButton>(R.id.btn_login)?.setOnClickListener {
             val signInIntent = mGoogleSignInClient.signInIntent
             startActivityForResult(signInIntent, ResponseCodes.login)
+        }
+        findViewById<TextView>(R.id.policy).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://files.sovize.com/policy/Politicasdeapp.html"))
+            startActivity(intent)
         }
     }
 
@@ -72,7 +79,7 @@ class Login : AppCompatActivity() {
                         "Error al iniciar sesion ${task.exception} ${task.result}",
                         Snackbar.LENGTH_INDEFINITE
                     ).setAction("Retry?") {
-                        startActivityForResult(Intent(this, Login::class.java), ResponseCodes.login)
+                        Log.d(AppLogger.mainActivity, "retry login")
                     }.show()
                 }
             }

@@ -2,16 +2,20 @@ package com.sovize.riesgocop
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.sovize.riesgocop.controlers.network.Glider
+import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.Login
+import com.sovize.riesgocop.views.activities.ProfileActivity
 import com.sovize.riesgocop.views.fragments.IssuesList
 import com.sovize.riesgocop.views.fragments.QuickBar
 import com.sovize.riesgocop.views.activities.ReportActivity
@@ -31,19 +35,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
         supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
         setSupportActionBar(findViewById(R.id.mainBar))
-        //If horizonrtal caragar tu fragmento,
-        //raplace for report deatisl
-        //
-        findViewById<FloatingActionButton>(R.id.plus).setOnClickListener {
-            if (user == null) {
-                onPLus()
-            } else {
-                FirebaseAuth.getInstance().signOut()
-            }
 
+        findViewById<FloatingActionButton>(R.id.plus).setOnClickListener {
+            onPLus()
         }
-        issueFragment.callbackMethod = { report ->
-            //myfragment.setFata(report)
+        findViewById<ImageView>(R.id.app_bar_pic).setOnClickListener {
+            startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+        }
+        if(user != null){
+            Glider.loadCircle(this, user.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
         }
     }
 
@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
         }
+        Log.i(AppLogger.mainActivity, item.itemId.toString())
         return true
     }
 

@@ -3,6 +3,7 @@
           package="com.sovize.riesgocop">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-feature
@@ -16,20 +17,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name="com.sovize.riesgocop.views.activities.Login">
+        <activity android:name=".views.activities.ProfileActivity">
+        </activity>
+        <activity android:name=".views.activities.Login">
         </activity>
         <activity
                 android:name=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
+                <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.sovize.riesgocop.views.activities.ReportActivity">
+        <activity android:name=".views.activities.ReportActivity">
         </activity>
-        <activity android:name=".views.activities.ReportDetail"></activity>
+        <activity
+                android:name=".views.activities.ReportDetail"
+                android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

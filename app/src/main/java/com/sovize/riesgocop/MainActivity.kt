@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
         }
         if(user != null){
-            Glider.loadCircle(this, user.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
+            Glider.loadCircle(user.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
         }
     }
 

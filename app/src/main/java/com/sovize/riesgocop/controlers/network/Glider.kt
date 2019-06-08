@@ -30,19 +30,19 @@ object Glider {
     }
 
     fun loadCircle(
-        context: Context,
         address: String,
         v: ImageView,
         placeholder: Int = R.drawable.ic_image_black_48dp,
         errorHolder: Int = R.drawable.ic_broken_image_black_48dp
     ) {
-        Glide.with(context)
-            .load(address).apply(RequestOptions.circleCropTransform())
+        Glide.with(v.context)
+            .load(address)
             .fitCenter()
             .transition(DrawableTransitionOptions.withCrossFade(factory))
             .placeholder(placeholder)
             .error(errorHolder)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .apply(RequestOptions.circleCropTransform())
             .into(v)
     }
 

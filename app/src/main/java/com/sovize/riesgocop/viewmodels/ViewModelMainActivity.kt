@@ -2,8 +2,11 @@ package com.sovize.riesgocop.viewmodels
 
 import android.content.ContentValues
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppLogger
@@ -12,6 +15,7 @@ class ViewModelMainActivity : ViewModel() {
 
     val reportList = MutableLiveData<MutableList<Report>>()
     private var reportsDB = FirebaseFirestore.getInstance()
+    private val user = MutableLiveData<FirebaseUser>()
 
     fun getReportsData() {
         if (reportList.value.isNullOrEmpty()) {
@@ -45,5 +49,13 @@ class ViewModelMainActivity : ViewModel() {
                     Log.w(ContentValues.TAG, "Error getting documents.", task.exception)
                 }
             }
+    }
+
+    fun getUserData(): LiveData<FirebaseUser>{
+        return user
+    }
+
+    fun setUserState(){
+        user.value = FirebaseAuth.getInstance().currentUser
     }
 }

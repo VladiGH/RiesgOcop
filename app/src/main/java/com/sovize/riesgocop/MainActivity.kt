@@ -6,27 +6,37 @@ import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.Login
 import com.sovize.riesgocop.views.activities.ProfileActivity
+import com.sovize.riesgocop.views.activities.ReportActivity
 import com.sovize.riesgocop.views.fragments.IssuesList
 import com.sovize.riesgocop.views.fragments.QuickBar
-import com.sovize.riesgocop.views.activities.ReportActivity
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val quickBar = QuickBar()
     private val issueFragment = IssuesList()
-    private val user = FirebaseAuth.getInstance().currentUser
     private lateinit var vmMain: ViewModelMainActivity
+    private var user: FirebaseUser? = null
+    private val userObserver = Observer<FirebaseUser> { fireBaseUser ->
+        if (fireBaseUser != null) {
+            user = fireBaseUser
+            Glider.loadCircle(fireBaseUser.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
+        } else {
+            user = null
+            findViewById<ImageView>(R.id.app_bar_pic).setImageResource(R.drawable.profile)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         findViewById<ImageView>(R.id.app_bar_pic).setOnClickListener {
             startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
         }
-        if(user != null){
-            Glider.loadCircle(user.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
-        }
+        vmMain.getUserData().observe(this, userObserver)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -60,6 +68,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        vmMain.setUserState()
         when (requestCode) {
             ResponseCodes.login -> {
                 if (resultCode == RESULT_OK) {
@@ -75,6 +84,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             startActivity(Intent(this, ReportActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        vmMain.setUserState()
     }
 
 }

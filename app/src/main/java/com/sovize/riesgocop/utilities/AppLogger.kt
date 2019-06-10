@@ -7,4 +7,5 @@ object AppLogger {
     const val issuesFragment = "IssuesFragment"
     const val reportActivity = "ReportActivity"
     const val reportDao = "ReportDao"
+
 }

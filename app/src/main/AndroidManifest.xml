@@ -3,7 +3,6 @@
           package="com.sovize.riesgocop">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <uses-feature
@@ -35,6 +34,17 @@
         <activity
                 android:name=".views.activities.ReportDetail"
                 android:theme="@style/AppTheme.NoActionBar"/>
+
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="com.sovize.riesgocop.utilities.system.fileManager.FileManager"
+                android:exported="false"
+                android:readPermission="com.sovize.riesgocop.utilities.system.fileManager.FileManager.READ"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

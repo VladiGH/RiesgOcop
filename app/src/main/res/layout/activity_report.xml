@@ -55,5 +55,9 @@
             android:layout_below="@+id/takePicture"
             android:text="@string/upload"/>
 
-
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/upload"
+               android:id="@+id/picture_preview"
+    />
 </RelativeLayout>

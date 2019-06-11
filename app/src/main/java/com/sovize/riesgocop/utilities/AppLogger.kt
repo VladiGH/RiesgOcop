@@ -8,5 +8,6 @@ object AppLogger {
     const val reportActivity = "ReportActivity"
     const val reportDao = "ReportDao"
     const val fileManager = "FileManager"
+    const val retrofit = "Retrofit Client"
 
 }

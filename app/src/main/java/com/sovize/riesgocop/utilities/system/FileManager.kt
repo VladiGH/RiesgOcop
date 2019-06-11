@@ -47,7 +47,6 @@ class FileManager {
             // Create an image file name
             val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
             val file = File.createTempFile(timeStamp,".jpg", getPublicStorageDir(myNumber))
-
             tempDir = file.absolutePath
         }
         return tempDir

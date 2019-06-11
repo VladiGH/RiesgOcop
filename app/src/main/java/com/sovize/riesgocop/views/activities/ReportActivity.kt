@@ -1,17 +1,15 @@
 package com.sovize.riesgocop.views.activities
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.media.ThumbnailUtils
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.sovize.riesgocop.R
@@ -21,26 +19,35 @@ import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
+import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
+import androidx.lifecycle.viewModelScope
+import java.io.File
+
 
 class ReportActivity : AppCompatActivity() {
 
     private val permission = PermissionRequester()
     private val reportDao = ReportDao()
-    private lateinit var view: View
-    private var coverPhoto: String? = null
     private val fileKeeper = FileManager()
-    private lateinit var listOfUri: ArrayList<Uri>
+    private val counter = 0
+    private var tempPhoto = ""
+    private var anchorView: View? = null
+    private lateinit var mvReport: ViewModelReportActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            finish()
+        }
         setContentView(R.layout.activity_report)
-        view = findViewById(R.id.takePicture)
-        findViewById<Button>(R.id.takePicture).setOnClickListener {
+        mvReport = ViewModelProviders.of(this).get(ViewModelReportActivity::class.java)
+        anchorView = findViewById<Button>(R.id.takePicture)
+        anchorView?.setOnClickListener {
             if (permission.hasExtStoragePermission(this)) {
                 takeCoverPic()
             } else {
                 permission.askExtStoragePermission(this)
-                Snackbar.make(view, "No se tienen permisos suficientes",Snackbar.LENGTH_LONG).show()
+                Snackbar.make(it, "No se tienen permisos suficientes", Snackbar.LENGTH_LONG).show()
             }
         }
         findViewById<Button>(R.id.upload).setOnClickListener { createReport() }
@@ -57,13 +64,13 @@ class ReportActivity : AppCompatActivity() {
             danger = danger,
             description = descant,
             location = location,
-            pictures = listOf("xd", "no", "implement", "yet")
+            pictures = mvReport.photoUrlList
         )
 
         reportDao.insertReport(report) {
             Log.d(AppLogger.reportActivity, "se creo $it")
             Snackbar.make(
-                view,
+                anchorView!!,
                 if (it) "Reporte ingresado"
                 else "Reporte no ingresado"
                 , Snackbar.LENGTH_LONG
@@ -76,17 +83,10 @@ class ReportActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 ResponseCodes.takeCoverPhotoRequest -> {
-                    val imageBitmap = ThumbnailUtils.extractThumbnail(
-                        BitmapFactory.decodeFile(coverPhoto), 400, 300)
-                    findViewById<ImageView>(R.id.picture_preview).setImageBitmap(imageBitmap)
-                }
-                ResponseCodes.takePhotoRequest -> {
-//                    val imageBitmap = data?.extras?.get("data") as Bitmap
-//                    findViewById<ImageView>(R.id.cover).setImageBitmap(imageBitmap)
-                    Log.d(AppLogger.reportActivity, "takePhotoRequest")
+                    mvReport.uploadNewPhoto()
                 }
                 else -> {
-                    Log.d(AppLogger.reportActivity, "supermonkey")
+                    Log.d(AppLogger.reportActivity, "No photo taken")
                 }
             }
         }
@@ -98,16 +98,15 @@ class ReportActivity : AppCompatActivity() {
             /**
              * @counter es una variable para indicar el id del reporte, de momento es un 0
              *quemado pero se genera un report ID aleatorio basado en el momento que se crea el reporte
-            */
-            val counter = 0
+             */
             val workingDir = fileKeeper.createImageFile(counter)
             if (workingDir != "") {
-                coverPhoto = workingDir
-                Log.d(AppLogger.reportActivity, "Directorio de trabajo de la foto: $coverPhoto")
+                mvReport.tempPhoto = workingDir
+                Log.d(AppLogger.reportActivity, "Directorio de trabajo de la foto: $workingDir")
                 Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                     takePictureIntent.resolveActivity(packageManager)?.also {
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileKeeper.getUri(coverPhoto!!,this))
-                        startActivityForResult(takePictureIntent,  ResponseCodes.takeCoverPhotoRequest )
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileKeeper.getUri(workingDir, this))
+                        startActivityForResult(takePictureIntent, ResponseCodes.takeCoverPhotoRequest)
                     }
                 }
             } else {

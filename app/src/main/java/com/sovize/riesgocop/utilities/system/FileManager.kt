@@ -1,18 +1,17 @@
-package com.sovize.riesgocop.utilities.system.fileManager
+package com.sovize.riesgocop.utilities.system
 
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
 import androidx.core.content.FileProvider
+import com.sovize.riesgocop.utilities.AppLogger
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class FileManager {
-
-    private val tag = "FileManager"
 
     /* Checks if external storage is available for read and write */
     private fun isExternalStorageWritable(): Boolean {
@@ -30,19 +29,15 @@ class FileManager {
         val date = Date()
         val formatDate = SimpleDateFormat("yyyy/MM/dd")
         val file = File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_PICTURES), "sovize/${formatDate.format(date)}/casa_$secuense")
+            Environment.DIRECTORY_PICTURES), "riesgocop/${formatDate.format(date)}/report_$secuense")
         file.mkdirs()
         if (!file.mkdirs()) {
-            Log.w(tag, "Directory not created")
+            Log.w(AppLogger.fileManager, "Directory not created")
         }
-        Log.d(tag, "this is the path: ${file.absolutePath}")
+        Log.d(AppLogger.fileManager, "this is the path: ${file.absolutePath}")
         return file
     }
 
-    /**
-     * @copied_from
-     * @URL: https://medium.com/@rodrigolmti/android-get-camera-thumbnail-and-full-image-1bddfdc5347e
-     */
 
     fun createImageFile(myNumber: Int): String {
 
@@ -59,8 +54,8 @@ class FileManager {
     }
 
     fun getUri(path: String, context: Context): Uri {
-        Log.d("aca toy, prro", "antes de morir")
-        return FileProvider.getUriForFile(context, "com.sovize.riesgocop.utilities.system.fileManager.FileManager", File(path))
+        Log.d(AppLogger.fileManager, "antes de morir")
+        return FileProvider.getUriForFile(context, "com.sovize.riesgocop.utilities.system.FileManager", File(path))
     }
 
 }

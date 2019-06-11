@@ -14,26 +14,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.sovize.riesgocop.R
-import com.sovize.riesgocop.firebase.ReportDao
+import com.sovize.riesgocop.controlers.firebase.ReportDao
 import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
-import com.sovize.riesgocop.utilities.system.fileManager.FileManager
+import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
 
 class ReportActivity : AppCompatActivity() {
 
-    val REQUEST_IMAGE_CAPTURE = 1
-    val REQUEST_TAKE_PHOTO = 1
     private val permission = PermissionRequester()
     private val reportDao = ReportDao()
     private lateinit var view: View
-    private lateinit var imageViewPic: ImageView
-    private val user = FirebaseAuth.getInstance().currentUser
-    private lateinit var currentPhotoPath: String
     private var coverPhoto: String? = null
     private val fileKeeper = FileManager()
-    private var counter = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +35,7 @@ class ReportActivity : AppCompatActivity() {
         view = findViewById(R.id.takePicture)
         findViewById<Button>(R.id.takePicture).setOnClickListener {
             if (permission.hasExtStoragePermission(this)) {
-                takeCoverPic(findViewById(R.id.picture_preview))
+                takeCoverPic()
             } else {
                 permission.askExtStoragePermission(this)
                 Snackbar.make(view, "No se tienen permisos suficientes",Snackbar.LENGTH_LONG).show()
@@ -96,8 +90,14 @@ class ReportActivity : AppCompatActivity() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-    fun takeCoverPic(view: View) {
+
+    private fun takeCoverPic() {
         if (permission.hasExtStoragePermission(this)) {
+            /**
+             * @counter es una variable para indicar el id del reporte, de momento es un 0
+             *quemado pero se genera un report ID aleatorio basado en el momento que se crea el reporte
+            */
+            val counter = 0
             val workingDir = fileKeeper.createImageFile(counter)
             if (workingDir != "") {
                 coverPhoto = workingDir

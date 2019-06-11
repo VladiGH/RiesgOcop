@@ -1,4 +1,4 @@
-package com.sovize.riesgocop.firebase
+package com.sovize.riesgocop.controlers.firebase
 
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore

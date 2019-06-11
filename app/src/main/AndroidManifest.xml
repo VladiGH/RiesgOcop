@@ -37,7 +37,7 @@
 
         <provider
                 android:name="androidx.core.content.FileProvider"
-                android:authorities="com.sovize.riesgocop.utilities.system.fileManager.FileManager"
+                android:authorities="com.sovize.riesgocop.utilities.system.FileManager"
                 android:exported="false"
                 android:readPermission="com.sovize.riesgocop.utilities.system.fileManager.FileManager.READ"
                 android:grantUriPermissions="true">

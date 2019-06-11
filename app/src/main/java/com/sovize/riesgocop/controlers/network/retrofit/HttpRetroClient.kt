@@ -23,7 +23,7 @@ class HttpRetroClient {
 
     fun uploadPhoto(photoFile: File) {
         val data = RequestBody.create(
-            okhttp3.MediaType.parse("image/*"),
+            okhttp3.MediaType.parse("image"),
             photoFile
         )
         val partData = MultipartBody.Part.createFormData(
@@ -36,7 +36,7 @@ class HttpRetroClient {
         retrofit.create(PhotoReport::class.java).sentPicture(partData).enqueue(
             object : Callback<ServerResponse>{
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-                    Log.d(AppLogger.retrofit, "${t.message} and ${t.cause}")
+                    Log.e(AppLogger.retrofit, "${t.message} ANDXD ${t.cause}")
                 }
 
                 override fun onResponse(call: Call<ServerResponse>, response: Response<ServerResponse>) {

@@ -10,7 +10,7 @@ import retrofit2.http.Part
 interface PhotoReport {
 
     @Multipart
-    @POST("upload3.php")
+    @POST("upload.php")
     fun sentPicture(
         @Part photo: MultipartBody.Part
     ): Call<ServerResponse>

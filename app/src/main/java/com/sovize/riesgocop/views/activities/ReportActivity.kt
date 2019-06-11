@@ -3,6 +3,7 @@ package com.sovize.riesgocop.views.activities
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -28,6 +29,7 @@ class ReportActivity : AppCompatActivity() {
     private lateinit var view: View
     private var coverPhoto: String? = null
     private val fileKeeper = FileManager()
+    private lateinit var listOfUri: ArrayList<Uri>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

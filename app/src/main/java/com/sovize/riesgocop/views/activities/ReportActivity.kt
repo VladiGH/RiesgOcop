@@ -55,7 +55,17 @@ class ReportActivity : AppCompatActivity() {
                 Snackbar.make(it, "No se tienen permisos suficientes", Snackbar.LENGTH_LONG).show()
             }
         }
-        findViewById<Button>(R.id.upload).setOnClickListener { createReport() }
+        findViewById<Button>(R.id.upload).setOnClickListener {
+            if(et_name_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() &&
+                et_ubicacion_report.text.isNotEmpty() && et_peligro_report.text.isNotEmpty()){
+                createReport()
+            }
+            else{
+                Snackbar.make(findViewById(R.id.formTitle), "Campos incompletos", Snackbar.LENGTH_LONG).show()
+            }
+
+
+        }
     }
 
     private fun createReport() {

@@ -32,11 +32,11 @@ class HttpRetroClient {
             photoFile.name,
             data
         )
-        Log.d(AppLogger.retrofit, "llega ${photoFile.toURI()}")
         Log.d(AppLogger.retrofit, "llegax ${photoFile.absoluteFile}")
         Log.d(AppLogger.retrofit, "llegax ${photoFile.exists()}")
         retrofit.create(PhotoReport::class.java).sentPicture(partData).enqueue(
             object : Callback<ServerResponse> {
+
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
                     Log.e(AppLogger.retrofit, "${t.message}", t)
                 }
@@ -45,7 +45,8 @@ class HttpRetroClient {
                     when (response.code()) {
                         200 -> {
                             Log.d(AppLogger.retrofit, response.message())
-                            Log.d(AppLogger.retrofit, response.body()?.dir)
+                            Log.d(AppLogger.retrofit, response.body()?.fileDir)
+                            //
                         }
 
                         else -> {

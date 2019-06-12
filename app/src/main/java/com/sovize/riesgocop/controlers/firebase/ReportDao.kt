@@ -11,7 +11,7 @@ class ReportDao {
     private var reportsDB = FirebaseFirestore.getInstance()
 
     fun insertReport(report: Report, callback: (Boolean) -> Unit) {
-        reportsDB.collection("Reports")
+        reportsDB.collection("report")
             .add(report)
             .addOnSuccessListener { newdoc ->
                 Log.d(

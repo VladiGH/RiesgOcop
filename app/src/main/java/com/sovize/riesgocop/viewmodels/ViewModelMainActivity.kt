@@ -25,23 +25,14 @@ class ViewModelMainActivity : ViewModel() {
     }
 
     private fun queryDB() {
-        reportsDB.collection("Reports")
+        reportsDB.collection("report")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val results = mutableListOf<Report>()
                     for (document in task.result!!) {
                         Log.d(ContentValues.TAG, "id: " + document.id + " => " + document.data)
-                        results.add(
-                            Report(
-                                document.get("id").toString(),
-                                document.get("title").toString(),
-                                document.get("danger").toString().toLong(),
-                                document.get("description").toString(),
-                                document.get("location").toString()
-                                //TODO: falta por aca la lista de fotos
-                            )
-                        )
+                        results.add(document.toObject(Report::class.java))
                         reportList.value = results
                     }
 

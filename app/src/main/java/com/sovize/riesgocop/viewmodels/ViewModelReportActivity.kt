@@ -21,4 +21,8 @@ class ViewModelReportActivity : ViewModel() {
         Log.d(AppLogger.reportActivity, "la data es $tempPhoto")
         client.uploadPhoto(File(tempPhoto))
     }
+
+    fun getAllPhotos(): MutableList<String>{
+        return photoList
+    }
 }

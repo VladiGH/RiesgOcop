@@ -21,6 +21,9 @@ import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
 import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.sovize.riesgocop.views.adapters.ReportPhotoAdapter
+import kotlinx.android.synthetic.main.activity_report.*
 import java.io.File
 
 
@@ -32,6 +35,8 @@ class ReportActivity : AppCompatActivity() {
     private val counter = 0
     private var tempPhoto = ""
     private var anchorView: View? = null
+    private var viewPhotoAdapter: ReportPhotoAdapter? = null
+    private val viewManager = LinearLayoutManager(this)
     private lateinit var mvReport: ViewModelReportActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,6 +89,7 @@ class ReportActivity : AppCompatActivity() {
             when (requestCode) {
                 ResponseCodes.takeCoverPhotoRequest -> {
                     mvReport.uploadNewPhoto()
+                    initRecycler(mvReport.getAllPhotos())
                 }
                 else -> {
                     Log.d(AppLogger.reportActivity, "No photo taken")
@@ -114,6 +120,15 @@ class ReportActivity : AppCompatActivity() {
             }
         } else {
             permission.askExtStoragePermission(this)
+        }
+    }
+    private fun initRecycler(photo: MutableList<String>) {
+        viewPhotoAdapter = ReportPhotoAdapter(photo)
+
+        rv_photos.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewPhotoAdapter
         }
     }
 }

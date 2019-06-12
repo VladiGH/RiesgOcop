@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.sovize.riesgocop.R
+import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.views.fragments.ReportDetailFragment
@@ -35,5 +37,8 @@ class ReportDetail: AppCompatActivity() {
         view.findViewById<TextView>(R.id.location).text = report.location
         view.findViewById<TextView>(R.id.description_report_viewer).text = report.description
         view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
+
+        Glider.load(report.pictures[0],
+            findViewById(R.id.app_bar_report_image_viewer))
     }
 }

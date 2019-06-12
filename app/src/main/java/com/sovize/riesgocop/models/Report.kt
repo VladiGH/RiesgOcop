@@ -9,7 +9,7 @@ data class Report(
     val danger: Long = 0,
     val description: String = "N/A",
     val location: String = "N/A",
-    val pictures: List<String> = listOf("N/A")
+    val pictures: List<String> = listOf("")
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?:"N/a",

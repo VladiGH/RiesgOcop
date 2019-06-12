@@ -1,5 +1,6 @@
 package com.sovize.riesgocop.views.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,11 @@ class ReportAdapter(val items: List<Report>, private val clickListener: (Report)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position], clickListener)
+        if((position % 2)==0){
+            holder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"))
+        }else{
+            holder.itemView.setBackgroundColor(Color.parseColor("#D8D8D8"))
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){

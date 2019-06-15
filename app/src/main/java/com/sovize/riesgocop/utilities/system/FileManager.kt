@@ -27,7 +27,7 @@ class FileManager {
     private fun getPublicStorageDir(secuense: Int): File? {
         // Get the directory for the user's public pictures directory.
         val date = Date()
-        val formatDate = SimpleDateFormat("yyyy/MM/dd")
+        val formatDate = SimpleDateFormat.getDateInstance().format(Date())
         val file = File(Environment.getExternalStoragePublicDirectory(
             Environment.DIRECTORY_PICTURES), "riesgocop/${formatDate.format(date)}/report_$secuense")
         file.mkdirs()
@@ -45,7 +45,7 @@ class FileManager {
 
         if(isExternalStorageWritable()){
             // Create an image file name
-            val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+            val timeStamp = SimpleDateFormat.getDateInstance().format(Date())
             val file = File.createTempFile(timeStamp,".jpg", getPublicStorageDir(myNumber))
             tempDir = file.absolutePath
         }

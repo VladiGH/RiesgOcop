@@ -4,20 +4,22 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Report(
-    val id: String = "N/A",
+    var id: String = "N/A",
     val title: String = "N/A",
     val danger: Long = 0,
     val description: String = "N/A",
     val location: String = "N/A",
-    val pictures: List<String> = listOf("N/A")
-): Parcelable {
+    val pictures: List<String> = listOf("N/A"),
+    val date: String = "0"
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()?:"N/a",
-        parcel.readString()?:"N/a",
-        parcel.readLong()?:0,
-        parcel.readString()?:"N/a",
-        parcel.readString()?:"N/a",
-        parcel.createStringArrayList()?: listOf("N/a")
+        parcel.readString() ?: "N/a",
+        parcel.readString() ?: "N/a",
+        parcel.readLong(),
+        parcel.readString() ?: "N/a",
+        parcel.readString() ?: "N/a",
+        parcel.createStringArrayList() ?: listOf("N/a"),
+        parcel.readString() ?: "0"
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -27,6 +29,7 @@ data class Report(
         parcel.writeString(description)
         parcel.writeString(location)
         parcel.writeStringList(pictures)
+        parcel.writeString(date)
     }
 
     override fun describeContents(): Int {

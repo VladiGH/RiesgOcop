@@ -5,8 +5,9 @@ import com.sovize.riesgocop.controlers.network.retrofit.interfaces.PhotoReport
 import com.sovize.riesgocop.models.ServerResponse
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ServerInfo
-import okhttp3.MultipartBody
+import okhttp3.MediaType
 import okhttp3.RequestBody
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,7 +24,7 @@ class HttpRetroClient {
 
     fun uploadPhoto(photoFile: File) {
         val data = RequestBody.create(
-            okhttp3.MediaType.parse("image/*"),
+            MediaType.parse("multipart/form-data"),
             photoFile
         )
         val partData = MultipartBody.Part.createFormData(
@@ -31,19 +32,21 @@ class HttpRetroClient {
             photoFile.name,
             data
         )
-        Log.d(AppLogger.retrofit, "llega ${photoFile.toURI()}")
         Log.d(AppLogger.retrofit, "llegax ${photoFile.absoluteFile}")
+        Log.d(AppLogger.retrofit, "llegax ${photoFile.exists()}")
         retrofit.create(PhotoReport::class.java).sentPicture(partData).enqueue(
-            object : Callback<ServerResponse>{
+            object : Callback<ServerResponse> {
+
                 override fun onFailure(call: Call<ServerResponse>, t: Throwable) {
-                    Log.d(AppLogger.retrofit, "${t.message} and ${t.cause}")
+                    Log.e(AppLogger.retrofit, "${t.message}", t)
                 }
 
                 override fun onResponse(call: Call<ServerResponse>, response: Response<ServerResponse>) {
                     when (response.code()) {
                         200 -> {
                             Log.d(AppLogger.retrofit, response.message())
-                            Log.d(AppLogger.retrofit, response.body()?.dir)
+                            Log.d(AppLogger.retrofit, response.body()?.fileDir)
+                            //
                         }
 
                         else -> {

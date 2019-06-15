@@ -21,6 +21,9 @@ import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
 import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
 import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.sovize.riesgocop.views.adapters.ReportPhotoAdapter
+import kotlinx.android.synthetic.main.activity_report.*
 import java.io.File
 
 
@@ -32,6 +35,8 @@ class ReportActivity : AppCompatActivity() {
     private val counter = 0
     private var tempPhoto = ""
     private var anchorView: View? = null
+    private var viewPhotoAdapter: ReportPhotoAdapter? = null
+    private val viewManager = LinearLayoutManager(this)
     private lateinit var mvReport: ViewModelReportActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +55,17 @@ class ReportActivity : AppCompatActivity() {
                 Snackbar.make(it, "No se tienen permisos suficientes", Snackbar.LENGTH_LONG).show()
             }
         }
-        findViewById<Button>(R.id.upload).setOnClickListener { createReport() }
+        findViewById<Button>(R.id.upload).setOnClickListener {
+            if(et_name_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() &&
+                et_ubicacion_report.text.isNotEmpty() && et_peligro_report.text.isNotEmpty()){
+                createReport()
+            }
+            else{
+                Snackbar.make(findViewById(R.id.formTitle), "Campos incompletos", Snackbar.LENGTH_LONG).show()
+            }
+
+
+        }
     }
 
     private fun createReport() {
@@ -84,6 +99,7 @@ class ReportActivity : AppCompatActivity() {
             when (requestCode) {
                 ResponseCodes.takeCoverPhotoRequest -> {
                     mvReport.uploadNewPhoto()
+                    initRecycler(mvReport.getAllPhotos())
                 }
                 else -> {
                     Log.d(AppLogger.reportActivity, "No photo taken")
@@ -114,6 +130,15 @@ class ReportActivity : AppCompatActivity() {
             }
         } else {
             permission.askExtStoragePermission(this)
+        }
+    }
+    private fun initRecycler(photo: MutableList<String>) {
+        viewPhotoAdapter = ReportPhotoAdapter(photo)
+
+        rv_photos.apply {
+            setHasFixedSize(true)
+            layoutManager = viewManager
+            adapter = viewPhotoAdapter
         }
     }
 }

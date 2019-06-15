@@ -11,7 +11,7 @@ import com.sovize.riesgocop.R
 import kotlinx.android.synthetic.main.list_item_photo.view.*
 
 
-class ReportPhotoAdapter(var photosItems: List<Uri>): RecyclerView.Adapter<ReportPhotoAdapter.ViewHolder>() {
+class ReportPhotoAdapter(var photosItems: MutableList<String>): RecyclerView.Adapter<ReportPhotoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_photo, parent, false)
@@ -23,9 +23,9 @@ class ReportPhotoAdapter(var photosItems: List<Uri>): RecyclerView.Adapter<Repor
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.bind(photosItems[position])
     }
-    fun updateList(newPhotos:List<Uri>){
+    fun updateList(newPhotos:MutableList<String>){
         this.photosItems = newPhotos
         notifyDataSetChanged()
     }
@@ -35,9 +35,9 @@ class ReportPhotoAdapter(var photosItems: List<Uri>): RecyclerView.Adapter<Repor
 
         private var coverPhoto: String? = null
 
-        fun bind(photo: Uri) = with(itemView) {
+        fun bind(photo: String) = with(itemView) {
             val imageBitmap = ThumbnailUtils.extractThumbnail(
-                BitmapFactory.decodeFile(coverPhoto), 400, 300)
+                BitmapFactory.decodeFile(photo), 400, 300)
             this.list_photo.setImageBitmap(imageBitmap)
         }
     }

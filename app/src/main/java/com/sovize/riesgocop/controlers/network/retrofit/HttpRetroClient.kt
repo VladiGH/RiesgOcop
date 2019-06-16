@@ -2,6 +2,8 @@ package com.sovize.riesgocop.controlers.network.retrofit
 
 import android.util.Log
 import com.sovize.riesgocop.controlers.network.retrofit.interfaces.PhotoReport
+import com.sovize.riesgocop.controlers.network.retrofit.interfaces.drivers.Progressable
+import com.sovize.riesgocop.controlers.network.retrofit.request.ProgressiveBody
 import com.sovize.riesgocop.models.ServerResponse
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ServerInfo
@@ -24,13 +26,27 @@ class HttpRetroClient {
 
     fun uploadPhoto(photoFile: File) {
         val data = RequestBody.create(
-            MediaType.parse("multipart/form-data"),
+            MediaType.parse("image/*"),
             photoFile
         )
+        val data2 = ProgressiveBody(object : Progressable{
+
+            override fun onProgressUpdate(percentage: Int) {
+                Log.d(AppLogger.retrofit, "Updated so far: $percentage")
+            }
+
+            override fun onError() {
+                Log.d(AppLogger.retrofit, "ya valio verga")
+            }
+
+            override fun onFinish() {
+                Log.d(AppLogger.retrofit, "ya termino")
+            }
+        }, photoFile, "image")
         val partData = MultipartBody.Part.createFormData(
             "photo",
             photoFile.name,
-            data
+            data2
         )
         Log.d(AppLogger.retrofit, "llegax ${photoFile.absoluteFile}")
         Log.d(AppLogger.retrofit, "llegax ${photoFile.exists()}")

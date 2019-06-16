@@ -12,6 +12,7 @@ import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppKey
+import com.sovize.riesgocop.utilities.ServerInfo
 import com.sovize.riesgocop.views.fragments.ReportDetailFragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +39,7 @@ class ReportDetail: AppCompatActivity() {
         view.findViewById<TextView>(R.id.description_report_viewer).text = report.description
         view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
 
-        Glider.load(report.pictures[0],
+        Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
             findViewById(R.id.app_bar_report_image_viewer))
     }
 }

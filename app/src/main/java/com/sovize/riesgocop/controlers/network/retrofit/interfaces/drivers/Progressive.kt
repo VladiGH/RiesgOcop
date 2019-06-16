@@ -1,6 +1,6 @@
 package com.sovize.riesgocop.controlers.network.retrofit.interfaces.drivers
 
-interface Progressable {
+interface Progressive {
     fun onProgressUpdate(percentage: Int)
     fun onError()
     fun onFinish()

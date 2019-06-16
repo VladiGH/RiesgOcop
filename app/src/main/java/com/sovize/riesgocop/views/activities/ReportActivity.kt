@@ -7,8 +7,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -20,11 +21,9 @@ import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
 import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sovize.riesgocop.views.adapters.ReportPhotoAdapter
 import kotlinx.android.synthetic.main.activity_report.*
-import java.io.File
 
 
 class ReportActivity : AppCompatActivity() {
@@ -33,11 +32,17 @@ class ReportActivity : AppCompatActivity() {
     private val reportDao = ReportDao()
     private val fileKeeper = FileManager()
     private val counter = 0
-    private var tempPhoto = ""
     private var anchorView: View? = null
     private var viewPhotoAdapter: ReportPhotoAdapter? = null
     private val viewManager = LinearLayoutManager(this)
     private lateinit var mvReport: ViewModelReportActivity
+    private lateinit var progress: TextView
+    private val observer = Observer<Int>{
+        progress.text = it?.run {
+            if (this < 0) "ya se jodio"
+            else "$it%"
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,9 +68,8 @@ class ReportActivity : AppCompatActivity() {
             else{
                 Snackbar.make(findViewById(R.id.formTitle), "Campos incompletos", Snackbar.LENGTH_LONG).show()
             }
-
-
         }
+        progress = findViewById(R.id.tv_uour_pics)
     }
 
     private fun createReport() {
@@ -98,7 +102,7 @@ class ReportActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 ResponseCodes.takeCoverPhotoRequest -> {
-                    mvReport.uploadNewPhoto()
+                    mvReport.uploadNewPhoto().observe(this, observer)
                     initRecycler(mvReport.getAllPhotos())
                 }
                 else -> {

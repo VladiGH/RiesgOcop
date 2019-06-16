@@ -1,21 +1,22 @@
 package com.sovize.riesgocop.controlers.network.retrofit.request
 
-import android.os.Handler
-import android.os.Looper
-import com.sovize.riesgocop.controlers.network.retrofit.interfaces.drivers.Progressable
+import android.util.Log
+import com.sovize.riesgocop.controlers.network.retrofit.interfaces.drivers.Progressive
+import com.sovize.riesgocop.utilities.AppLogger
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okio.BufferedSink
 import java.io.File
 import java.io.FileInputStream
+import java.lang.Exception
 
 class ProgressiveBody(
-    val callBack: Progressable,
+    private val callBack: Progressive,
     private val mFile: File,
     private var contentType: String
 ) : RequestBody() {
 
-    private val defaultBufferSize = 1028
+    private val defaultBufferSize = 2048
 
     override fun contentType(): MediaType? {
         return MediaType.parse("$contentType/*")
@@ -30,25 +31,20 @@ class ProgressiveBody(
         val buffer = ByteArray(defaultBufferSize)
         val witter = FileInputStream(mFile)
         var uploaded: Long = 0
-        witter.use {
-            var read =it.read(buffer)
-            val handler = Handler(Looper.getMainLooper())
+        try {
+            var read = witter.read(buffer)
             while (read != -1) {
                 uploaded += read
                 sink.write(buffer, 0, read)
-                handler.post(ProgressUpdater(uploaded, fileSize))
-                read = it.read(buffer)
+                callBack.onProgressUpdate((100 * uploaded / fileSize).toInt())
+                read = witter.read(buffer)
             }
-        }
-    }
-
-    private inner class ProgressUpdater(
-        private val mUploaded: Long,
-        private val mTotal: Long
-    ) : Runnable {
-
-        override fun run() {
-            callBack.onProgressUpdate((100 * mUploaded / mTotal).toInt())
+            callBack.onFinish()
+        } catch (e: Exception) {
+            Log.e(AppLogger.retrofit, "error de subida", e)
+            callBack.onError()
+        } finally {
+            witter.close()
         }
     }
 }

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Producto"
+                android:textSize="15dp"
+                tools:layout_editor_absoluteY="16dp" app:layout_constraintEnd_toStartOf="@+id/et_producto"
+                android:layout_marginEnd="28dp" android:layout_marginRight="28dp"/>
+        <EditText
+                android:id="@+id/et_producto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"
+                android:textSize="15dp"
+                android:inputType="number" tools:layout_editor_absoluteY="7dp" tools:layout_editor_absoluteX="106dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Cantidad" tools:layout_editor_absoluteY="73dp"
+                app:layout_constraintEnd_toStartOf="@+id/et_p_cantidad" android:layout_marginEnd="28dp"
+                android:layout_marginRight="28dp"/>
+        <EditText
+                android:id="@+id/et_p_cantidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"
+                android:textSize="15dp"
+                android:inputType="number" tools:layout_editor_absoluteY="68dp" tools:layout_editor_absoluteX="106dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Precio" tools:layout_editor_absoluteY="16dp"
+                app:layout_constraintEnd_toStartOf="@+id/et_p_precio" android:layout_marginEnd="44dp"
+                android:layout_marginRight="44dp"/>
+        <EditText
+                android:id="@+id/et_p_precio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="00"
+                android:textSize="15dp"
+                android:inputType="number" tools:layout_editor_absoluteX="292dp" tools:layout_editor_absoluteY="7dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="Total: " tools:layout_editor_absoluteY="73dp"
+                app:layout_constraintEnd_toStartOf="@+id/tv_p_total" android:layout_marginEnd="44dp"
+                android:layout_marginRight="44dp"/>
+
+        <TextView
+                android:id="@+id/tv_p_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00"
+                android:textSize="15dp"
+                android:inputType="number" tools:layout_editor_absoluteY="75dp" tools:layout_editor_absoluteX="292dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

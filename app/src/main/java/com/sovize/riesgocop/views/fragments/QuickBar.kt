@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.viewModelScope
 import com.sovize.riesgocop.R
-import com.sovize.riesgocop.models.Report
+import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class QuickBar : Fragment() {
 
     private lateinit var vmMain: ViewModelMainActivity
-    private val observer = Observer<MutableList<Report>> {
+    private val observer = Observer<MutableList<AccidentReport>> {
         view?.findViewById<TextView>(R.id.newIssueValue)?.text = (it.size - 2).toString()
         view?.findViewById<TextView>(R.id.in_process)?.text = (it.size - 1).toString()
         view?.findViewById<TextView>(R.id.close_issue_value)?.text = (it.size).toString()

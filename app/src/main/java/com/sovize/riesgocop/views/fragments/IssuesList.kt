@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sovize.riesgocop.R
-import com.sovize.riesgocop.models.Report
+import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
@@ -24,7 +24,7 @@ class IssuesList : Fragment() {
     private lateinit var vmMain: ViewModelMainActivity
     private var viewAdapter: ReportAdapter? = null
     private val viewManager = LinearLayoutManager(this.context)
-    private val observer = Observer<MutableList<Report>> {
+    private val observer = Observer<MutableList<AccidentReport>> {
         if (viewAdapter == null) {
             initRecycler(it)
         } else {
@@ -43,7 +43,7 @@ class IssuesList : Fragment() {
         return view
     }
 
-    private fun initRecycler(report: MutableList<Report>) {
+    private fun initRecycler(report: MutableList<AccidentReport>) {
         viewAdapter = ReportAdapter(report) { reportItem -> reportItemClicked(reportItem) }
 
         rv_list_issues.apply {
@@ -53,7 +53,7 @@ class IssuesList : Fragment() {
         }
     }
 
-    private fun reportItemClicked(item: Report) {
+    private fun reportItemClicked(item: AccidentReport) {
         Log.d(AppLogger.issuesFragment, "${item.title} + ${item.description}")
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)

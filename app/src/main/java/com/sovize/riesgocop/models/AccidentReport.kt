@@ -8,6 +8,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class AccidentReport (
     @Exclude var id: String = "N/A",
+    val title: String = "N/A",
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
     val personInjuredGender: String = "N/A",
@@ -24,6 +25,7 @@ data class AccidentReport (
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
+        parcel.readString() ?: "N/A",
         parcel.readString()?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString()?: "N/A",
@@ -35,6 +37,7 @@ data class AccidentReport (
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
+        parcel.writeString(title)
         parcel.writeString(location)
         parcel.writeString(personInjuredName)
         parcel.writeString(personInjuredGender)

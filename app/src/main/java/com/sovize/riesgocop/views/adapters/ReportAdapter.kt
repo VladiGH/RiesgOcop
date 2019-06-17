@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sovize.riesgocop.R
-import com.sovize.riesgocop.models.Report
+import com.sovize.riesgocop.models.AccidentReport
 import kotlinx.android.synthetic.main.item_list_report.view.*
 
 
-class ReportAdapter(val items: List<Report>, private val clickListener: (Report)-> Unit)
+class ReportAdapter(val items: List<AccidentReport>, private val clickListener: (AccidentReport)-> Unit)
     : RecyclerView.Adapter<ReportAdapter.ViewHolder> (){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,9 +34,9 @@ class ReportAdapter(val items: List<Report>, private val clickListener: (Report)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bind(item: Report, clickListener: (Report) -> Unit)= with(itemView){
+        fun bind(item: AccidentReport, clickListener: (AccidentReport) -> Unit)= with(itemView){
             tv_report_title.text = item.title
-            tv_report_danger.text = item.danger.toString()
+            tv_report_danger.text = item.SeverityLevel
             this.setOnClickListener { clickListener(item) }
 
         }

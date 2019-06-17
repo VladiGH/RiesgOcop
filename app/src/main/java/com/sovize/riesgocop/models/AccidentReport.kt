@@ -36,7 +36,7 @@ data class AccidentReport (
         parcel.writeString(location)
         parcel.writeString(personInjuredName)
         parcel.writeString(personInjuredGender)
-        parcel.writeString(personRole)
+        parcel.writeString(accidentedPersonType)
         parcel.writeString(description)
         parcel.writeString(SeverityLevel)
         parcel.writeString(placeOfAttention)

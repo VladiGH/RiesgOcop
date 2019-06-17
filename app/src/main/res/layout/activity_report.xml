@@ -1,87 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    tools:context=".views.activities.ReportActivity">
+
+        <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                tools:context=".views.activities.ReportActivity">
-    <TextView
+                android:layout_height="wrap_content"
+                android:text="@string/fill_the_form"
+                android:fontFamily="@font/robotoregular"
+                android:id="@+id/formTitle"
+                android:textSize="25sp"/>
+
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fill_the_form"
-            android:fontFamily="@font/robotoregular"
-            android:id="@+id/formTitle"
-            android:textSize="25sp"/>
+            android:id="@+id/et_location_report"
+            android:layout_below="@+id/formTitle"
+            android:hint="@string/location"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_name_report"
-        android:layout_below="@+id/formTitle"
-        android:hint="@string/report_title"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_descripcion_report"
-        android:layout_below="@+id/et_name_report"
-        android:hint="@string/description"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_ubicacion_report"
-        android:layout_below="@+id/et_descripcion_report"
-        android:hint="@string/location"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_peligro_report"
-        android:layout_below="@+id/et_ubicacion_report"
-        android:inputType="number"
-        android:hint="Peligro"/>
-
-    <Button
-            android:id="@+id/takePicture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_peligro_report"
-            android:text="@string/take_pic"/>
-    <Button
-            android:id="@+id/upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/takePicture"
-            android:text="@string/upload"/>
-
-    <Button android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/select_photos"
-            android:text="@string/select_photos"
-            android:layout_toEndOf="@+id/takePicture"
-            android:layout_toRightOf="@+id/takePicture"
-            android:layout_below="@+id/et_peligro_report"
-            />
-
-
-    <TextView android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="@string/report_s_photos"
-              android:layout_below="@id/upload"
-              android:fontFamily="@font/roboto_medium"
-              android:textColor="#000"
-              android:id="@+id/tv_uour_pics"
-    />
-    <androidx.recyclerview.widget.RecyclerView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/picture_preview"
-            android:id="@+id/rv_photos"
-    />
-    <ImageView android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_below="@+id/tv_uour_pics"
-               android:id="@+id/picture_preview"
-    />
-</RelativeLayout>
+            android:id="@+id/et_descripcion_report"
+            android:layout_below="@+id/et_location_report"
+            android:hint="@string/description"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_peligro_report"
+            android:layout_below="@+id/et_descripcion_report"
+            android:hint="@string/accident_s_severity"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_personInjured"
+                android:layout_below="@+id/et_peligro_report"
+                android:hint="@string/person_injured_name"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_personInjuredGender"
+                android:layout_below="@+id/et_personInjured"
+                android:hint="@string/gender_of_the_person_injured"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_personInjuredType"
+                android:layout_below="@+id/et_personInjuredGender"
+                android:hint="@string/occupation_of_the_person"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_attentionPlace"
+                android:layout_below="@+id/et_personInjuredType"
+                android:hint="@string/place_of_attention"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_ambullance"
+                android:layout_below="@+id/et_attentionPlace"
+                android:hint="@string/was_necessary_an_ambulance"/>
+
+
+
+                <Button
+                        android:id="@+id/takePicture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/et_ambullance"
+                        android:text="@string/take_pic"/>
+                <Button
+                        android:id="@+id/upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/takePicture"
+                        android:text="@string/upload"/>
+
+                <Button android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/select_photos"
+                        android:text="@string/select_photos"
+                        android:layout_toEndOf="@+id/takePicture"
+                        android:layout_toRightOf="@+id/takePicture"
+                        android:layout_below="@+id/et_ambullance"
+                        />
+
+
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="@string/report_s_photos"
+                          android:layout_below="@id/upload"
+                          android:fontFamily="@font/roboto_medium"
+                          android:textColor="#000"
+                          android:id="@+id/tv_uour_pics"
+                />
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/picture_preview"
+                        android:id="@+id/rv_photos"
+                />
+                <ImageView android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/tv_uour_pics"
+                           android:id="@+id/picture_preview"
+                />
+    </RelativeLayout>
+</ScrollView>

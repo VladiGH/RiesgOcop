@@ -10,13 +10,14 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.QuerySnapshot
 import com.sovize.riesgocop.controlers.firebase.ReportDao
+import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppLogger
 import kotlinx.coroutines.launch
 
 class ViewModelMainActivity : ViewModel() {
 
-    val reportList = MutableLiveData<MutableList<Report>>()
+    val reportList = MutableLiveData<MutableList<AccidentReport>>()
     private val user = MutableLiveData<FirebaseUser>()
     private val repository = ReportDao()
 
@@ -39,10 +40,11 @@ class ViewModelMainActivity : ViewModel() {
 
     private fun updateResult(query: QuerySnapshot?) {
         viewModelScope.launch {
-            val newSet = mutableListOf<Report>()
+            val newSet = mutableListOf<AccidentReport>()
             val oldSet = reportList.value
+
             query?.documentChanges?.forEach {
-                val tempDoc = it.document.toObject(Report::class.java)
+                val tempDoc = it.document.toObject(AccidentReport::class.java)
                 tempDoc.id = it.document.id
                 when (it.type) {
                     DocumentChange.Type.ADDED -> {

@@ -20,19 +20,18 @@ data class AccidentReport (
     val date: String = "0"
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.createStringArrayList(),
-        parcel.readString()
-    ) {
-    }
+        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.createStringArrayList() ?: listOf("N/A"),
+        parcel.readString()?: "N/A"
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)

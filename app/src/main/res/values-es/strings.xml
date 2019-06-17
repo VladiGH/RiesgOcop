@@ -30,4 +30,11 @@
     <string name="privacy_policy"><u>Política de privacidad</u></string>
     <string name="report_title">Titutlo del reporte</string>
     <string name="user_profile">Perfil de usuario</string>
+    <string name="accident_s_severity">Severidad del accidente</string>
+    <string name="person_injured_name">Nombre de persona accidentada</string>
+    <string name="gender_of_the_person_injured">Género de la persona accidentada</string>
+    <string name="occupation_of_the_person">Ocupación del accidentado</string>
+    <string name="place_of_attention">Lugar de atención</string>
+    <string name="was_necessary_an_ambulance">¿Se requirió ambulancia?</string>
+
 </resources>

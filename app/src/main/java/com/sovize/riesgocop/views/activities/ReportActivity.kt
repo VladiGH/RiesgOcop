@@ -22,6 +22,7 @@ import com.sovize.riesgocop.utilities.system.FileManager
 import com.sovize.riesgocop.utilities.system.PermissionRequester
 import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.views.adapters.ReportPhotoAdapter
 import kotlinx.android.synthetic.main.activity_report.*
 
@@ -61,8 +62,8 @@ class ReportActivity : AppCompatActivity() {
             }
         }
         findViewById<Button>(R.id.upload).setOnClickListener {
-            if(et_name_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() &&
-                et_ubicacion_report.text.isNotEmpty() && et_peligro_report.text.isNotEmpty()){
+            if(et_location_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() &&
+                et_peligro_report.text.isNotEmpty()){
                 createReport()
             }
             else{
@@ -73,16 +74,25 @@ class ReportActivity : AppCompatActivity() {
     }
 
     private fun createReport() {
-        val title = findViewById<EditText>(R.id.et_name_report).text.toString()
+
+        val location = findViewById<EditText>(R.id.et_location_report).text.toString()
+        val personName = findViewById<EditText>(R.id.et_personInjured).text.toString()
+        val personGender = findViewById<EditText>(R.id.et_personInjuredGender).text.toString()
+        val personType = findViewById<EditText>(R.id.et_personInjuredType).text.toString()
         val descant = findViewById<EditText>(R.id.et_descripcion_report).text.toString()
-        val location = findViewById<EditText>(R.id.et_ubicacion_report).text.toString()
-        val danger = findViewById<EditText>(R.id.et_peligro_report).text.toString().toLong()
-        val report = Report(
-            id = "",
-            title = title,
-            danger = danger,
-            description = descant,
+        val danger = findViewById<EditText>(R.id.et_peligro_report).text.toString()
+        val placeAttention = findViewById<EditText>(R.id.et_attentionPlace).text.toString()
+        val ambullance = findViewById<EditText>(R.id.et_ambullance).text.toString()
+
+        val report = AccidentReport(
             location = location,
+            personInjuredName = personName,
+            personInjuredGender = personGender,
+            accidentedPersonType = personType,
+            description = descant,
+            SeverityLevel = danger,
+            placeOfAttention = placeAttention,
+            ambullance = ambullance,
             pictures = mvReport.photoUrlList
         )
 

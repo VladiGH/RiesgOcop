@@ -48,7 +48,7 @@ class Login : AppCompatActivity() {
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == ResponseCodes.login) {
+        if (requestCode == ResponseCodes.login && resultCode == Activity.RESULT_OK) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             fireBaseAuthWithGoogle(handleSignInResult(task))
         }
@@ -66,7 +66,7 @@ class Login : AppCompatActivity() {
         }
 
     private fun fireBaseAuthWithGoogle(acct: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
+        val credential = GoogleAuthProvider.getCredential(acct?.idToken, getString(R.string.default_web_client_id))
         Log.d(tag, "${credential.signInMethod} ${credential.provider}")
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this@Login) { task ->

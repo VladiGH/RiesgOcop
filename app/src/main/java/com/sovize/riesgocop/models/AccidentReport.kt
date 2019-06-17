@@ -8,7 +8,7 @@ data class AccidentReport (
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
     val personInjuredGender: String = "N/A",
-    val personRole: String = "N/A",
+    val accidentedPersonType: String = "N/A",
     val description: String = "N/A",
     val SeverityLevel: String = "N/A",
     val placeOfAttention: String = "N/A",

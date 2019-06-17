@@ -2,9 +2,12 @@ package com.sovize.riesgocop.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.firestore.Exclude
+import com.google.firebase.firestore.IgnoreExtraProperties
 
+@IgnoreExtraProperties
 data class AccidentReport (
-    var id: String = "N/A",
+    @Exclude var id: String = "N/A",
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
     val personInjuredGender: String = "N/A",

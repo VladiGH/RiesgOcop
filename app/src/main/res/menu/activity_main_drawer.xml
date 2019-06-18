@@ -10,19 +10,19 @@
         <!-- TODO (3.5) Los mienbros del menu necesitan ID, TITLE-->
         <item
                 android:id="@+id/nav_camera"
-                android:icon="@drawable/ic_launcher_background"
+                android:icon="@drawable/ic_import"
                 android:title="Import"/>
         <item
                 android:id="@+id/nav_gallery"
-                android:icon="@drawable/ic_launcher_background"
+                android:icon="@drawable/ic_gallery"
                 android:title="Gallery"/>
         <item
                 android:id="@+id/nav_slideshow"
-                android:icon="@drawable/ic_launcher_background"
+                android:icon="@drawable/ic_slideshow"
                 android:title="Slideshow"/>
         <item
                 android:id="@+id/nav_manage"
-                android:icon="@drawable/ic_launcher_background"
+                android:icon="@drawable/ic_tools"
                 android:title="Tools"/>
     </group>
 
@@ -33,11 +33,11 @@
             <!-- TODO (3.7) Y lo elementos que lo conforman -->
             <item
                     android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_launcher_background"
+                    android:icon="@drawable/ic_shaer"
                     android:title="Share"/>
             <item
                     android:id="@+id/nav_logOut"
-                    android:icon="@drawable/ic_launcher_background"
+                    android:icon="@drawable/ic_logout"
                     android:title="Log out"/>
         </menu>
     </item>

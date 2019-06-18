@@ -66,7 +66,7 @@ class Login : AppCompatActivity() {
         }
 
     private fun fireBaseAuthWithGoogle(acct: GoogleSignInAccount?) {
-        val credential = GoogleAuthProvider.getCredential(acct?.idToken, getString(R.string.default_web_client_id))
+        val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         Log.d(tag, "${credential.signInMethod} ${credential.provider}")
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this@Login) { task ->

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               tools:context=".views.activities.Calculator">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -16,14 +17,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Suma Total: "
-                android:textSize="30dp"/>
+                android:textSize="30dp" tools:ignore="MissingConstraints" android:id="@+id/textView3"/>
         <TextView
                 android:id="@+id/tv_suma"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="30dp"/>
-    </LinearLayout>
+                android:textSize="30dp" tools:ignore="MissingConstraints" tools:layout_editor_absoluteY="0dp"
+                app:layout_constraintStart_toEndOf="@+id/textView3" android:layout_marginStart="12dp"
+                android:layout_marginLeft="12dp"/>
+
+        <Button
+                android:id="@+id/btn_add_product"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add" tools:ignore="MissingConstraints" tools:layout_editor_absoluteY="0dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_suma" android:layout_marginLeft="120dp"
+                android:layout_marginStart="120dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"

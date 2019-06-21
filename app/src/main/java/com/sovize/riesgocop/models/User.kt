@@ -2,26 +2,29 @@ package com.sovize.riesgocop.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
+import kotlinx.android.parcel.IgnoredOnParcel
 
 @IgnoreExtraProperties
 data class User(
-    @Exclude
-    val firebaseUser: String,
     val email: String,
     val rol: Int,
     val permission: CharArray
 ) : Parcelable {
+
+    @Exclude
+    @IgnoredOnParcel
+    var firebaseUser: FirebaseUser? = null
+
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readInt(),
         parcel.createCharArray() ?: charArrayOf('x')
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(firebaseUser)
         parcel.writeString(email)
         parcel.writeInt(rol)
         parcel.writeCharArray(permission)

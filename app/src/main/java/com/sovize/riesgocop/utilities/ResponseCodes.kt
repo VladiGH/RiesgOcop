@@ -7,4 +7,5 @@ object ResponseCodes {
     const val report = 3
     const val takeCoverPhotoRequest = 4
     const val takePhotoRequest = 5
+    const val loginForAction = 6
 }

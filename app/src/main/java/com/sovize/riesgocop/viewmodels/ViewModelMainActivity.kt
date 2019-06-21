@@ -11,7 +11,6 @@ import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.QuerySnapshot
 import com.sovize.riesgocop.controlers.firebase.ReportDao
 import com.sovize.riesgocop.models.AccidentReport
-import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppLogger
 import kotlinx.coroutines.launch
 
@@ -35,7 +34,13 @@ class ViewModelMainActivity : ViewModel() {
     }
 
     fun setUserState() {
-        user.value = FirebaseAuth.getInstance().currentUser
+        FirebaseAuth.getInstance().addAuthStateListener {
+            user.value = it.currentUser
+        }
+    }
+
+    fun enduserState() {
+        FirebaseAuth.getInstance().removeAuthStateListener {}
     }
 
     private fun updateResult(query: QuerySnapshot?) {

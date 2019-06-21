@@ -14,6 +14,7 @@
     <string name="application_logo">Application logo</string>
     <string name="user_not_found">User not found</string>
     <string name="log_out">Log out</string>
+    <string name="log_in">Log in</string>
     <string name="n_a_value">N/A</string>
     <string name="username">Username</string>
     <string name="tus_reportes">your reports</string>
@@ -40,4 +41,11 @@
     <string name="occupation_of_the_person">Occupation of the person</string>
     <string name="place_of_attention">Place of attention</string>
     <string name="was_necessary_an_ambulance">Was necessary an ambulance?</string>
+    <string name="loginmsm1">Login cancelled</string>
+    <string name="loginmsm2">Error starting session</string>
+    <string name="alerttitle">This account is not a UCA account</string>
+    <string name="alertmsm">Would you like to continue as a guest or try other account?
+    You cannot create reports</string>
+    <string name="continuex">Continue</string>
+    <string name="changeacct">Change account</string>
 </resources>

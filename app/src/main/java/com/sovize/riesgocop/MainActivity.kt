@@ -2,8 +2,6 @@ package com.sovize.riesgocop
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -15,7 +13,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseUser
 import com.sovize.riesgocop.controlers.network.Glider
-import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.Login
@@ -59,7 +56,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         vmMain.getUserData().observe(this, userObserver)
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, findViewById(R.id.mainBar), R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this,
+            drawer_layout,
+            findViewById(R.id.mainBar),
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
         )
 
         drawer_layout.addDrawerListener(toggle)
@@ -105,6 +106,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onResume()
         vmMain.setUserState()
     }
+
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -114,7 +116,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-    // TODO (14.2) Funcion que recibe el ID del elemento tocado
+    //Funcion que recibe el ID del elemento tocado
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
@@ -137,10 +139,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-
-        // TODO (15) Cuando se da click a un opcion del menu se cierra de manera automatica
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        vmMain.enduserState()
+    }
 }

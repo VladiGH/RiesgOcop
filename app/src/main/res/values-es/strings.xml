@@ -17,18 +17,18 @@
     <string name="Zero">0</string>
     <string name="close">cerrar</string>
     <string name="date">fecha</string>
-    <string name="in_process">en proceso</string>
+    <string name="in_process">En proceso</string>
     <string name="n_a_value">N/A</string>
-    <string name="newIssue">nuevos</string>
-    <string name="title">titulo</string>
+    <string name="newIssue">Nuevos</string>
+    <string name="title">Titulo</string>
     <string name="tus_reportes">Tus reportes</string>
-    <string name="username">usuario</string>
+    <string name="username">Usuario</string>
     <string name="description">Descripcion</string>
     <string name="fill_the_form">Llene el formulario</string>
-    <string name="location">ubicación</string>
+    <string name="location">Ubicación</string>
     <string name="menu">menu</string>
     <string name="privacy_policy"><u>Política de privacidad</u></string>
-    <string name="report_title">Titutlo del reporte</string>
+    <string name="report_title">Titulo del reporte</string>
     <string name="user_profile">Perfil de usuario</string>
     <string name="accident_s_severity">Severidad del accidente</string>
     <string name="person_injured_name">Nombre de persona accidentada</string>
@@ -36,5 +36,16 @@
     <string name="occupation_of_the_person">Ocupación del accidentado</string>
     <string name="place_of_attention">Lugar de atención</string>
     <string name="was_necessary_an_ambulance">¿Se requirió ambulancia?</string>
+    <string name="report_s_photos">Fotos adjuntas</string>
+    <string name="select_photos">Selecciona las fotos</string>
+    <string name="navigation_drawer_open">Abre el Navigation Drawer</string>
+    <string name="navigation_drawer_close">Cierra el navigation drawer</string>
+    <string name="loginmsm1">Login ha sido cancelado</string>
+    <string name="loginmsm2">Error al iniciar sesión</string>
+    <string name="alerttitle">Esta cuenta no pertene a la UCA</string>
+    <string name="alertmsm">¿Continuar como invitado?
+        No puedes ingresar reportes</string>
+    <string name="continuex">Continuar</string>
+    <string name="changeacct">Cambiar de cuenta</string>
 
 </resources>

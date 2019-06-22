@@ -24,7 +24,7 @@
     <string name="title">Titulo</string>
     <string name="tus_reportes">Tus reportes</string>
     <string name="username">Usuario</string>
-    <string name="description">Descripcion</string>
+    <string name="description">Descripción</string>
     <string name="fill_the_form">Llene el formulario</string>
     <string name="location">Ubicación</string>
     <string name="menu">menu</string>
@@ -32,9 +32,10 @@
     <string name="report_title">Titulo del reporte</string>
     <string name="user_profile">Perfil de usuario</string>
     <string name="accident_s_severity">Severidad del accidente</string>
+    <string name="severity">Severidad</string>
     <string name="person_injured_name">Nombre de persona accidentada</string>
     <string name="gender_of_the_person_injured">Género</string>
-    <string name="occupation_of_the_person">Ocupación del accidentado</string>
+    <string name="occupation_of_the_person">Accidentado</string>
     <string name="place_of_attention">Lugar de atención</string>
     <string name="was_necessary_an_ambulance">¿Se requirió ambulancia?</string>
     <string name="report_s_photos">Fotos adjuntas</string>

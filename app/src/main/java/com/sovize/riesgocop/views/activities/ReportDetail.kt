@@ -37,18 +37,28 @@ class ReportDetail: AppCompatActivity() {
 
     }
     fun bindData(view: View, report: AccidentReport){
+
+        val severity = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
+        val location = "${resources.getString(R.string.location)}: ${report.location}"
+        val descrip = "${resources.getString(R.string.description)}: ${report.description}"
+        val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
+        val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
+        val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
+        val ambullance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambullance}"
+
         view.findViewById<CollapsingToolbarLayout>(R.id.collapsingtoolbarviewer_reportname).title = report.accidentedPersonType
-        view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = report.severityLevel
-        view.findViewById<TextView>(R.id.location).text = report.location
-        view.findViewById<TextView>(R.id.description_report_viewer).text = report.description
-        view.findViewById<TextView>(R.id.nameOfPerson).text = report.personInjuredName
-        view.findViewById<TextView>(R.id.genderOfPerson).text = report.personInjuredGender
-        view.findViewById<TextView>(R.id.placeAttention).text = report.placeOfAttention
-        view.findViewById<TextView>(R.id.ambullanceNec).text = report.ambullance
+        view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = severity
+        view.findViewById<TextView>(R.id.location).text = location
+        view.findViewById<TextView>(R.id.description_report_viewer).text = descrip
+        view.findViewById<TextView>(R.id.nameOfPerson).text = name
+        view.findViewById<TextView>(R.id.genderOfPerson).text = gender
+        view.findViewById<TextView>(R.id.placeAttention).text = place
+        view.findViewById<TextView>(R.id.ambullanceNec).text = ambullance
 
         view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
 
         /*Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
             findViewById(R.id.app_bar_report_image_viewer))*/
     }
+
 }

@@ -14,7 +14,7 @@ data class AccidentReport (
     val personInjuredGender: String = "N/A",
     val accidentedPersonType: String = "N/A",
     val description: String = "N/A",
-    val SeverityLevel: String = "N/A",
+    val severityLevel: String = "N/A",
     val placeOfAttention: String = "N/A",
     val ambullance: String = "N/A",
     val pictures: List<String> = listOf("N/A"),
@@ -43,7 +43,7 @@ data class AccidentReport (
         parcel.writeString(personInjuredGender)
         parcel.writeString(accidentedPersonType)
         parcel.writeString(description)
-        parcel.writeString(SeverityLevel)
+        parcel.writeString(severityLevel)
         parcel.writeString(placeOfAttention)
         parcel.writeString(ambullance)
         parcel.writeStringList(pictures)

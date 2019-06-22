@@ -30,7 +30,7 @@ class ReportDetail: AppCompatActivity() {
         Log.d("INFO ", "esto si llegax")
         val reportInfo = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
         val report = AccidentReport(reportInfo!!.id,reportInfo.location,reportInfo.personInjuredName,reportInfo.personInjuredGender,
-            reportInfo.accidentedPersonType, reportInfo.description, reportInfo.SeverityLevel, reportInfo.placeOfAttention,
+            reportInfo.accidentedPersonType, reportInfo.description, reportInfo.severityLevel, reportInfo.placeOfAttention,
             reportInfo.ambullance, reportInfo.pictures)
 
         bindData(findViewById(R.id.viewer_id), report)
@@ -38,7 +38,7 @@ class ReportDetail: AppCompatActivity() {
     }
     fun bindData(view: View, report: AccidentReport){
         view.findViewById<CollapsingToolbarLayout>(R.id.collapsingtoolbarviewer_reportname).title = report.accidentedPersonType
-        view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = report.SeverityLevel
+        view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = report.severityLevel
         view.findViewById<TextView>(R.id.location).text = report.location
         view.findViewById<TextView>(R.id.description_report_viewer).text = report.description
         view.findViewById<TextView>(R.id.nameOfPerson).text = report.personInjuredName

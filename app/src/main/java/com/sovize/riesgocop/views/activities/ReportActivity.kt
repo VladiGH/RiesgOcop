@@ -143,7 +143,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener{
             personInjuredGender = genderValue,
             accidentedPersonType = occupationValue,
             description = descant,
-            SeverityLevel = severityValue,
+            severityLevel = severityValue,
             placeOfAttention = attentionValue,
             ambullance = ambulanceValue,
             pictures = mvReport.photoUrlList

@@ -36,7 +36,7 @@ class ReportAdapter(val items: List<AccidentReport>, private val clickListener: 
 
         fun bind(item: AccidentReport, clickListener: (AccidentReport) -> Unit)= with(itemView){
             tv_report_title.text = item.accidentedPersonType
-            tv_report_danger.text = item.SeverityLevel
+            tv_report_danger.text = item.severityLevel
             this.setOnClickListener { clickListener(item) }
 
         }

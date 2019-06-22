@@ -6,19 +6,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.QuerySnapshot
+import com.sovize.riesgocop.controlers.firebase.MasterCrud
 import com.sovize.riesgocop.controlers.firebase.ReportDao
 import com.sovize.riesgocop.models.AccidentReport
+import com.sovize.riesgocop.models.User
 import com.sovize.riesgocop.utilities.AppLogger
+import com.sovize.riesgocop.utilities.Document
 import kotlinx.coroutines.launch
 
 class ViewModelMainActivity : ViewModel() {
 
     val reportList = MutableLiveData<MutableList<AccidentReport>>()
-    private val user = MutableLiveData<FirebaseUser>()
+    private val user = MutableLiveData<User>()
+    //Todo change for a MasterCrud
     private val repository = ReportDao()
+    private val master = MasterCrud()
 
     fun getReportsData() {
         if (reportList.value.isNullOrEmpty()) {
@@ -29,17 +33,26 @@ class ViewModelMainActivity : ViewModel() {
         }
     }
 
-    fun getUserData(): LiveData<FirebaseUser> {
+    fun getUserData(): LiveData<User> {
         return user
     }
 
     fun setUserState() {
         FirebaseAuth.getInstance().addAuthStateListener {
-            user.value = it.currentUser
+            if (it.currentUser != null) {
+                master.readUid(Document.users, it.currentUser!!.uid) { doc ->
+                    doc?.toObject(User::class.java).apply {
+                        this?.firebaseUser = it.currentUser
+                        user.postValue(this)
+                    }
+                }
+            } else {
+                user.postValue(null)
+            }
         }
     }
 
-    fun enduserState() {
+    fun endUserState() {
         FirebaseAuth.getInstance().removeAuthStateListener {}
     }
 

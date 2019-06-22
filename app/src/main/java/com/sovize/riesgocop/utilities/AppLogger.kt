@@ -10,5 +10,6 @@ object AppLogger {
     const val fileManager = "FileManager"
     const val retrofit = "Retrofit Client"
     const val login = "LoginActivity"
+    const val master = "masterCrud"
 
 }

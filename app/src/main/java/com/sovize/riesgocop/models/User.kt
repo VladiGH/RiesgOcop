@@ -5,29 +5,30 @@ import android.os.Parcelable
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
-import kotlinx.android.parcel.IgnoredOnParcel
+import com.sovize.riesgocop.utilities.system.Permissions
 
 @IgnoreExtraProperties
 data class User(
-    val email: String,
-    val rol: Int,
-    val permission: CharArray
+    val email: String = "N/A",
+    val rol: Int = 0,
+    val permission: MutableList<String> = Permissions.anonimus
 ) : Parcelable {
 
-    @Exclude
-    @IgnoredOnParcel
+    @get:Exclude
     var firebaseUser: FirebaseUser? = null
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "N/A",
         parcel.readInt(),
-        parcel.createCharArray() ?: charArrayOf('x')
-    )
+        mutableListOf<String>()
+    ) {
+        parcel.readList(permission, String::class.java.classLoader)
+    }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(email)
         parcel.writeInt(rol)
-        parcel.writeCharArray(permission)
+        parcel.writeList(permission)
     }
 
     override fun describeContents(): Int {

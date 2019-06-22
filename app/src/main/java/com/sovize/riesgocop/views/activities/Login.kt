@@ -25,6 +25,7 @@ import com.sovize.riesgocop.models.User
 import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.Document
 import com.sovize.riesgocop.utilities.ResponseCodes
+import com.sovize.riesgocop.utilities.system.Permissions
 
 class Login : AppCompatActivity() {
 
@@ -78,10 +79,13 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this@Login) { task ->
                 if (task.isSuccessful) {
                     if (task.result?.additionalUserInfo?.isNewUser == true) {
-                        val newUser = User(task.result?.user?.email ?: "error", 5, charArrayOf('x'))
-                        MasterCrud().insert(Document.users, newUser) {
-                            Log.d(AppLogger.login, "Si se pudo meter nuevo user?: $it")
+                        val newUser = if (task.result?.user?.email?.split('@')?.get(1) == "uca.edu.sv") {
+                            User(task.result?.user?.email!!, 2, Permissions.userUca)
+                        } else {
+                            User(task.result?.user?.email ?: "error", 1, Permissions.user)
                         }
+                        newUser.firebaseUser = task.result?.user
+                        MasterCrud().insertWithUid(Document.users, newUser)
                     }
                     takeAction()
                 } else {

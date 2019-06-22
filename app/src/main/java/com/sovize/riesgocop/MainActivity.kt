@@ -2,6 +2,7 @@ package com.sovize.riesgocop
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -13,6 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseUser
 import com.sovize.riesgocop.controlers.network.Glider
+import com.sovize.riesgocop.models.User
+import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ResponseCodes
 import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.Login
@@ -29,12 +32,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val issueFragment = IssuesList()
     private lateinit var vmMain: ViewModelMainActivity
     private var user: FirebaseUser? = null
-    private val userObserver = Observer<FirebaseUser> { fireBaseUser ->
-        if (fireBaseUser != null) {
-            user = fireBaseUser
-            Glider.loadCircle(fireBaseUser.photoUrl.toString(), findViewById(R.id.app_bar_pic), R.drawable.profile)
+    private val userObserver = Observer<User> { user ->
+        if (user != null) {
+            Glider.loadCircle(
+                user.firebaseUser?.photoUrl.toString(),
+                findViewById(R.id.app_bar_pic),
+                R.drawable.profile
+            )
+            user.permission.forEach {
+                Log.d(AppLogger.mainActivity, "Permission : $it")
+            }
         } else {
-            user = null
             findViewById<ImageView>(R.id.app_bar_pic).setImageResource(R.drawable.profile)
         }
     }
@@ -43,10 +51,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
+        vmMain.setUserState()
         supportFragmentManager.beginTransaction().replace(R.id.quickBar, quickBar).commit()
         supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
         setSupportActionBar(findViewById(R.id.mainBar))
-
         findViewById<FloatingActionButton>(R.id.plus).setOnClickListener {
             onPLus()
         }
@@ -84,7 +92,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        vmMain.setUserState()
         when (requestCode) {
             ResponseCodes.login -> {
                 if (resultCode == RESULT_OK) {
@@ -105,6 +112,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
         vmMain.setUserState()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        vmMain.endUserState()
     }
 
     override fun onBackPressed() {
@@ -145,6 +157,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onDestroy() {
         super.onDestroy()
-        vmMain.enduserState()
+        vmMain.endUserState()
     }
 }

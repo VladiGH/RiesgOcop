@@ -31,7 +31,7 @@
     <string name="user_profile">user profile</string>
     <string name="menu">menu</string>
     <string name="privacy_policy"><u>Privacy policy</u></string>
-    <string name="report_s_photos">Report\'s photos</string>
+    <string name="report_s_photos">Report\s photos</string>
     <string name="select_photos">Select photos</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

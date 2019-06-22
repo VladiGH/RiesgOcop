@@ -8,6 +8,7 @@
     <string name="upload_picture">Suba una fotografia</string>
     <string name="upload">Subir</string>
     <string name="take_pic">Tomar Foto</string>
+    <string name="log_in">Ingresar</string>
     <string name="admin">Administrador</string>
     <string name="error_login_default_username">Error durante el proceso de autenticacion</string>
     <string name="instructions">Por favor ingrese en la aplicacion con su cuenta UCA educativa de Google</string>
@@ -32,7 +33,7 @@
     <string name="user_profile">Perfil de usuario</string>
     <string name="accident_s_severity">Severidad del accidente</string>
     <string name="person_injured_name">Nombre de persona accidentada</string>
-    <string name="gender_of_the_person_injured">Género de la persona accidentada</string>
+    <string name="gender_of_the_person_injured">Género</string>
     <string name="occupation_of_the_person">Ocupación del accidentado</string>
     <string name="place_of_attention">Lugar de atención</string>
     <string name="was_necessary_an_ambulance">¿Se requirió ambulancia?</string>

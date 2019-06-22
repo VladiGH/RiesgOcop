@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Gender">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
+
+
+    <string-array name="Ocuppation">
+        <item>Estudiante</item>
+        <item>Trabajador UCA</item>
+        <item>Otro</item>
+    </string-array>
+
+    <string-array name="placeOfAttention">
+        <item>Clínica UCA</item>
+        <item>No se sabe</item>
+        <item>No aplica</item>
+    </string-array>
+
+    <string-array name="ambullance">
+        <item>Sí</item>
+        <item>No se sabe</item>
+        <item>No aplica</item>
+    </string-array>
+
+</resources>

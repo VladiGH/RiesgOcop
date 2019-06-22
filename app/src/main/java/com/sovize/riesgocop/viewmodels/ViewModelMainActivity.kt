@@ -24,6 +24,23 @@ class ViewModelMainActivity : ViewModel() {
     private val repository = ReportDao()
     private val master = MasterCrud()
 
+    init {
+        FirebaseAuth.getInstance().addAuthStateListener {
+            if (it.currentUser != null) {
+                if (user.value == null) {
+                    master.readUid(Document.users, it.currentUser!!.uid) { doc ->
+                        doc?.toObject(User::class.java).apply {
+                            this?.firebaseUser = it.currentUser
+                            user.postValue(this)
+                        }
+                    }
+                }
+            } else {
+                user.postValue(null)
+            }
+        }
+    }
+
     fun getReportsData() {
         if (reportList.value.isNullOrEmpty()) {
             Log.d(AppLogger.viewModelMainActivity, "Database loading first time")
@@ -35,25 +52,6 @@ class ViewModelMainActivity : ViewModel() {
 
     fun getUserData(): LiveData<User> {
         return user
-    }
-
-    fun setUserState() {
-        FirebaseAuth.getInstance().addAuthStateListener {
-            if (it.currentUser != null) {
-                master.readUid(Document.users, it.currentUser!!.uid) { doc ->
-                    doc?.toObject(User::class.java).apply {
-                        this?.firebaseUser = it.currentUser
-                        user.postValue(this)
-                    }
-                }
-            } else {
-                user.postValue(null)
-            }
-        }
-    }
-
-    fun endUserState() {
-        FirebaseAuth.getInstance().removeAuthStateListener {}
     }
 
     private fun updateResult(query: QuerySnapshot?) {

@@ -37,8 +37,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="accident_s_severity">Accident\'s Severity</string>
     <string name="person_injured_name">Person Injured Name</string>
-    <string name="gender_of_the_person_injured">Gender of the person injured</string>
-    <string name="occupation_of_the_person">Occupation of the person</string>
+    <string name="gender_of_the_person_injured">Gender</string>
+    <string name="occupation_of_the_person">Occupation</string>
     <string name="place_of_attention">Place of attention</string>
     <string name="was_necessary_an_ambulance">Was necessary an ambulance?</string>
     <string name="loginmsm1">Login cancelled</string>

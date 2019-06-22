@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -61,6 +59,7 @@ class ReportActivity : AppCompatActivity() {
                 Snackbar.make(it, "No se tienen permisos suficientes", Snackbar.LENGTH_LONG).show()
             }
         }
+        Spinners()
         findViewById<Button>(R.id.upload).setOnClickListener {
             if(et_location_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() &&
                 et_peligro_report.text.isNotEmpty()){
@@ -71,6 +70,29 @@ class ReportActivity : AppCompatActivity() {
             }
         }
         progress = findViewById(R.id.tv_uour_pics)
+    }
+
+    private fun Spinners(){
+        val genderSpinner = findViewById<Spinner>(R.id.et_personInjuredGender)
+        val adapterG = ArrayAdapter.createFromResource(this@ReportActivity,R.array.Gender,android.R.layout.simple_spinner_item)
+        adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        genderSpinner.adapter = adapterG
+
+        val occupationSpinner = findViewById<Spinner>(R.id.et_personInjuredType)
+        val adapterO = ArrayAdapter.createFromResource(this@ReportActivity,R.array.Ocuppation,android.R.layout.simple_spinner_item)
+        adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        occupationSpinner.adapter = adapterO
+
+        val placeSpinner = findViewById<Spinner>(R.id.et_attentionPlace)
+        val adapterP = ArrayAdapter.createFromResource(this@ReportActivity,R.array.placeOfAttention,android.R.layout.simple_spinner_item)
+        adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        placeSpinner.adapter = adapterP
+
+
+        val ambullanceSpinner = findViewById<Spinner>(R.id.et_ambullance)
+        val adapterA = ArrayAdapter.createFromResource(this@ReportActivity,R.array.ambullance,android.R.layout.simple_spinner_item)
+        adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        ambullanceSpinner.adapter = adapterA
     }
 
     private fun createReport() {

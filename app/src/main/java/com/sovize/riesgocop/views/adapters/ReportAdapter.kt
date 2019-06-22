@@ -35,7 +35,7 @@ class ReportAdapter(val items: List<AccidentReport>, private val clickListener: 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         fun bind(item: AccidentReport, clickListener: (AccidentReport) -> Unit)= with(itemView){
-            tv_report_title.text = item.title
+            tv_report_title.text = item.accidentedPersonType
             tv_report_danger.text = item.SeverityLevel
             this.setOnClickListener { clickListener(item) }
 

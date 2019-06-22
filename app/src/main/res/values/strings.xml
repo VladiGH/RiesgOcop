@@ -36,7 +36,7 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="accident_s_severity">Accident\'s Severity</string>
-    <string name="person_injured_name">Person Injured Name</string>
+    <string name="person_injured_name">Person\'s name</string>
     <string name="gender_of_the_person_injured">Gender</string>
     <string name="occupation_of_the_person">Occupation</string>
     <string name="place_of_attention">Place of attention</string>

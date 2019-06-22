@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="Gender">
+    <string-array name="gender">
         <item>Hombre</item>
         <item>Mujer</item>
     </string-array>
 
 
-    <string-array name="Ocuppation">
+    <string-array name="ocuppation">
         <item>Estudiante</item>
         <item>Trabajador UCA</item>
         <item>Otro</item>
     </string-array>
 
     <string-array name="placeOfAttention">
+        <item>No aplica</item>
         <item>Clínica UCA</item>
         <item>No se sabe</item>
-        <item>No aplica</item>
     </string-array>
 
     <string-array name="ambullance">
+        <item>No aplica</item>
         <item>Sí</item>
         <item>No se sabe</item>
-        <item>No aplica</item>
+    </string-array>
+
+    <string-array name="severity">
+        <item>Bajo</item>
+        <item>Medio</item>
+        <item>Alto</item>
     </string-array>
 
 </resources>

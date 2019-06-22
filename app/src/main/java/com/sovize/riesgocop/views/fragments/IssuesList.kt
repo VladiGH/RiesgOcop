@@ -54,7 +54,7 @@ class IssuesList : Fragment() {
     }
 
     private fun reportItemClicked(item: AccidentReport) {
-        Log.d(AppLogger.issuesFragment, "${item.title} + ${item.description}")
+        Log.d(AppLogger.issuesFragment, "${item.accidentedPersonType} + ${item.description}")
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)
         startActivity(intent)

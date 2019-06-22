@@ -85,9 +85,12 @@ class Login : AppCompatActivity() {
                             User(task.result?.user?.email ?: "error", 1, Permissions.user)
                         }
                         newUser.firebaseUser = task.result?.user
-                        MasterCrud().insertWithUid(Document.users, newUser)
+                        MasterCrud().insertWithUid(Document.users, newUser) {
+                            takeAction()
+                        }
+                    } else {
+                        takeAction()
                     }
-                    takeAction()
                 } else {
                     Snackbar.make(
                         findViewById(R.id.btn_login),

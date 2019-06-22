@@ -1,9 +1,11 @@
 package com.sovize.riesgocop
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(R.id.issue_list, issueFragment).commit()
         setSupportActionBar(findViewById(R.id.mainBar))
         findViewById<FloatingActionButton>(R.id.plus).setOnClickListener {
-            onPLus()
+            onPLus(it)
         }
         findViewById<ImageView>(R.id.app_bar_pic).setOnClickListener {
             startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
@@ -102,11 +104,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun onPLus() {
+    private fun onPLus(ref: View) {
         if (cUser == null) {
             startActivityForResult(Intent(this, Login::class.java), ResponseCodes.login)
         } else {
-            startActivity(Intent(this, ReportActivity::class.java))
+            if (cUser?.permission?.contains("w")!!) {
+                startActivity(Intent(this, ReportActivity::class.java))
+            } else {
+                AlertDialog.Builder(ref.context)
+                    .setTitle(getString(R.string.errortypeacct1))
+                    .setMessage(getString(R.string.errortypeacct2))
+                    .setNeutralButton(getString(R.string.ok)) { dialog, _ ->
+                        dialog.dismiss()
+                    }.create().show()
+            }
         }
     }
 

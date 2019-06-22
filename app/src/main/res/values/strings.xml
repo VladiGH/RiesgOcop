@@ -48,4 +48,7 @@
     You cannot create reports</string>
     <string name="continuex">Continue</string>
     <string name="changeacct">Change account</string>
+    <string name="errortypeacct1">insufficient permissions</string>
+    <string name="errortypeacct2">your type of user is not an UCA account some features are disable</string>
+    <string name="ok">ok</string>
 </resources>

@@ -35,7 +35,7 @@ class MasterCrud {
             }
     }
 
-    fun insertWithUid(collection: String, dataObject: User) {
+    fun insertWithUid(collection: String, dataObject: User, callback: () -> Unit) {
         reportsDB.collection(collection)
             .document(dataObject.firebaseUser!!.uid)
             .set(dataObject)
@@ -44,6 +44,7 @@ class MasterCrud {
                     AppLogger.reportDao,
                     "DocumentSnapshot: User written with ID: ${dataObject.firebaseUser?.uid}"
                 )
+                callback()
             }
             .addOnFailureListener { e ->
                 Log.e(AppLogger.reportDao, "Error adding document", e)

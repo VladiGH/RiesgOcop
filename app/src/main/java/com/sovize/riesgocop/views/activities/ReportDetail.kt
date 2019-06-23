@@ -1,5 +1,6 @@
 package com.sovize.riesgocop.views.activities
 
+import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -7,7 +8,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.AccidentReport

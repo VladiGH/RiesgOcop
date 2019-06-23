@@ -29,15 +29,15 @@ class ViewModelReportActivity : ViewModel() {
                     val index = progressed.size - 1
 
                     override fun onProgressUpdate(percentage: Int) {
-                        progressed[index].postValue(percentage)
+                        progressed[index].postValue(100 - percentage)
                     }
 
                     override fun onError() {
-                        progressed[index].postValue(0)
+                        progressed[index].postValue(100)
                     }
 
                     override fun onFinish() {
-                        progressed[index].postValue(100)
+                        progressed[index].postValue(0)
                     }
                 })
             dir?.let { photoUrlList.add(it) }

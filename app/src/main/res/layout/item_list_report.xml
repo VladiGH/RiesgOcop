@@ -39,7 +39,19 @@
                 app:layout_constraintStart_toEndOf="@+id/report_state"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/n_a_value"
-                android:textSize="20sp" app:layout_constraintVertical_bias="0.285"/>
+                android:textSize="20sp" app:layout_constraintVertical_bias="0.103"/>
+
+        <TextView
+                android:id="@+id/tv_report_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="00/00/0000" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/tv_report_danger" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_report_title"
+                app:layout_constraintStart_toEndOf="@+id/report_state" android:layout_marginLeft="12dp"
+                android:layout_marginStart="12dp" app:layout_constraintVertical_bias="0.0"/>
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

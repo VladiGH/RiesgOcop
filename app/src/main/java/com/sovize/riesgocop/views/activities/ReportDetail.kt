@@ -1,5 +1,6 @@
 package com.sovize.riesgocop.views.activities
 
+import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -17,14 +18,21 @@ import com.sovize.riesgocop.utilities.ServerInfo
 import com.sovize.riesgocop.views.fragments.ReportDetailFragment
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
+
 
 class ReportDetail: AppCompatActivity() {
     var report: AccidentReport? = AccidentReport()
     var fecha = Date()
     var formatFecha = SimpleDateFormat("dd-MM-yy")
 
+    val carousel: CarouselPicker?=null
+    val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         Log.d("INFO ", "esto si llega")
         setContentView(R.layout.viewer_report)
         Log.d("INFO ", "esto si llegax")
@@ -34,6 +42,13 @@ class ReportDetail: AppCompatActivity() {
             reportInfo.ambullance, reportInfo.pictures)
 
         bindData(findViewById(R.id.viewer_id), report)
+
+        carousel?.findViewById<CarouselPicker>(R.id.rv_report_photos)
+
+        itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.profile))
+        itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
+        itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
+
 
     }
     fun bindData(view: View, report: AccidentReport){
@@ -56,6 +71,9 @@ class ReportDetail: AppCompatActivity() {
         view.findViewById<TextView>(R.id.ambullanceNec).text = ambullance
 
         view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
+
+        val imageAdapter = CarouselPicker.CarouselViewAdapter(this,itemsImages,3)
+        carousel?.adapter = imageAdapter
 
         /*Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
             findViewById(R.id.app_bar_report_image_viewer))*/

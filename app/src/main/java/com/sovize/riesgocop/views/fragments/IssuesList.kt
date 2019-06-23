@@ -1,16 +1,18 @@
 package com.sovize.riesgocop.views.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sovize.riesgocop.R
+import com.sovize.riesgocop.R.layout.*
 import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.AppLogger
@@ -18,8 +20,14 @@ import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.ReportDetail
 import com.sovize.riesgocop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.report_dash_list.*
+import java.util.*
+import kotlin.Comparator
 
+
+@Suppress("UNREACHABLE_CODE")
 class IssuesList : Fragment() {
+
+    //private var ArrayList: MutableList<AccidentReport>? = null
 
     private lateinit var vmMain: ViewModelMainActivity
     private var viewAdapter: ReportAdapter? = null
@@ -30,17 +38,41 @@ class IssuesList : Fragment() {
         } else {
             viewAdapter = ReportAdapter(it){reportItem -> reportItemClicked(reportItem)}
             rv_list_issues.swapAdapter(viewAdapter,true)
-        }
 
+        }
     }
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
         vmMain.reportList.observe(this, observer)
 
-        val view  =  inflater.inflate(R.layout.report_dash_list, container, false)
+        val view  =  inflater.inflate(report_dash_list, container, false)
 
         return view
+    }
+
+    fun Context.toast(message: CharSequence) =
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+
+    fun myFun() {
+        context?.toast("Funka")
+    }
+
+    fun sortArrayList(ArrayList: MutableList<AccidentReport>) {
+        //var ArrayList: MutableList<AccidentReport>? = null
+        val sortedList = ArrayList?.sortWith(compareBy { it.accidentedPersonType })
+        return sortedList
+    }
+
+    private fun sortArrayList2(Array: MutableList<AccidentReport>) {
+        Collections.sort(Array, object : Comparator<AccidentReport> {
+            override fun compare(o1: AccidentReport, o2: AccidentReport): Int {
+                return o1.accidentedPersonType.compareTo(o2.accidentedPersonType)
+            }
+        })
+
     }
 
     private fun initRecycler(report: MutableList<AccidentReport>) {
@@ -50,6 +82,11 @@ class IssuesList : Fragment() {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+
+
+        tv_title_filter.setOnClickListener {
+
         }
     }
 

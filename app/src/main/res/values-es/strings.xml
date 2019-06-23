@@ -49,5 +49,6 @@
         No puedes ingresar reportes</string>
     <string name="continuex">Continuar</string>
     <string name="changeacct">Cambiar de cuenta</string>
+    <string name="permissiond">Permission denied</string>
 
 </resources>

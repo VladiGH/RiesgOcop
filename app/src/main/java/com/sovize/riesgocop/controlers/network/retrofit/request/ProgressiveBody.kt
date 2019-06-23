@@ -8,7 +8,6 @@ import okhttp3.RequestBody
 import okio.BufferedSink
 import java.io.File
 import java.io.FileInputStream
-import java.lang.Exception
 
 class ProgressiveBody(
     private val callBack: Progressive,
@@ -16,7 +15,7 @@ class ProgressiveBody(
     private var contentType: String
 ) : RequestBody() {
 
-    private val defaultBufferSize = 2048
+    private val defaultBufferSize = 1024
 
     override fun contentType(): MediaType? {
         return MediaType.parse("$contentType/*")

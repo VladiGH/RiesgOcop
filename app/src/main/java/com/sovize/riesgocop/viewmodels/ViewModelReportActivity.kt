@@ -1,7 +1,6 @@
 package com.sovize.riesgocop.viewmodels
 
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,37 +13,36 @@ import java.io.File
 class ViewModelReportActivity : ViewModel() {
 
     private val client = HttpRetroClient()
-    private val photoList = mutableListOf<String>()
+    val photoList = mutableListOf<String>()
     val photoUrlList = mutableListOf<String>()
-    var tempPhoto = ""
+    val progressed = ArrayList<MutableLiveData<Int>>()
+    var cPhoto = ""
 
-    fun uploadNewPhoto(): LiveData<Int> {
-        photoList.add(tempPhoto)
-        val dataLive = MutableLiveData<Int>().apply { value = 0 }
+    fun uploadNewPhoto(photo: String): MutableLiveData<Int> {
+        val newData = MutableLiveData<Int>()
+        progressed.add(newData)
         viewModelScope.launch(Dispatchers.IO) {
-            val dir = client.uploadPhoto(File(tempPhoto),
+            val dir = client.uploadPhoto(
+                File(photo),
                 object : Progressive {
 
+                    val index = progressed.size - 1
+
                     override fun onProgressUpdate(percentage: Int) {
-                        dataLive.postValue(percentage)
+                        progressed[index].postValue(percentage)
                     }
 
                     override fun onError() {
-                        dataLive.postValue(-1)
+                        progressed[index].postValue(0)
                     }
 
                     override fun onFinish() {
-                        dataLive.postValue(100)
+                        progressed[index].postValue(100)
                     }
                 })
-            dir?.apply {
-                photoUrlList.add(this)
-            }
+            dir?.let { photoUrlList.add(it) }
         }
-        return dataLive
+        return newData
     }
 
-    fun getAllPhotos(): MutableList<String> {
-        return photoList
-    }
 }

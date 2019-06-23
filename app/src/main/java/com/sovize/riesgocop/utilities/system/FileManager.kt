@@ -24,12 +24,14 @@ class FileManager {
                 setOf(Environment.MEDIA_MOUNTED, Environment.MEDIA_MOUNTED_READ_ONLY)
     }
 
-    private fun getPublicStorageDir(secuense: Int): File? {
+    private fun getPublicStorageDir(): File? {
         // Get the directory for the user's public pictures directory.
         val date = Date()
         val formatDate = SimpleDateFormat.getDateInstance().format(Date())
         val file = File(Environment.getExternalStoragePublicDirectory(
-            Environment.DIRECTORY_PICTURES), "riesgocop/${formatDate.format(date)}/report_$secuense")
+            Environment.DIRECTORY_PICTURES
+        ), "riesgocop/${formatDate.format(date)}"
+        )
         file.mkdirs()
         if (!file.mkdirs()) {
             Log.w(AppLogger.fileManager, "Directory not created")
@@ -39,14 +41,14 @@ class FileManager {
     }
 
 
-    fun createImageFile(myNumber: Int): String {
+    fun createImageFile(): String {
 
         var tempDir = ""
 
         if(isExternalStorageWritable()){
             // Create an image file name
             val timeStamp = SimpleDateFormat.getDateInstance().format(Date())
-            val file = File.createTempFile(timeStamp,".jpg", getPublicStorageDir(myNumber))
+            val file = File.createTempFile(timeStamp, ".jpg", getPublicStorageDir())
             tempDir = file.absolutePath
         }
         return tempDir

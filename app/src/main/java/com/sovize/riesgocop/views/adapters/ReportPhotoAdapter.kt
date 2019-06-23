@@ -2,7 +2,6 @@ package com.sovize.riesgocop.views.adapters
 
 import android.graphics.BitmapFactory
 import android.media.ThumbnailUtils
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,15 +24,9 @@ class ReportPhotoAdapter(var photosItems: MutableList<String>): RecyclerView.Ada
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(photosItems[position])
     }
-    fun updateList(newPhotos:MutableList<String>){
-        this.photosItems = newPhotos
-        notifyDataSetChanged()
-    }
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-        private var coverPhoto: String? = null
 
         fun bind(photo: String) = with(itemView) {
             val imageBitmap = ThumbnailUtils.extractThumbnail(

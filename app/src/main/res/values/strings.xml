@@ -52,4 +52,9 @@
     <string name="errortypeacct1">insufficient permissions</string>
     <string name="errortypeacct2">your type of user is not an UCA account some features are disable</string>
     <string name="ok">ok</string>
+    <string name="noPics">No photos provided</string>
+    <string name="permissiond">Permission denied</string>
+    <string name="succes1">Your report was added</string>
+    <string name="failure1">Report upload failed</string>
+    <string name="failure2">Could not create file in external media</string>
 </resources>

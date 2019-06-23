@@ -32,7 +32,7 @@ class ReportDetailFragment: Fragment() {
         view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = report?.danger.toString()
         view.findViewById<TextView>(R.id.location).text = report?.location
         view.findViewById<TextView>(R.id.description_report_viewer).text = report?.description
-        view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
+        view.findViewById<TextView>(R.id.tv_date).text = formatFecha.format(fecha).toString()
     }
 
     fun setData(report: Report){
@@ -40,7 +40,7 @@ class ReportDetailFragment: Fragment() {
         view?.findViewById<TextView>(R.id.app_bar_rating_danger_viewer)?.text = report.danger.toString()
         view?.findViewById<TextView>(R.id.location)?.text = report.location
         view?.findViewById<TextView>(R.id.description_report_viewer)?.text = report.description
-        view?.findViewById<TextView>(R.id.et_date)?.text = formatFecha.format(fecha).toString()
+        view?.findViewById<TextView>(R.id.tv_date)?.text = formatFecha.format(fecha).toString()
     }
 
     companion object {

@@ -25,8 +25,6 @@ import kotlin.collections.ArrayList
 
 class ReportDetail: AppCompatActivity() {
     var report: AccidentReport? = AccidentReport()
-    var fecha = Date()
-    var formatFecha = SimpleDateFormat("dd-MM-yy")
 
     val carousel: CarouselPicker?=null
     val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
@@ -41,7 +39,7 @@ class ReportDetail: AppCompatActivity() {
         val reportInfo = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
         val report = AccidentReport(reportInfo!!.id,reportInfo.location,reportInfo.personInjuredName,reportInfo.personInjuredGender,
             reportInfo.accidentedPersonType, reportInfo.description, reportInfo.severityLevel, reportInfo.placeOfAttention,
-            reportInfo.ambullance, reportInfo.pictures)
+            reportInfo.ambullance, reportInfo.pictures, reportInfo.date)
 
         bindData(findViewById(R.id.viewer_id), report)
 
@@ -62,6 +60,7 @@ class ReportDetail: AppCompatActivity() {
         val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
         val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
         val ambullance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambullance}"
+        val date = "${resources.getString(R.string.date)}: ${report.date}"
 
         view.findViewById<CollapsingToolbarLayout>(R.id.collapsingtoolbarviewer_reportname).title = report.accidentedPersonType
         view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = severity
@@ -72,7 +71,7 @@ class ReportDetail: AppCompatActivity() {
         view.findViewById<TextView>(R.id.placeAttention).text = place
         view.findViewById<TextView>(R.id.ambullanceNec).text = ambullance
 
-        view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
+        view.findViewById<TextView>(R.id.tv_date).text = date
 
         val imageAdapter = CarouselPicker.CarouselViewAdapter(this,itemsImages,3)
         carousel?.adapter = imageAdapter

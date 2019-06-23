@@ -53,7 +53,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
             val occupation = "${resources.getString(R.string.occupation_of_the_person)}: ${item.accidentedPersonType}"
             val severity = "${ resources.getString(R.string.accident_s_severity)}: ${item.severityLevel}"
 
-            tv_report_date.text = formatFecha.format(fecha).toString()
+            tv_report_date.text = item.date
             tv_report_title.text = occupation
             tv_report_danger.text = severity
             this.setOnClickListener { clickListener(item) }

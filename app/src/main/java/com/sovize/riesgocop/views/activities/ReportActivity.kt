@@ -23,6 +23,8 @@ import com.sovize.riesgocop.utilities.system.PermissionRequester
 import com.sovize.riesgocop.viewmodels.ViewModelReportActivity
 import com.sovize.riesgocop.views.adapters.ReportPhotoAdapter
 import kotlinx.android.synthetic.main.activity_report.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -39,6 +41,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var occupationValue: String
     private lateinit var attentionValue: String
     private lateinit var ambulanceValue: String
+    var fecha = Date()
+    var formatFecha = SimpleDateFormat("dd-MM-yy")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,6 +163,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val location = findViewById<EditText>(R.id.et_location_report).text.toString()
         val personName = findViewById<EditText>(R.id.et_personInjured).text.toString()
         val descant = findViewById<EditText>(R.id.et_descripcion_report).text.toString()
+        val date = formatFecha.format(fecha).toString()
         val report = AccidentReport(
             location = location,
             personInjuredName = personName,
@@ -168,7 +173,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             severityLevel = severityValue,
             placeOfAttention = attentionValue,
             ambullance = ambulanceValue,
-            pictures = mvReport.photoUrlList
+            pictures = mvReport.photoUrlList,
+            date = date
         )
         master.insert(Document.accident, report) {
             Log.d(AppLogger.reportActivity, "se creo $it")

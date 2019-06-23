@@ -7,7 +7,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.AccidentReport
@@ -57,8 +59,17 @@ class ReportDetail: AppCompatActivity() {
 
         view.findViewById<TextView>(R.id.et_date).text = formatFecha.format(fecha).toString()
 
-        /*Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
-            findViewById(R.id.app_bar_report_image_viewer))*/
+        if(report.pictures.isNotEmpty()){
+            Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
+                findViewById(R.id.app_bar_report_image_viewer))
+        } else{
+            Snackbar.make(findViewById(R.id.app_bar_report_image_viewer),
+                resources.getString(R.string.noPics), Snackbar.LENGTH_LONG).show()
+            Glide.with(this@ReportDetail)
+                .load(R.drawable.ic_broken_image_black_48dp)
+                .into(findViewById(R.id.app_bar_report_image_viewer))
+        }
+
     }
 
 }

@@ -50,5 +50,9 @@
     <string name="continuex">Continuar</string>
     <string name="changeacct">Cambiar de cuenta</string>
     <string name="permissiond">Permission denied</string>
+    <string name="errortypeacct1">No hay permisos suficientes</string>
+    <string name="errortypeacct2">Necesitas ser usuario UCA. Algunas funciones deshabilitadas.</string>
+    <string name="ok">ok</string>
+    <string name="noPics">No se proporcionaron fotos</string>
 
 </resources>

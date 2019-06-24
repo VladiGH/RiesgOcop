@@ -15,10 +15,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.firebase.MasterCrud
 import com.sovize.riesgocop.models.User
@@ -124,7 +127,28 @@ class Login : AppCompatActivity() {
                 setResult(Activity.RESULT_OK)
                 finish()
             }
+            updateToken()
         }
 
+    }
+
+    private fun updateToken() {
+        FirebaseInstanceId.getInstance().instanceId
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.d(AppLogger.login, "getInstanceId failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new Instance ID token
+                val token = task.result?.token
+                token?.let {
+                    Log.d(AppLogger.login, "The generated token is $it")
+                    FirebaseAuth.getInstance().currentUser?.apply {
+                        FirebaseFirestore.getInstance().collection(Document.users)
+                            .document(this.uid).update("token", it)
+                    }
+                }
+            })
     }
 }

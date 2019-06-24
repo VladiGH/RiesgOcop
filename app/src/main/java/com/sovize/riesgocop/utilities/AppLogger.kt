@@ -11,5 +11,6 @@ object AppLogger {
     const val retrofit = "Retrofit Client"
     const val login = "LoginActivity"
     const val master = "masterCrud"
+    const val messenger = "messenger"
 
 }

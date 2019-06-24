@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -18,14 +17,17 @@ import com.sovize.riesgocop.models.Report
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.ServerInfo
 import com.sovize.riesgocop.views.fragments.ReportDetailFragment
+import kotlinx.android.synthetic.main.viewer_report.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class ReportDetail: AppCompatActivity() {
-    var report: AccidentReport? = AccidentReport()
+class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
+
+    var report: AccidentReport? = AccidentReport()
+    private lateinit var stateValue: String
     val carousel: CarouselPicker?=null
     val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
 
@@ -39,16 +41,16 @@ class ReportDetail: AppCompatActivity() {
         val reportInfo = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
         val report = AccidentReport(reportInfo!!.id,reportInfo.location,reportInfo.personInjuredName,reportInfo.personInjuredGender,
             reportInfo.accidentedPersonType, reportInfo.description, reportInfo.severityLevel, reportInfo.placeOfAttention,
-            reportInfo.ambullance, reportInfo.pictures, reportInfo.date)
+            reportInfo.ambullance, reportInfo.pictures, reportInfo.date, reportInfo.state)
 
         bindData(findViewById(R.id.viewer_id), report)
-
+        spinnerState()
         carousel?.findViewById<CarouselPicker>(R.id.rv_report_photos)
 
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.profile))
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
-
+        findViewById<Spinner>(R.id.spinner_state).onItemSelectedListener = this
 
     }
     fun bindData(view: View, report: AccidentReport){
@@ -89,6 +91,23 @@ class ReportDetail: AppCompatActivity() {
                 .into(findViewById(R.id.app_bar_report_image_viewer))
         }
 
+    }
+
+    private fun spinnerState() {
+        val stateSpinner = findViewById<Spinner>(R.id.spinner_state)
+        val adapterS = ArrayAdapter.createFromResource(this@ReportDetail, R.array.state, android.R.layout.simple_spinner_item)
+        adapterS.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+        stateSpinner.adapter = adapterS
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        stateValue = spinner_state.selectedItem.toString()
+        Snackbar.make(findViewById<Spinner>(R.id.spinner_state),
+            "${resources.getString(R.string.actual_state)}: ${stateValue}", Snackbar.LENGTH_LONG).show()
     }
 
 }

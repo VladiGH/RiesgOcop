@@ -30,4 +30,13 @@
         <item>Alto</item>
     </string-array>
 
+    <string-array name="state">
+        <item>Nuevo</item>
+        <item>Visto</item>
+        <item>En proceso</item>
+        <item>Terminado</item>
+        <item>Cancelado</item>
+    </string-array>
+
+
 </resources>

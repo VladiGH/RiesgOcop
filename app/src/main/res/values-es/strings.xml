@@ -54,5 +54,6 @@
     <string name="errortypeacct2">Necesitas ser usuario UCA. Algunas funciones deshabilitadas.</string>
     <string name="ok">ok</string>
     <string name="noPics">No se proporcionaron fotos</string>
+    <string name="actual_state">Estado actual</string>
 
 </resources>

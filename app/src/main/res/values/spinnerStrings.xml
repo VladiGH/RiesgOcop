@@ -31,4 +31,12 @@
         <item>High</item>
     </string-array>
 
+    <string-array name="state">
+        <item>New</item>
+        <item>Seen</item>
+        <item>In process</item>
+        <item>Closed</item>
+        <item>Cancelled</item>
+    </string-array>
+
 </resources>

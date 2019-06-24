@@ -60,4 +60,5 @@
     <string name="notyName">Reportes</string>
     <string name="notyDesc">En este canal se muestran la lista de reportes</string>
     <string name="chnenlsid">riesgocop Accidents</string>
+    <string name="actual_state">Actual state</string>
 </resources>

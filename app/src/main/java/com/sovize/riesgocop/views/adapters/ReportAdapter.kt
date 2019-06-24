@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.sovize.riesgocop.R
+import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.AccidentReport
+import com.sovize.riesgocop.utilities.ServerInfo
 import kotlinx.android.synthetic.main.item_list_report.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,10 +49,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
-        var fecha = Date()
-        var formatFecha = SimpleDateFormat("dd-MM-yy")
-
+        
         fun bind(item: AccidentReport, clickListener: (AccidentReport) -> Unit)= with(itemView){
             val occupation = "${resources.getString(R.string.occupation_of_the_person)}: ${item.accidentedPersonType}"
             val severity = "${ resources.getString(R.string.accident_s_severity)}: ${item.severityLevel}"
@@ -57,6 +58,15 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
             tv_report_title.text = occupation
             tv_report_danger.text = severity
             this.setOnClickListener { clickListener(item) }
+
+            if(item.pictures.isNotEmpty()){
+                Glider.load("${ServerInfo.baseURL}${item.pictures[0]}",
+                    findViewById(R.id.report_state))
+            } else{
+                Glide.with(this.context)
+                    .load(R.drawable.ic_broken_image_black_48dp)
+                    .into(findViewById(R.id.report_state))
+            }
 
         }
     }

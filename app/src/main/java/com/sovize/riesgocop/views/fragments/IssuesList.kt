@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sovize.riesgocop.R.layout.*
+import com.sovize.riesgocop.R.layout.report_dash_list
 import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.AppLogger
@@ -20,8 +20,6 @@ import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.activities.ReportDetail
 import com.sovize.riesgocop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.report_dash_list.*
-import java.util.*
-import kotlin.Comparator
 
 
 @Suppress("UNREACHABLE_CODE")
@@ -62,16 +60,12 @@ class IssuesList : Fragment() {
 
     fun sortArrayList(ArrayList: MutableList<AccidentReport>) {
         //var ArrayList: MutableList<AccidentReport>? = null
-        val sortedList = ArrayList?.sortWith(compareBy { it.accidentedPersonType })
+        val sortedList = ArrayList.sortWith(compareBy { it.accidentedPersonType })
         return sortedList
     }
 
     private fun sortArrayList2(Array: MutableList<AccidentReport>) {
-        Collections.sort(Array, object : Comparator<AccidentReport> {
-            override fun compare(o1: AccidentReport, o2: AccidentReport): Int {
-                return o1.accidentedPersonType.compareTo(o2.accidentedPersonType)
-            }
-        })
+        Array.sortWith(Comparator { o1, o2 -> o1.accidentedPersonType.compareTo(o2.accidentedPersonType) })
 
     }
 

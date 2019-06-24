@@ -1,6 +1,7 @@
 package com.sovize.riesgocop.views.activities
 
 import `in`.goodiebag.carouselpicker.CarouselPicker
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -33,6 +34,7 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
     val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
     val masterCrud = MasterCrud()
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,7 +50,7 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
         spinnerState()
         carousel?.findViewById<CarouselPicker>(R.id.rv_report_photos)
 
-        itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.profile))
+        itemsImages?.add(CarouselPicker.DrawableItem(R.id.list_photo))
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         findViewById<Spinner>(R.id.spinner_state).onItemSelectedListener = this

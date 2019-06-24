@@ -61,6 +61,17 @@
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="88dp"
                 android:layout_marginStart="88dp" android:id="@+id/tv_report_danger"/>
 
+        <ImageView
+
+                android:id="@+id/estado"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_launcher_background"
+                tools:layout_editor_absoluteY="16dp"
+                app:layout_constraintStart_toEndOf="@+id/tv_report_title"
+                android:layout_marginLeft="236dp"
+                android:layout_marginStart="236dp"
+                tools:ignore="MissingConstraints"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

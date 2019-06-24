@@ -7,7 +7,8 @@ import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class AccidentReport (
-    @Exclude var id: String = "N/A",
+    @get:Exclude
+    var id: String = "N/A",
    // val title: String = "N/A",
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
@@ -19,7 +20,7 @@ data class AccidentReport (
     val ambullance: String = "N/A",
     val pictures: List<String> = listOf("N/A"),
     val date: String = "0",
-    val state: Int = 0
+    val state: Int = 1
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?: "N/A",

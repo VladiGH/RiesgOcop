@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.sovize.riesgocop.R
+import com.sovize.riesgocop.controlers.firebase.MasterCrud
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.models.Report
@@ -30,7 +31,7 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var stateValue: String
     val carousel: CarouselPicker?=null
     val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
-
+    val masterCrud = MasterCrud()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,10 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         findViewById<Spinner>(R.id.spinner_state).onItemSelectedListener = this
+
+        if(report.state == 1){
+            masterCrud.updateReport(report, 2)
+        }
 
     }
     fun bindData(view: View, report: AccidentReport){

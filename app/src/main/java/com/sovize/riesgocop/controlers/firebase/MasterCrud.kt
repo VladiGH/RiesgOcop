@@ -4,8 +4,10 @@ import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
+import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.models.User
 import com.sovize.riesgocop.utilities.AppLogger
+import com.sovize.riesgocop.utilities.Document
 
 class MasterCrud {
 
@@ -82,5 +84,9 @@ class MasterCrud {
                     Log.e(AppLogger.master, "Read UI failed with:", it.exception)
                 }
             }
+    }
+    fun updateReport(report: AccidentReport, state: Int) {
+        reportsDB.collection(Document.accident).document(report.id)
+            .update("state", state )
     }
 }

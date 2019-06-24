@@ -8,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
@@ -16,8 +18,10 @@ import com.sovize.riesgocop.controlers.firebase.MasterCrud
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.AccidentReport
 import com.sovize.riesgocop.models.Report
+import com.sovize.riesgocop.models.User
 import com.sovize.riesgocop.utilities.AppKey
 import com.sovize.riesgocop.utilities.ServerInfo
+import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 import com.sovize.riesgocop.views.fragments.ReportDetailFragment
 import kotlinx.android.synthetic.main.viewer_report.*
 import java.text.SimpleDateFormat
@@ -33,6 +37,7 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
     val carousel: CarouselPicker?=null
     val itemsImages : ArrayList<CarouselPicker.PickerItem>? = null
     val masterCrud = MasterCrud()
+    var user: User? = null
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,9 +60,17 @@ class ReportDetail: AppCompatActivity(), AdapterView.OnItemSelectedListener {
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
         findViewById<Spinner>(R.id.spinner_state).onItemSelectedListener = this
 
-        if(report.state == 1){
-            masterCrud.updateReport(report, 2)
+        val viewModel = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
+
+        viewModel.getUserData().observe(this, Observer<User>{
+            user = it
+        })
+        user?.let{
+            if(report.state == 1 && it.permission.contains("g")){
+                masterCrud.updateReport(report, 2)
+            }
         }
+
 
     }
     fun bindData(view: View, report: AccidentReport){

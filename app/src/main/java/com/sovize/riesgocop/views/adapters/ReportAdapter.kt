@@ -74,7 +74,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
                     .load(R.drawable.ic_broken_image_black_48dp)
                     .into(findViewById(R.id.report_state))
             }
-            /*if(item.state==1){
+            if(item.state==1){
                 Glide.with(this.context)
                     .load(R.drawable.ic_active_on)
                     .into(findViewById(R.id.estado))
@@ -83,7 +83,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
                 Glide.with(this.context)
                     .load(R.drawable.ic_active_pause)
                     .into(findViewById(R.id.estado))
-            }*/
+            }
 
         }
     }

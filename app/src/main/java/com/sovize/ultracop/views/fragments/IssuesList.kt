@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.report_dash_list.*
 @Suppress("UNREACHABLE_CODE")
 class IssuesList : Fragment() {
 
-    //private var ArrayList: MutableList<AccidentReport>? = null
+    private var ArrayList: MutableList<AccidentReport>? = null
 
     private lateinit var vmMain: ViewModelMainActivity
     private var viewAdapter: ReportAdapter? = null
@@ -58,20 +58,21 @@ class IssuesList : Fragment() {
         context?.toast("Funka")
     }
 
-    fun sortArrayList(ArrayList: MutableList<AccidentReport>) {
+    fun sortArrayList(): Unit? {
         //var ArrayList: MutableList<AccidentReport>? = null
-        val sortedList = ArrayList.sortWith(compareBy { it.accidentedPersonType })
+        val sortedList = ArrayList?.sortWith(compareBy { it.accidentedPersonType })
         return sortedList
     }
 
-    private fun sortArrayList2(Array: MutableList<AccidentReport>) {
-        Array.sortWith(Comparator { o1, o2 -> o1.accidentedPersonType.compareTo(o2.accidentedPersonType) })
-
+    private fun sortArrayList2(Array: MutableList<AccidentReport>?) {
+        if (Array != null) {
+            Array.sortWith(Comparator { o1, o2 -> o1.accidentedPersonType.compareTo(o2.accidentedPersonType) })
+        }
     }
 
-    private fun initRecycler(report: MutableList<AccidentReport>) {
-        viewAdapter = ReportAdapter(report) { reportItem -> reportItemClicked(reportItem) }
-
+    private fun initRecycler(report: MutableList<AccidentReport>?) {
+        viewAdapter = report?.let { ReportAdapter(it) { reportItem -> reportItemClicked(reportItem) } }
+        ArrayList?.add(AccidentReport())
         rv_list_issues.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
@@ -80,6 +81,9 @@ class IssuesList : Fragment() {
 
 
         tv_title_filter.setOnClickListener {
+            sortArrayList2(ArrayList)
+
+            //initRecycler(ArrayList)
 
         }
     }

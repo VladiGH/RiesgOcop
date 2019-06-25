@@ -86,6 +86,9 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 rv_photos.getChildAt(index).findViewById<ProgressBar>(R.id.progress).progress = percentage
             })
         }
+        findViewById<Button>(R.id.select_photos).setOnClickListener {
+            startActivity(Intent(this@ReportActivity, MapsActivity::class.java))
+        }
     }
 
     /**

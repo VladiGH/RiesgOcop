@@ -64,4 +64,6 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="add_your_current_location">Add your current location</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="locationS">Accident location</string>
 </resources>

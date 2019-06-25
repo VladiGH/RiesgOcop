@@ -37,7 +37,7 @@ data class AccidentReport (
         parcel.readString() ?: "N/A",
         parcel.createStringArrayList() ?: listOf("N/A"),
         parcel.readString()?: "N/A",
-        parcel.readInt()?: 0,
+        parcel.readInt(),
         parcel.readString()?: "N/A",
         parcel.readString()?:"N/A"
     )

@@ -1,62 +1,20 @@
 package com.sovize.riesgocop.views.activities
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.network.Glider
-import com.sovize.riesgocop.models.User
-import com.sovize.riesgocop.utilities.AppKey
-import com.sovize.riesgocop.utilities.AppLogger
-import com.sovize.riesgocop.utilities.ServerInfo
-import com.sovize.riesgocop.utilities.system.Permissions.user
-import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 
 class ProfileActivity : AppCompatActivity() {
 
-    private var cUser: User? = null
-
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile)
-
-         val userObserver = Observer<User> { user ->
-            cUser = user
-            cUser.apply {
-                if (this != null) {
-                    Glider.loadCircle(
-                        user.firebaseUser?.photoUrl.toString(),
-                        findViewById(R.id.user_profile_photo),
-                        R.drawable.profile
-                    )
-                    findViewById<TextView>(R.id.user_profile_name).text = user.firebaseUser?.email
-                    user.permission.forEach {
-                        Log.d(AppLogger.mainActivity, "Permission : $it")
-                    }
-                } else {
-                    findViewById<ImageView>(R.id.user_profile_photo).setImageResource(R.drawable.profile)
-                }
-            }
-        }
-        val vmProfile = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
-        //val profileInfo = intent?.extras?.getParcelable<User>(AppKey.activity)
-        //val profile = User(profileInfo!!.email,profileInfo.rol,profileInfo.permission,profileInfo.picture)
-
-        //bindData(findViewById(R.layout.profile),profile)
         findViewById<Button>(R.id.logout).setOnClickListener {
             if (FirebaseAuth.getInstance().currentUser == null) {
                 startActivity(Intent(this, Login::class.java))
@@ -78,32 +36,15 @@ class ProfileActivity : AppCompatActivity() {
                 findViewById<Button>(R.id.logout).text = getString(R.string.log_out)
 
                 Glider.load(
-                    cUser?.picture.toString(),
+                    it.currentUser?.photoUrl.toString(),
                     findViewById(R.id.user_profile_photo),
-                    R.drawable.profile)
-                    findViewById<TextView>(R.id.user_profile_name).text = cUser?.email.toString()
+                    R.drawable.profile
+                )
             }
         }
-    vmProfile.getUserData().observe(this, userObserver)
+
 
     }
-/*
-    fun bindData(view: View, profile: User){
-
-        val nickname = "${profile.email}"
-
-        view.findViewById<TextView>(R.id.user_profile_name).text = nickname
-        if(profile.picture.isNotEmpty()){
-            Glider.load("${ServerInfo.baseURL}${profile.picture}",
-                findViewById(R.id.user_profile_photo))
-        }else{
-            Snackbar.make(findViewById(R.id.user_profile_photo),
-                resources.getString(R.string.noPics), Snackbar.LENGTH_LONG).show()
-            Glide.with(this@ProfileActivity)
-                .load(R.drawable.ic_broken_image_black_48dp)
-                .into(findViewById(R.id.user_profile_photo))
-        }
-    }*/
 
     override fun onDestroy() {
         super.onDestroy()

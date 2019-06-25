@@ -3,6 +3,7 @@ package com.sovize.ultracop.views.activities
 import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import com.sovize.ultracop.controlers.network.Glider
 import com.sovize.ultracop.models.AccidentReport
 import com.sovize.ultracop.models.User
 import com.sovize.ultracop.utilities.AppKey
+import com.sovize.ultracop.utilities.AppLogger
 import com.sovize.ultracop.utilities.ServerInfo
 import com.sovize.ultracop.viewmodels.ViewModelMainActivity
 import kotlinx.android.synthetic.main.viewer_report.*
@@ -59,6 +61,7 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             val coordinates = Intent(this@ReportDetail, MapsActivity::class.java)
             coordinates.putExtra(AppKey.longitude, report?.longitude)
             coordinates.putExtra(AppKey.latitude, report?.latitude)
+            Log.d(AppLogger.reportDetail, "${report?.longitude} ${report?.latitude}")
             startActivity(coordinates)
         }
     }

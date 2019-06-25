@@ -1,6 +1,7 @@
 package com.sovize.ultracop.views.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +11,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sovize.ultracop.R
 import com.sovize.ultracop.utilities.AppKey
+import com.sovize.ultracop.utilities.AppLogger
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -44,8 +46,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val place = LatLng(lat, lon)
+        val place = LatLng(lon, lat)
+        Log.d(AppLogger.map, " $lat y $lon")
         mMap.addMarker(MarkerOptions().position(place).title(getString(R.string.locationS)))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 20f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 18f))
     }
 }

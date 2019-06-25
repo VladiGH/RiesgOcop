@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -16,18 +20,39 @@ import com.sovize.riesgocop.R
 import com.sovize.riesgocop.controlers.network.Glider
 import com.sovize.riesgocop.models.User
 import com.sovize.riesgocop.utilities.AppKey
+import com.sovize.riesgocop.utilities.AppLogger
 import com.sovize.riesgocop.utilities.ServerInfo
 import com.sovize.riesgocop.utilities.system.Permissions.user
+import com.sovize.riesgocop.viewmodels.ViewModelMainActivity
 
 class ProfileActivity : AppCompatActivity() {
 
-    private val cUser: User? = null
+    private var cUser: User? = null
 
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile)
 
+         val userObserver = Observer<User> { user ->
+            cUser = user
+            cUser.apply {
+                if (this != null) {
+                    Glider.loadCircle(
+                        user.firebaseUser?.photoUrl.toString(),
+                        findViewById(R.id.user_profile_photo),
+                        R.drawable.profile
+                    )
+                    findViewById<TextView>(R.id.user_profile_name).text = user.firebaseUser?.email
+                    user.permission.forEach {
+                        Log.d(AppLogger.mainActivity, "Permission : $it")
+                    }
+                } else {
+                    findViewById<ImageView>(R.id.user_profile_photo).setImageResource(R.drawable.profile)
+                }
+            }
+        }
+        val vmProfile = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
         //val profileInfo = intent?.extras?.getParcelable<User>(AppKey.activity)
         //val profile = User(profileInfo!!.email,profileInfo.rol,profileInfo.permission,profileInfo.picture)
 
@@ -59,7 +84,7 @@ class ProfileActivity : AppCompatActivity() {
                     findViewById<TextView>(R.id.user_profile_name).text = cUser?.email.toString()
             }
         }
-
+    vmProfile.getUserData().observe(this, userObserver)
 
     }
 /*

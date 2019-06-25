@@ -56,7 +56,7 @@ class FileManager {
 
     fun getUri(path: String, context: Context): Uri {
         Log.d(AppLogger.fileManager, "antes de morir")
-        return FileProvider.getUriForFile(context, "com.sovize.riesgocop.utilities.system.FileManager", File(path))
+        return FileProvider.getUriForFile(context, "com.sovize.ultracop.utilities.system.FileManager", File(path))
     }
 
 }

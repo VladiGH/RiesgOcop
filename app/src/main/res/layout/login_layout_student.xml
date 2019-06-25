@@ -15,10 +15,10 @@
         android:textSize="40sp"
         android:layout_gravity="center"/>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
-        android:layout_gravity="center_horizontal"/>
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:src="@drawable/logo"
+            android:layout_gravity="center_horizontal"/>
 
     <EditText
         android:id="@+id/et_carnet_estudiante"

@@ -27,7 +27,7 @@
     <ImageView
             android:layout_width="133dp"
             android:layout_height="139dp"
-            android:src="@mipmap/ic_launcher_round"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"

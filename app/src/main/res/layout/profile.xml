@@ -16,7 +16,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/navigation_header_image"/>
 
-        <ImageButton
+        <ImageView
                 android:id="@+id/user_profile_photo"
                 android:layout_width="120dp"
                 android:layout_height="120dp"

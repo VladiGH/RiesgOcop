@@ -11,7 +11,8 @@ import com.sovize.riesgocop.utilities.system.Permissions
 data class User(
     val email: String = "N/A",
     val rol: Int = 0,
-    val permission: MutableList<String> = Permissions.anonimus
+    val permission: MutableList<String> = Permissions.anonimus,
+    val picture: String = "N/A"
 ) : Parcelable {
 
     @get:Exclude
@@ -20,7 +21,8 @@ data class User(
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "N/A",
         parcel.readInt(),
-        mutableListOf<String>()
+        mutableListOf<String>(),
+        parcel.readString()?:"N/A"
     ) {
         parcel.readList(permission, String::class.java.classLoader)
     }
@@ -29,6 +31,7 @@ data class User(
         parcel.writeString(email)
         parcel.writeInt(rol)
         parcel.writeList(permission)
+        parcel.writeString(picture)
     }
 
     override fun describeContents(): Int {

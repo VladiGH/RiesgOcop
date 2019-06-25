@@ -7,19 +7,23 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.firebase.MasterCrud
 import com.sovize.ultracop.models.AccidentReport
+import com.sovize.ultracop.models.User
 import com.sovize.ultracop.utilities.AppLogger
 import com.sovize.ultracop.utilities.Document
 import com.sovize.ultracop.utilities.ResponseCodes
 import com.sovize.ultracop.utilities.system.FileManager
 import com.sovize.ultracop.utilities.system.PermissionRequester
+import com.sovize.ultracop.viewmodels.ViewModelMainActivity
 import com.sovize.ultracop.viewmodels.ViewModelReportActivity
 import com.sovize.ultracop.views.adapters.ReportPhotoAdapter
 import kotlinx.android.synthetic.main.activity_report.*
@@ -43,6 +47,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var ambulanceValue: String
     var fecha = Date()
     var formatFecha = SimpleDateFormat("dd-MM-yy")
+    private var cUser:  User? =null
+    private var uidUser: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +95,19 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         findViewById<Button>(R.id.select_photos).setOnClickListener {
             startActivity(Intent(this@ReportActivity, MapsActivity::class.java))
         }
+        val vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
+
+        val userObserver = Observer<User> { user ->
+            cUser = user
+            cUser.apply {
+                if (this != null) {
+                    uidUser = FirebaseAuth.getInstance().currentUser?.uid
+                } else {
+                    Snackbar.make(progress, "No hay usuario", Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+        vmMain.getUserData().observe(this, userObserver)
     }
 
     /**
@@ -177,7 +196,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             placeOfAttention = attentionValue,
             ambullance = ambulanceValue,
             pictures = mvReport.photoUrlList,
-            date = date
+            date = date,
+            user = uidUser!!
         )
         master.insert(Document.accident, report) {
             Log.d(AppLogger.reportActivity, "se creo $it")

@@ -12,7 +12,7 @@
         <ImageView
                 android:id="@+id/header_cover_image"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/navigation_header_image"/>
 
@@ -25,7 +25,6 @@
                 android:layout_marginTop="-60dp"
                 android:background="@drawable/circle_img_profile"
                 android:elevation="5dp"
-                android:padding="20dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/profile"/>
 
@@ -35,18 +34,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/header_cover_image"
                 android:background="@drawable/degradado_inicial"
-                android:elevation="4dp"
-                android:paddingBottom="24dp">
+                android:paddingBottom="10dp">
 
-
-            <ImageView
-                    android:id="@+id/drop_down_option_menu"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/ic_more_vert_black"/>
 
             <TextView
                     android:id="@+id/user_profile_name"
@@ -55,6 +44,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="76dp"
                     android:text="@string/username"
+                    android:fontFamily="@font/robotoregular"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
@@ -63,19 +53,21 @@
                     android:id="@+id/user_profile_short_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_profile_name"
+                    android:layout_below="@+id/logout"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_marginTop="10dp"
                     android:text="@string/tus_reportes"
                     android:textColor="#fff"
-                    android:textSize="14sp"/>
+                    android:textSize="16sp"/>
 
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/logout"
-                    android:layout_below="@id/user_profile_short_bio"
+                    android:layout_below="@id/user_profile_name"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="14dp"
                     android:text="@string/log_out"/>
         </RelativeLayout>
 

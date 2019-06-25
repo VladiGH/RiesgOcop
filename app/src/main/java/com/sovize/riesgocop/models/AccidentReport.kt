@@ -20,7 +20,9 @@ data class AccidentReport (
     val ambullance: String = "N/A",
     val pictures: List<String> = listOf("N/A"),
     val date: String = "0",
-    val state: Int = 1
+    val state: Int = 1,
+    val user: String = "N/A",
+    val gpsCoord: String = "N/A"
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()?: "N/A",
@@ -35,7 +37,9 @@ data class AccidentReport (
         parcel.readString() ?: "N/A",
         parcel.createStringArrayList() ?: listOf("N/A"),
         parcel.readString()?: "N/A",
-        parcel.readInt()?: 0
+        parcel.readInt()?: 0,
+        parcel.readString()?: "N/A",
+        parcel.readString()?:"N/A"
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -52,6 +56,8 @@ data class AccidentReport (
         parcel.writeStringList(pictures)
         parcel.writeString(date)
         parcel.writeInt(state)
+        parcel.writeString(user)
+        parcel.writeString(gpsCoord)
     }
 
     override fun describeContents(): Int {

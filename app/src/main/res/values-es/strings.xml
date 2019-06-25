@@ -55,5 +55,7 @@
     <string name="ok">ok</string>
     <string name="noPics">No se proporcionaron fotos</string>
     <string name="actual_state">Estado actual</string>
-
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="add_your_current_location">Agregar ubicación actual</string>
 </resources>

@@ -4,13 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.network.Glider
 
 class ProfileActivity : AppCompatActivity() {
+
+    private val user = MutableLiveData<FirebaseUser>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,21 +34,21 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
         FirebaseAuth.getInstance().addAuthStateListener {
-            if (it.currentUser == null) {
+            user.value = it.currentUser
+        }
+        user.observe(this, Observer<FirebaseUser> { fire ->
+            if (fire == null) {
                 findViewById<Button>(R.id.logout).text = getString(R.string.log_in)
 
             } else {
                 findViewById<Button>(R.id.logout).text = getString(R.string.log_out)
-
                 Glider.load(
-                    it.currentUser?.photoUrl.toString(),
+                    fire.photoUrl.toString(),
                     findViewById(R.id.user_profile_photo),
                     R.drawable.profile
                 )
             }
-        }
-
-
+        })
     }
 
     override fun onDestroy() {

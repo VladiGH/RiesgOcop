@@ -9,8 +9,8 @@ android {
         applicationId "com.sovize.ultracop"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.1.0"
+        versionCode 1
+        versionName "0.0.9"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

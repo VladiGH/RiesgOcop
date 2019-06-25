@@ -6,10 +6,9 @@ import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 
 @IgnoreExtraProperties
-data class AccidentReport (
+data class AccidentReport(
     @get:Exclude
     var id: String = "N/A",
-   // val title: String = "N/A",
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
     val personInjuredGender: String = "N/A",
@@ -22,29 +21,31 @@ data class AccidentReport (
     val date: String = "0",
     val state: Int = 1,
     val user: String = "N/A",
-    val gpsCoord: String = "N/A"
+    val longitude: Double = 0.toDouble(),
+    val latitude: Double = 0.toDouble()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
         //parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
-        parcel.readString()?: "N/A",
         parcel.readString() ?: "N/A",
-        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
+        parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.createStringArrayList() ?: listOf("N/A"),
-        parcel.readString()?: "N/A",
+        parcel.readString() ?: "N/A",
         parcel.readInt(),
-        parcel.readString()?: "N/A",
-        parcel.readString()?:"N/A"
+        parcel.readString() ?: "N/A",
+        parcel.readDouble(),
+        parcel.readDouble()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-       // parcel.writeString(title)
+        // parcel.writeString(title)
         parcel.writeString(location)
         parcel.writeString(personInjuredName)
         parcel.writeString(personInjuredGender)
@@ -57,7 +58,8 @@ data class AccidentReport (
         parcel.writeString(date)
         parcel.writeInt(state)
         parcel.writeString(user)
-        parcel.writeString(gpsCoord)
+        parcel.writeDouble(longitude)
+        parcel.writeDouble(latitude)
     }
 
     override fun describeContents(): Int {

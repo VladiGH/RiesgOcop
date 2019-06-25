@@ -1,13 +1,10 @@
 package com.sovize.ultracop.views.activities
 
 import `in`.goodiebag.carouselpicker.CarouselPicker
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -30,31 +27,14 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     var report: AccidentReport? = AccidentReport()
     private lateinit var stateValue: String
-    val carousel: CarouselPicker? = null
-    val itemsImages: ArrayList<CarouselPicker.PickerItem>? = null
-    val masterCrud = MasterCrud()
+    private val carousel: CarouselPicker? = null
+    private val itemsImages: ArrayList<CarouselPicker.PickerItem>? = null
+    private val masterCrud = MasterCrud()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        Log.d("INFO ", "esto si llega")
         setContentView(R.layout.viewer_report)
-        Log.d("INFO ", "esto si llegax")
-        val reportInfo = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
-        val report = AccidentReport(
-            reportInfo!!.id,
-            reportInfo.location,
-            reportInfo.personInjuredName,
-            reportInfo.personInjuredGender,
-            reportInfo.accidentedPersonType,
-            reportInfo.description,
-            reportInfo.severityLevel,
-            reportInfo.placeOfAttention,
-            reportInfo.ambullance,
-            reportInfo.pictures,
-            reportInfo.date,
-            reportInfo.state
-        )
+        val report = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
 
         bindData(findViewById(R.id.viewer_id), report)
         spinnerState()
@@ -69,26 +49,33 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         viewModel.getUserData().observe(this, Observer<User> {
             it?.let {
-                if (report.state == 1 && it.permission.contains("g")) {
+                if (report?.state == 1 && it.permission.contains("g")) {
                     masterCrud.updateReport(report, 2)
                 }
             }
         })
+
+        findViewById<Button>(R.id.map_btn).setOnClickListener {
+            val coordinates = Intent(this@ReportDetail, MapsActivity::class.java)
+            coordinates.putExtra(AppKey.longitude, report?.longitude)
+            coordinates.putExtra(AppKey.latitude, report?.latitude)
+            startActivity(coordinates)
+        }
     }
 
-    private fun bindData(view: View, report: AccidentReport) {
+    private fun bindData(view: View, report: AccidentReport?) {
 
-        val severity = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
-        val location = "${resources.getString(R.string.location)}: ${report.location}"
-        val descrip = "${resources.getString(R.string.description)}: ${report.description}"
-        val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
-        val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
-        val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
-        val ambullance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambullance}"
-        val date = "${resources.getString(R.string.date)}: ${report.date}"
+        val severity = "${resources.getString(R.string.severity)}: ${report?.severityLevel}"
+        val location = "${resources.getString(R.string.location)}: ${report?.location}"
+        val descrip = "${resources.getString(R.string.description)}: ${report?.description}"
+        val name = "${resources.getString(R.string.person_injured_name)}: ${report?.personInjuredName}"
+        val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report?.personInjuredGender}"
+        val place = "${resources.getString(R.string.place_of_attention)}: ${report?.placeOfAttention}"
+        val ambullance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report?.ambullance}"
+        val date = "${resources.getString(R.string.date)}: ${report?.date}"
 
         view.findViewById<CollapsingToolbarLayout>(R.id.collapsingtoolbarviewer_reportname).title =
-            report.accidentedPersonType
+            report?.accidentedPersonType
         view.findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = severity
         view.findViewById<TextView>(R.id.location).text = location
         view.findViewById<TextView>(R.id.description_report_viewer).text = descrip
@@ -104,7 +91,7 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         /*Glider.load("${ServerInfo.baseURL}${report.pictures[0]}",
             findViewById(R.id.app_bar_report_image_viewer))*/
-        if (report.pictures.isNotEmpty()) {
+        if (report?.pictures != null && report.pictures.isNotEmpty()) {
             Glider.load(
                 "${ServerInfo.baseURL}${report.pictures[0]}",
                 findViewById(R.id.app_bar_report_image_viewer)
@@ -137,7 +124,8 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         stateValue = spinner_state.selectedItem.toString()
         Snackbar.make(
             findViewById<Spinner>(R.id.spinner_state),
-            "${resources.getString(R.string.actual_state)}: ${stateValue}", Snackbar.LENGTH_LONG
+            "${resources.getString(R.string.actual_state)}: $stateValue",
+            Snackbar.LENGTH_LONG
         ).show()
     }
 

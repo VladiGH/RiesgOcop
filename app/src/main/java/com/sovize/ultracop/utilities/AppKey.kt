@@ -7,4 +7,6 @@ object AppKey {
     const val activity = "activity"
     const val reportInfo = "report"
     const val email = "email"
+    const val longitude = "longitude"
+    const val latitude = "latitude"
 }

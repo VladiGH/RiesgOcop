@@ -58,8 +58,6 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="add_your_current_location">Agregar ubicación actual</string>
-    <string name="gps_provider_on">Proveedor GPS Activado</string>
-    <string name="gps_provider_off">Proveedor GPS Desactivado</string>
     <string name="succes1">Tu Report ha sido agregado</string>
     <string name="failure1">Carga del Reporte Fallida</string>
     <string name="notyName">Reportes</string>

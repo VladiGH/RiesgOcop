@@ -17,7 +17,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.sovize.ultracop.R
@@ -31,7 +30,6 @@ import com.sovize.ultracop.utilities.system.FileManager
 import com.sovize.ultracop.utilities.system.PermissionRequester
 import com.sovize.ultracop.viewmodels.ViewModelMainActivity
 import com.sovize.ultracop.viewmodels.ViewModelReportActivity
-import com.sovize.ultracop.views.adapters.ReportPhotoAdapter
 import kotlinx.android.synthetic.main.activity_report.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -110,14 +108,9 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
             }
         }
         progress = findViewById(R.id.tv_uour_pics)
-        rv_photos.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@ReportActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = ReportPhotoAdapter(mvReport.photoList)
-        }
+
         mvReport.progressed.forEachIndexed { index, data ->
             data.observe(this@ReportActivity, Observer<Int> { percentage ->
-                rv_photos.getChildAt(index).findViewById<ProgressBar>(R.id.progress).progress = percentage
             })
         }
         findViewById<Button>(R.id.select_photos).setOnClickListener {
@@ -291,12 +284,6 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
                     mvReport.apply {
                         if (cPhoto != "") {
                             photoList.add(cPhoto)
-                            rv_photos.adapter?.notifyDataSetChanged()
-                            uploadNewPhoto(cPhoto).observe(this@ReportActivity, Observer<Int> { percentage ->
-                                rv_photos.getChildAt(progressed.size - 1).findViewById<ProgressBar>(R.id.progress)
-                                    .progress =
-                                    percentage
-                            })
                             cPhoto = ""
                         }
                     }

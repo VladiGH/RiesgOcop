@@ -77,8 +77,7 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val report2 = outState
-        report2.putParcelable("KEY", report)
+        outState.putParcelable("KEY", report)
     }
 
     private fun bindData(view: View, report: AccidentReport?) {

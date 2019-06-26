@@ -21,20 +21,14 @@ import com.sovize.ultracop.models.AccidentReport
 import com.sovize.ultracop.utilities.AppKey
 import com.sovize.ultracop.utilities.AppLogger
 import com.sovize.ultracop.utilities.Document
-import com.sovize.ultracop.viewmodels.ViewModelMainActivity
 import com.sovize.ultracop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.profile.*
 
 class ProfileActivity : AppCompatActivity() {
 
     private val user = MutableLiveData<FirebaseUser>()
-    var cont: Int = 0
-    private var ArrayList: MutableList<AccidentReport>? = null
     private val masterCrud = MasterCrud()
-    private lateinit var vmMain: ViewModelMainActivity
     private var viewAdapter: ReportAdapter? = null
-    private val viewManager = LinearLayoutManager(this@ProfileActivity)
-    private var currentUser: String = "N/A"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +53,7 @@ class ProfileActivity : AppCompatActivity() {
         user.observe(this, Observer<FirebaseUser> { fire ->
             if (fire == null) {
                 findViewById<Button>(R.id.logout).text = getString(R.string.log_in)
+                rv_reports_profile.swapAdapter(null, true)
 
             } else {
                 findViewById<Button>(R.id.logout).text = getString(R.string.log_out)
@@ -68,45 +63,41 @@ class ProfileActivity : AppCompatActivity() {
                     R.drawable.profile
                 )
                 findViewById<TextView>(R.id.user_profile_name).text = fire.email
-                currentUser = fire.uid
-                masterCrud.readWhereEq(Document.accident, "user", currentUser) {
-                    it?.forEach {
-                        ArrayList?.add(it.toObject(AccidentReport::class.java))
-                        cont++
-                        Snackbar.make(findViewById<TextView>(R.id.user_profile_name),"Numero de reportes al user: ${cont}"
-                        , Snackbar.LENGTH_LONG).show()
+                masterCrud.readWhereEq(Document.accident, "user", fire.uid) { snap ->
+                    val myReportList = mutableListOf<AccidentReport>()
+                    snap?.forEach {
+                        myReportList.add(it.toObject(AccidentReport::class.java))
                     }
-/*            if (viewAdapter == null) {
-                it?.documents?.size
-                //initRecycler(it)
-            } else {
-                viewAdapter = ReportAdapter(it){reportItem -> reportItemClicked(reportItem)}
-                rv_reports_profile.swapAdapter(viewAdapter,true)
-
-            }*/
+                    Snackbar.make(
+                        findViewById<TextView>(R.id.user_profile_name),
+                        "Numero de reportes al user: ${myReportList.size}"
+                        ,
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    initRecycler(myReportList)
                 }
             }
         })
-
-
     }
-    private fun initRecycler(report: MutableList<AccidentReport>?) {
-        viewAdapter = report?.let { ReportAdapter(it) { reportItem -> reportItemClicked(reportItem) } }
-        ArrayList?.add(AccidentReport())
+
+    private fun initRecycler(accidents: MutableList<AccidentReport>) {
+        viewAdapter = ReportAdapter(accidents) { reportItem -> reportItemClicked(reportItem) }
         rv_reports_profile.apply {
             setHasFixedSize(true)
-            layoutManager = viewManager
+            layoutManager = LinearLayoutManager(this@ProfileActivity)
             adapter = viewAdapter
         }
+        viewAdapter?.notifyDataSetChanged()
     }
 
 
     private fun reportItemClicked(item: AccidentReport) {
         Log.d(AppLogger.issuesFragment, "${item.accidentedPersonType} + ${item.description}")
         val intent = Intent(this@ProfileActivity, ReportDetail::class.java)
-        intent.putExtra(AppKey.reportInfo,item)
+        intent.putExtra(AppKey.reportInfo, item)
         startActivity(intent)
     }
+
     override fun onDestroy() {
         super.onDestroy()
         FirebaseAuth.getInstance().removeAuthStateListener {

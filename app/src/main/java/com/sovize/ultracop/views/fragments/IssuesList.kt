@@ -1,5 +1,6 @@
 package com.sovize.ultracop.views.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +26,7 @@ import kotlinx.android.synthetic.main.report_dash_list.*
 @Suppress("UNREACHABLE_CODE")
 class IssuesList : Fragment() {
 
-    private var ArrayList: MutableList<AccidentReport>? = null
+
 
     private lateinit var vmMain: ViewModelMainActivity
     private var viewAdapter: ReportAdapter? = null
@@ -33,6 +34,7 @@ class IssuesList : Fragment() {
     private val observer = Observer<MutableList<AccidentReport>> {
         if (viewAdapter == null) {
             initRecycler(it)
+
         } else {
             viewAdapter = ReportAdapter(it){reportItem -> reportItemClicked(reportItem)}
             rv_list_issues.swapAdapter(viewAdapter,true)
@@ -40,7 +42,7 @@ class IssuesList : Fragment() {
         }
     }
 
-
+    private var ArrayList: MutableList<AccidentReport> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
@@ -55,7 +57,8 @@ class IssuesList : Fragment() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     fun myFun() {
-        context?.toast("Funka")
+        val list: String = ArrayList?.size.toString()
+        context?.toast(list)
     }
 
     fun sortArrayList(): Unit? {
@@ -64,27 +67,43 @@ class IssuesList : Fragment() {
         return sortedList
     }
 
-    private fun sortArrayList2(Array: MutableList<AccidentReport>?) {
+    private fun UserFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
         if (Array != null) {
             Array.sortWith(Comparator { o1, o2 -> o1.accidentedPersonType.compareTo(o2.accidentedPersonType) })
         }
+        return Array
     }
 
-    private fun initRecycler(report: MutableList<AccidentReport>?) {
+    private fun SeverityFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
+        if (Array != null) {
+            Array.sortWith(Comparator { o1, o2 -> o1.severityLevel.compareTo(o2.severityLevel) })
+        }
+        return Array
+    }
+
+    @SuppressLint("NewApi")
+    private fun initRecycler(report: MutableList<AccidentReport>) {
         viewAdapter = report?.let { ReportAdapter(it) { reportItem -> reportItemClicked(reportItem) } }
-        ArrayList?.add(AccidentReport())
+
         rv_list_issues.apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
 
-
         tv_title_filter.setOnClickListener {
-            sortArrayList2(ArrayList)
-
-            //initRecycler(ArrayList)
-
+            var Array = UserFilter(report)
+            if (Array != null) {
+                //ArrayList.addAll(report)
+                initRecycler(Array)
+            }
+        }
+        tv_date_filter.setOnClickListener {
+            var Array = SeverityFilter(report)
+            if (Array != null) {
+                //ArrayList.addAll(report)
+                initRecycler(Array)
+            }
         }
     }
 
@@ -93,6 +112,7 @@ class IssuesList : Fragment() {
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)
         startActivity(intent)
+
     }
 
 }

@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.item_list_report.view.*
 class ReportAdapter(val items: MutableList<AccidentReport>, private val clickListener: (AccidentReport)-> Unit)
     : RecyclerView.Adapter<ReportAdapter.ViewHolder> (){
 
-    //val ArrayList: MutableList<AccidentReport>? = null
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -35,17 +33,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
             holder.itemView.setBackgroundColor(Color.parseColor("#E8EAF6"))
         }else{
             holder.itemView.setBackgroundColor(Color.parseColor("#C5CAE9"))
-        }/*
-        if(items[position].state==0) {
-            //holder.itemView.load(R.drawable.ic_active_done).into(findViewById(R.id.estado))
-
-
-        }*/
-        /*
-                fun sortArrayList() {
-                    val sortedList = ArrayList!!.run { sortWith(compareBy { it.accidentedPersonType }) }
-                    return sortedList
-                }*/
+        }
 
 
     }

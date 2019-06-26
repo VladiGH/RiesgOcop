@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">RiesgoCop</string>
     <string name="enter_your_id">Enter your student ID</string>
     <string name="enter">Enter</string>
-    <string name="password">Enter your password</string>
+    <string name="password">password</string>
     <string name="welcome">Welcome</string>
     <string name="student">Student</string>
     <string name="upload_picture">Upload a picture</string>
@@ -74,7 +74,4 @@
     <string name="photo_1">photo 1</string>
     <string name="photo_2">photo 2</string>
     <string name="photo_3">photo 3</string>
-    <string name="fields">Obligatory fields are not set</string>
-    <string name="therno">There is no user</string>
-    <string name="nophton">Photo no taken</string>
 </resources>

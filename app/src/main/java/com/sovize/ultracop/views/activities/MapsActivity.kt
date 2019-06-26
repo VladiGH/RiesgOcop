@@ -46,7 +46,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val place = LatLng(lon, lat)
+        val place = LatLng(lat, lon)
         Log.d(AppLogger.map, " $lat y $lon")
         mMap.addMarker(MarkerOptions().position(place).title(getString(R.string.locationS)))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 18f))

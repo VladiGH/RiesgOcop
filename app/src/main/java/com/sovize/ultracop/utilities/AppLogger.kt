@@ -12,7 +12,7 @@ object AppLogger {
     const val login = "LoginActivity"
     const val master = "masterCrud"
     const val messenger = "messenger"
-    const val reportDetail = "details"
+    const val reportDetail = "ReportDetails"
     const val map = "MapActivity"
 
 }

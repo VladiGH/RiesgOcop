@@ -4,9 +4,11 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.media.ThumbnailUtils
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -41,22 +43,19 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     private val permission = PermissionRequester()
     private val master = MasterCrud()
     private val fileKeeper = FileManager()
-    //anchorView es solo una vista cualquiera que sirve para obtener contexto para las notificaciones
+    //anchorView is just any random view that is use as anchor for the SnackBar to show up
     private var anchorView: View? = null
     private lateinit var mvReport: ViewModelReportActivity
-    private lateinit var progress: TextView
-    private lateinit var severityValue: String
-    private lateinit var genderValue: String
     private lateinit var occupationValue: String
     private lateinit var attentionValue: String
     private lateinit var ambulanceValue: String
-    var fecha = Date()
     var formatFecha = SimpleDateFormat("dd-MM-yy")
     private var cUser: User? = null
     private var uidUser: String? = ""
     private val locationRequestCode = 101
     private var longitudeM: Double = -89.054
     private var latitudeM: Double = 32.055
+    private var cPhoto = ""
     private lateinit var location: LocationManager
 
     override fun onLocationChanged(location: Location) {
@@ -104,15 +103,31 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
             if (et_location_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty()) {
                 createReport()
             } else {
-                Snackbar.make(findViewById(R.id.formTitle), "Campos incompletos", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(findViewById(R.id.formTitle), getString(R.string.fields), Snackbar.LENGTH_LONG).show()
             }
         }
-        progress = findViewById(R.id.tv_uour_pics)
 
-        mvReport.progressed.forEachIndexed { index, data ->
-            data.observe(this@ReportActivity, Observer<Int> { percentage ->
+        mvReport.progressed[0]
+            .observe(this@ReportActivity, Observer<Int> { percentage ->
+                findViewById<RelativeLayout>(R.id.photo1)
+                    .findViewById<ProgressBar>(R.id.progress)
+                    .progress = percentage
             })
-        }
+
+        mvReport.progressed[1]
+            .observe(this@ReportActivity, Observer<Int> { percentage ->
+                findViewById<RelativeLayout>(R.id.photo1)
+                    .findViewById<ProgressBar>(R.id.progress)
+                    .progress = percentage
+            })
+
+        mvReport.progressed[2]
+            .observe(this@ReportActivity, Observer<Int> { percentage ->
+                findViewById<RelativeLayout>(R.id.photo1)
+                    .findViewById<ProgressBar>(R.id.progress)
+                    .progress = percentage
+            })
+
         findViewById<Button>(R.id.select_photos).setOnClickListener {
             startActivity(Intent(this@ReportActivity, MapsActivity::class.java))
         }
@@ -124,7 +139,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
                 if (this != null) {
                     uidUser = FirebaseAuth.getInstance().currentUser?.uid
                 } else {
-                    Snackbar.make(progress, "No hay usuario", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(anchorView!!, getString(R.string.therno), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -134,11 +149,31 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         switchGPS.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkPermission()
-            } else {
             }
-
         }
 
+        mvReport.photoList.forEachIndexed { index, data ->
+            val bitmap = ThumbnailUtils.extractThumbnail(
+                BitmapFactory.decodeFile(data), 400, 300
+            )
+            when (index) {
+                0 -> {
+                    findViewById<RelativeLayout>(R.id.photo1)
+                        .findViewById<ImageView>(R.id.list_photo)
+                        .setImageBitmap(bitmap)
+                }
+                1 -> {
+                    findViewById<RelativeLayout>(R.id.photo2)
+                        .findViewById<ImageView>(R.id.list_photo)
+                        .setImageBitmap(bitmap)
+                }
+                2 -> {
+                    findViewById<RelativeLayout>(R.id.photo3)
+                        .findViewById<ImageView>(R.id.list_photo)
+                        .setImageBitmap(bitmap)
+                }
+            }
+        }
     }
 
     private fun getLocation() {
@@ -167,7 +202,10 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ),
                 locationRequestCode
             )
         }
@@ -184,12 +222,20 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         val ambullanceSpinner = findViewById<Spinner>(R.id.spinner_ambullance)
 
         val adapterS =
-            ArrayAdapter.createFromResource(this@ReportActivity, R.array.severity, android.R.layout.simple_spinner_item)
+            ArrayAdapter.createFromResource(
+                this@ReportActivity,
+                R.array.severity,
+                android.R.layout.simple_spinner_item
+            )
         adapterS.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         severitySpinner.adapter = adapterS
 
         val adapterG =
-            ArrayAdapter.createFromResource(this@ReportActivity, R.array.gender, android.R.layout.simple_spinner_item)
+            ArrayAdapter.createFromResource(
+                this@ReportActivity,
+                R.array.gender,
+                android.R.layout.simple_spinner_item
+            )
         adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
         genderSpinner.adapter = adapterG
 
@@ -225,12 +271,6 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (parent?.id) {
-            R.id.spinner_severity -> {
-                severityValue = spinner_severity.selectedItem.toString()
-            }
-            R.id.spinner_personInjuredGender -> {
-                genderValue = spinner_personInjuredGender.selectedItem.toString()
-            }
             R.id.spinner_personInjuredType -> {
                 occupationValue = spinner_personInjuredType.selectedItem.toString()
             }
@@ -248,14 +288,14 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         val location = findViewById<EditText>(R.id.et_location_report).text.toString()
         val personName = findViewById<EditText>(R.id.et_personInjured).text.toString()
         val descant = findViewById<EditText>(R.id.et_descripcion_report).text.toString()
-        val date = formatFecha.format(fecha).toString()
+        val date = formatFecha.format(Date()).toString()
         val report = AccidentReport(
             location = location,
             personInjuredName = personName,
-            personInjuredGender = genderValue,
+            personInjuredGender = spinner_personInjuredGender.selectedItem.toString(),
             accidentedPersonType = occupationValue,
             description = descant,
-            severityLevel = severityValue,
+            severityLevel = spinner_severity.selectedItem.toString(),
             placeOfAttention = attentionValue,
             ambullance = ambulanceValue,
             pictures = mvReport.photoUrlList,
@@ -277,38 +317,60 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 ResponseCodes.takeCoverPhotoRequest -> {
-                    Log.d(AppLogger.reportActivity, mvReport.cPhoto)
-                    mvReport.apply {
-                        if (cPhoto != "") {
-                            photoList.add(cPhoto)
-                            cPhoto = ""
+                    Log.d(AppLogger.reportActivity, cPhoto)
+                    if (cPhoto != "") {
+                        val bitmap = ThumbnailUtils.extractThumbnail(
+                            BitmapFactory.decodeFile(cPhoto), 400, 300
+                        )
+                        when (mvReport.uploaded) {
+                            0 -> {
+                                findViewById<RelativeLayout>(R.id.photo1)
+                                    .findViewById<ImageView>(R.id.list_photo)
+                                    .setImageBitmap(bitmap)
+                            }
+                            1 -> {
+                                findViewById<RelativeLayout>(R.id.photo2)
+                                    .findViewById<ImageView>(R.id.list_photo)
+                                    .setImageBitmap(bitmap)
+                            }
+                            2 -> {
+                                findViewById<RelativeLayout>(R.id.photo3)
+                                    .findViewById<ImageView>(R.id.list_photo)
+                                    .setImageBitmap(bitmap)
+                            }
                         }
+                        mvReport.uploadNewPhoto(cPhoto)
+                        cPhoto = ""
                     }
                 }
                 else -> {
                     Log.d(AppLogger.reportActivity, "No photo taken")
+                    Snackbar.make(
+                        anchorView!!,
+                        getString(R.string.nophton),
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun takeCoverPic() {
         if (permission.hasExtStoragePermission(this)) {
-            /**
-             * @counter es una variable para indicar el id del reporte, de momento es un 0
-             * quemado pero se genera un report ID aleatorio basado en el momento que se crea el reporte
-             */
             val workingDir = fileKeeper.createImageFile()
             if (workingDir != "") {
                 Log.d(AppLogger.reportActivity, "Directorio de trabajo de la foto: $workingDir")
-                mvReport.cPhoto = workingDir
+                cPhoto = workingDir
                 Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
                     takePictureIntent.resolveActivity(packageManager)?.also {
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileKeeper.getUri(workingDir, this))
+                        takePictureIntent.putExtra(
+                            MediaStore.EXTRA_OUTPUT,
+                            fileKeeper.getUri(workingDir, this)
+                        )
                         startActivityForResult(takePictureIntent, ResponseCodes.takeCoverPhotoRequest)
                     }
                 }

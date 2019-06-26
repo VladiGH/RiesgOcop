@@ -74,4 +74,7 @@
     <string name="photo_1">photo 1</string>
     <string name="photo_2">photo 2</string>
     <string name="photo_3">photo 3</string>
+    <string name="fields">Obligatory fields are not set</string>
+    <string name="therno">There is no user</string>
+    <string name="nophton">Photo no taken</string>
 </resources>

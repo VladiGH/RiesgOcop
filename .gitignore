@@ -19,3 +19,5 @@
 \.idea/misc\.xml
 
 app/google-services\.json
+
+app/release/

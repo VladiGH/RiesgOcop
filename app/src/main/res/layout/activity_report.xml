@@ -221,27 +221,25 @@
                 android:layout_below="@+id/upload"
                 android:background="#FFCACACA">
 
-
-            <ImageView
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+            <include
+                    layout="@layout/list_item_photo"
                     android:id="@+id/photo1"
-                    android:contentDescription="@string/photo_1"
-                    android:src="@drawable/ic_image_black_48dp"/>
-
-            <ImageView
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_height="200dp"/>
+
+            <include
+                    layout="@layout/list_item_photo"
                     android:id="@+id/photo2"
-                    android:contentDescription="@string/photo_2"
-                    android:src="@drawable/ic_image_black_48dp"/>
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
 
-            <ImageView
+            <include
+                    layout="@layout/list_item_photo"
+                    android:id="@+id/photo3"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
-                    android:id="@+id/photo3"
-                    android:contentDescription="@string/photo_3"
-                    android:src="@drawable/ic_image_black_48dp"/>
+                    />
+
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

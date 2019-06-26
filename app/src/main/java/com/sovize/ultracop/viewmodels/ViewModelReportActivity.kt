@@ -13,20 +13,27 @@ import java.io.File
 class ViewModelReportActivity : ViewModel() {
 
     private val client = HttpRetroClient()
+    var uploaded = 0
     val photoList = mutableListOf<String>()
     val photoUrlList = mutableListOf<String>()
     val progressed = ArrayList<MutableLiveData<Int>>()
-    var cPhoto = ""
 
-    fun uploadNewPhoto(photo: String): MutableLiveData<Int> {
-        val newData = MutableLiveData<Int>()
-        progressed.add(newData)
+    init {
+        progressed.add(MutableLiveData<Int>().apply { value = 0 })
+        progressed.add(MutableLiveData<Int>().apply { value = 0 })
+        progressed.add(MutableLiveData<Int>().apply { value = 0 })
+    }
+
+    fun uploadNewPhoto(photo: String) {
+        if (uploaded > 2) {
+            return
+        }
+        photoList.add(photo)
+        val index = uploaded
         viewModelScope.launch(Dispatchers.IO) {
             val dir = client.uploadPhoto(
                 File(photo),
                 object : Progressive {
-
-                    val index = progressed.size - 1
 
                     override fun onProgressUpdate(percentage: Int) {
                         progressed[index].postValue(100 - percentage)
@@ -42,7 +49,6 @@ class ViewModelReportActivity : ViewModel() {
                 })
             dir?.let { photoUrlList.add(it) }
         }
-        return newData
+        uploaded++
     }
-
 }

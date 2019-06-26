@@ -3,6 +3,7 @@ package com.sovize.ultracop.views.activities
 import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.viewer_report.*
 class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
-    var report: AccidentReport? = AccidentReport()
+    private var report: AccidentReport = AccidentReport()
     private lateinit var stateValue: String
     private val carousel: CarouselPicker? = null
     private val itemsImages: ArrayList<CarouselPicker.PickerItem>? = null
@@ -36,7 +37,16 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.viewer_report)
-        val report = intent?.extras?.getParcelable<AccidentReport>(AppKey.reportInfo)
+
+
+        intent?.let{
+           report = it.extras!!.getParcelable<AccidentReport>(AppKey.reportInfo)
+        }
+
+        savedInstanceState?.let{
+            report = it.getParcelable("KEY")
+        }
+
 
         bindData(findViewById(R.id.viewer_id), report)
         spinnerState()
@@ -51,7 +61,7 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         viewModel.getUserData().observe(this, Observer<User> {
             it?.let {
-                if (report?.state == 1 && it.permission.contains("g")) {
+                if (report.state == 1 && it.permission.contains("g")) {
                     masterCrud.updateReport(report, 2)
                 }
             }
@@ -59,11 +69,17 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         findViewById<Button>(R.id.map_btn).setOnClickListener {
             val coordinates = Intent(this@ReportDetail, MapsActivity::class.java)
-            coordinates.putExtra(AppKey.longitude, report?.longitude)
-            coordinates.putExtra(AppKey.latitude, report?.latitude)
-            Log.d(AppLogger.reportDetail, "${report?.longitude} ${report?.latitude}")
+            coordinates.putExtra(AppKey.longitude, report.longitude)
+            coordinates.putExtra(AppKey.latitude, report.latitude)
+            Log.d(AppLogger.reportDetail, "${report.longitude} ${report.latitude}")
             startActivity(coordinates)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val report2 = outState
+        report2.putParcelable("KEY", report)
     }
 
     private fun bindData(view: View, report: AccidentReport?) {

@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">RiesgoCop</string>
     <string name="enter_your_id">Enter your student ID</string>
     <string name="enter">Enter</string>
-    <string name="password">Enter your password</string>
+    <string name="password">password</string>
     <string name="welcome">Welcome</string>
     <string name="student">Student</string>
     <string name="upload_picture">Upload a picture</string>
@@ -57,9 +57,7 @@
     <string name="succes1">Your report was added</string>
     <string name="failure1">Report upload failed</string>
     <string name="failure2">Could not create file in external media</string>
-    <string name="notyName">Reportes</string>
-    <string name="notyDesc">En este canal se muestran la lista de reportes</string>
-    <string name="chnenlsid">riesgocop Accidents</string>
+    <string name="chnenlsid" translatable="false">riesgocop Accidents</string>
     <string name="actual_state">Actual state</string>
     <string name="on">On</string>
     <string name="off">Off</string>
@@ -69,6 +67,8 @@
     <string name="photos">Photos</string>
     <string name="map">Map</string>
     <string name="user">User</string>
-    <string name="gps_provider_on">Proveedor GPS encendido</string>
-    <string name="gps_provider_off">Proveedor GPS apagado</string>
+    <string name="gps_provider_off">GPS Provide OFF</string>
+    <string name="gps_provider_on">GPS Provide ON</string>
+    <string name="notyName">Reports</string>
+    <string name="notyDesc">This channel show the report list</string>
 </resources>

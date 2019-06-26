@@ -1,12 +1,19 @@
 package com.sovize.ultracop.views.activities
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -31,7 +38,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, LocationListener {
+
 
     private val permission = PermissionRequester()
     private val master = MasterCrud()
@@ -49,6 +57,26 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var formatFecha = SimpleDateFormat("dd-MM-yy")
     private var cUser:  User? =null
     private var uidUser: String? = ""
+    private val locationRequestCode = 101
+    private var longitudeM: Double = -89.054
+    private var latitudeM: Double = 32.055
+    private lateinit var location: LocationManager
+
+    override fun onLocationChanged(location: Location) {
+        longitudeM = location.longitude
+        latitudeM = location.latitude
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+    }
+
+    override fun onProviderEnabled(provider: String?) {
+        Toast.makeText(this@ReportActivity, "ENABLED", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onProviderDisabled(provider: String?) {
+        Toast.makeText(this@ReportActivity, "TURN ON GPS", Toast.LENGTH_LONG).show()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +93,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 permission.askExtStoragePermission(this)
                 Snackbar.make(it, getString(R.string.permissiond), Snackbar.LENGTH_LONG).show()
             }
+
         }
         findViewById<Spinner>(R.id.spinner_severity).onItemSelectedListener = this
         findViewById<Spinner>(R.id.spinner_personInjuredGender).onItemSelectedListener = this
@@ -108,8 +137,41 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
         }
         vmMain.getUserData().observe(this, userObserver)
+        val switchGPS = findViewById<Switch>(R.id.gps_switch)
+
+        switchGPS.setOnCheckedChangeListener{buttonView, isChecked ->
+            if(isChecked){
+                checkPermission()
+            }else{
+            }
+
+        }
+
     }
 
+    fun getLocation(){
+        try{
+            location = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0L, 0f, this)
+        } catch(ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available");
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getLocation()
+    }
+
+    fun checkPermission(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
+                locationRequestCode)
+        }
+    }
     /**
      * this function is only use to assign the options to the spiners
      */
@@ -197,7 +259,9 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             ambullance = ambulanceValue,
             pictures = mvReport.photoUrlList,
             date = date,
-            user = uidUser!!
+            user = uidUser!!,
+            longitude = longitudeM,
+            latitude = latitudeM
         )
         master.insert(Document.accident, report) {
             Log.d(AppLogger.reportActivity, "se creo $it")
@@ -209,6 +273,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             ).show()
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {

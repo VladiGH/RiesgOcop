@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,11 +70,11 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     }
 
     override fun onProviderEnabled(provider: String?) {
-        Toast.makeText(this@ReportActivity, "ENABLED", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@ReportActivity, resources.getString(R.string.gps_provider_on), Toast.LENGTH_LONG).show()
     }
 
     override fun onProviderDisabled(provider: String?) {
-        Toast.makeText(this@ReportActivity, "TURN ON GPS", Toast.LENGTH_LONG).show()
+        Toast.makeText(this@ReportActivity, resources.getString(R.string.gps_provider_off), Toast.LENGTH_LONG).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -150,7 +151,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     private fun getLocation() {
         try {
             location = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, this)
+            location.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0f, this)
         } catch (ex: SecurityException) {
             Log.d("myTag", "Security Exception, no location available")
         }
@@ -162,11 +163,11 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     }
 
     private fun checkPermission() {
-        if (ActivityCompat.checkSelfPermission(
+        if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(
+            && ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED

@@ -58,4 +58,6 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="add_your_current_location">Agregar ubicación actual</string>
+    <string name="gps_provider_on">GPS Provider ON</string>
+    <string name="gps_provider_off">GPS Provider OFF</string>
 </resources>

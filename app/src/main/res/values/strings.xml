@@ -69,4 +69,6 @@
     <string name="photos">Photos</string>
     <string name="map">Map</string>
     <string name="user">User</string>
+    <string name="gps_provider_on">Proveedor GPS encendido</string>
+    <string name="gps_provider_off">Proveedor GPS apagado</string>
 </resources>

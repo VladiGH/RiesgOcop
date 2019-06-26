@@ -58,14 +58,6 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="add_your_current_location">Agregar ubicación actual</string>
-    <string name="succes1">Tu Report ha sido agregado</string>
-    <string name="failure1">Carga del Reporte Fallida</string>
-    <string name="notyName">Reportes</string>
-    <string name="notyDesc">En este canal se muestran la lista de reportes</string>
-    <string name="title_activity_maps">Mapa</string>
-    <string name="locationS">Ubicación del Accidente</string>
-    <string name="photos">Fotos</string>
-    <string name="map">Mapa</string>
-    <string name="user">Usuario</string>
-    <string name="failure2">No se puede crear archivos de forma externa</string>
+    <string name="gps_provider_on">GPS Provider ON</string>
+    <string name="gps_provider_off">GPS Provider OFF</string>
 </resources>

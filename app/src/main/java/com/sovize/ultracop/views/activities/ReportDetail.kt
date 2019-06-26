@@ -3,7 +3,6 @@ package com.sovize.ultracop.views.activities
 import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -40,11 +39,11 @@ class ReportDetail : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
         intent?.let{
-           report = it.extras!!.getParcelable<AccidentReport>(AppKey.reportInfo)
+            report = it.extras?.getParcelable(AppKey.reportInfo) ?: AccidentReport()
         }
 
         savedInstanceState?.let{
-            report = it.getParcelable("KEY")
+            report = it.getParcelable("KEY") ?: AccidentReport()
         }
 
 

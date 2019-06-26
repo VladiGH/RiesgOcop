@@ -14,13 +14,11 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.firebase.MasterCrud
 import com.sovize.ultracop.models.AccidentReport
@@ -55,7 +53,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     private lateinit var ambulanceValue: String
     var fecha = Date()
     var formatFecha = SimpleDateFormat("dd-MM-yy")
-    private var cUser:  User? =null
+    private var cUser: User? = null
     private var uidUser: String? = ""
     private val locationRequestCode = 101
     private var longitudeM: Double = -89.054
@@ -139,22 +137,22 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         vmMain.getUserData().observe(this, userObserver)
         val switchGPS = findViewById<Switch>(R.id.gps_switch)
 
-        switchGPS.setOnCheckedChangeListener{buttonView, isChecked ->
-            if(isChecked){
+        switchGPS.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 checkPermission()
-            }else{
+            } else {
             }
 
         }
 
     }
 
-    fun getLocation(){
-        try{
+    private fun getLocation() {
+        try {
             location = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-            location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0L, 0f, this)
-        } catch(ex: SecurityException) {
-            Log.d("myTag", "Security Exception, no location available");
+            location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, this)
+        } catch (ex: SecurityException) {
+            Log.d("myTag", "Security Exception, no location available")
         }
     }
 
@@ -163,15 +161,24 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         getLocation()
     }
 
-    fun checkPermission(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+    private fun checkPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
-                locationRequestCode)
+                locationRequestCode
+            )
         }
     }
+
     /**
      * this function is only use to assign the options to the spiners
      */

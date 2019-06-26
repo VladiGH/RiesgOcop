@@ -71,4 +71,9 @@
     <string name="gps_provider_on">GPS Provide ON</string>
     <string name="notyName">Reports</string>
     <string name="notyDesc">This channel show the report list</string>
+    <string name="gps_provider_on">Proveedor GPS encendido</string>
+    <string name="gps_provider_off">Proveedor GPS apagado</string>
+    <string name="photo_1">photo 1</string>
+    <string name="photo_2">photo 2</string>
+    <string name="photo_3">photo 3</string>
 </resources>

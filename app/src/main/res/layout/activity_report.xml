@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,7 +23,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="25sp"/>
 
-        <Switch android:layout_width="wrap_content"
+        <Switch
+                android:layout_width="wrap_content"
                 android:id="@+id/gps_switch"
                 android:layout_height="wrap_content"
                 android:textOn="@string/on"
@@ -34,6 +36,7 @@
                 android:layout_below="@+id/et_location_report"
                 android:padding="5dp"
                 android:checked="false"/>
+
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,12 +49,12 @@
                 android:inputType="text"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_location_report"
-            android:fontFamily="@font/robotoregular"
-            android:layout_below="@+id/et_personInjured"
-            android:hint="@string/location"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_location_report"
+                android:fontFamily="@font/robotoregular"
+                android:layout_below="@+id/et_personInjured"
+                android:hint="@string/location"/>
 
         <EditText
                 android:layout_width="match_parent"
@@ -66,15 +69,16 @@
                 android:inputType="text"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/et_peligro_report"
-            android:layout_below="@+id/et_descripcion_report"
-            android:fontFamily="@font/roboto_medium"
-            android:textSize="16sp"
-            android:padding="10dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text="@string/accident_s_severity"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_peligro_report"
+                android:layout_below="@+id/et_descripcion_report"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="16sp"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="@string/accident_s_severity"/>
+
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,15 +90,17 @@
                 android:hint="@string/gender_of_the_person_injured"/>
 
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/tv_gender"
-                  android:textSize="16sp"
-                  android:text="@string/gender_of_the_person_injured"
-                  android:padding="10dp"
-                  android:textColor="@color/colorPrimaryDark"
-                  android:fontFamily="@font/roboto_medium"
-                  android:layout_below="@+id/et_peligro_report"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_gender"
+                android:textSize="16sp"
+                android:text="@string/gender_of_the_person_injured"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_below="@+id/et_peligro_report"/>
+
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,16 +112,18 @@
                 android:layout_toEndOf="@id/tv_gender"/>
 
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/tv_occupation"
-                  android:text="@string/occupation_of_the_person"
-                  android:textSize="16sp"
-                  android:textColor="@color/colorPrimaryDark"
-                  android:padding="10dp"
-                  android:fontFamily="@font/roboto_medium"
-                  android:layout_below="@+id/tv_gender"
-                  />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_occupation"
+                android:text="@string/occupation_of_the_person"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:padding="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_below="@+id/tv_gender"
+                />
+
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -127,15 +135,17 @@
                 android:hint="@string/occupation_of_the_person"/>
 
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/tv_attention"
-                  android:text="@string/place_of_attention"
-                  android:textSize="16sp"
-                  android:textColor="@color/colorPrimaryDark"
-                  android:layout_below="@+id/tv_occupation"
-                  android:fontFamily="@font/roboto_medium"
-                  android:padding="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_attention"
+                android:text="@string/place_of_attention"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_below="@+id/tv_occupation"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="10dp"/>
+
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,71 +155,93 @@
                 android:layout_below="@+id/tv_occupation"
                 android:layout_marginTop="10dp"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/tv_ambullance"
-                  android:text="@string/was_necessary_an_ambulance"
-                  android:textSize="16sp"
-                  android:textColor="@color/colorPrimaryDark"
-                  android:layout_below="@+id/tv_attention"
-                  android:fontFamily="@font/roboto_medium"
-                  android:padding="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_ambulance"
+                android:text="@string/was_necessary_an_ambulance"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_below="@+id/tv_attention"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="10dp"/>
+
         <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinner_ambullance"
-                android:layout_below="@+id/tv_ambullance"
+                android:layout_below="@+id/tv_ambulance"
                 android:layout_marginBottom="10dp"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="2dp"
-                      android:layout_below="@+id/spinner_ambullance"
-        android:background="@color/colorLogin"/>
+        <Button
+                android:id="@+id/takePicture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinner_ambullance"
+                android:layout_marginTop="15dp"
+                android:text="@string/take_pic"/>
 
+        <Button
+                android:id="@+id/upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/takePicture"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:text="@string/upload"/>
 
-                <Button
-                        android:id="@+id/takePicture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/spinner_ambullance"
-                        android:layout_marginTop="15dp"
-                        android:text="@string/take_pic"/>
-                <Button
-                        android:id="@+id/upload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/takePicture"
-                        android:layout_marginTop="20dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true"
-                        android:text="@string/upload"/>
-
-                <Button android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/select_photos"
-                        android:text="@string/select_photos"
-                        android:layout_toEndOf="@+id/takePicture"
-                        android:layout_toRightOf="@+id/takePicture"
-                        android:layout_below="@+id/spinner_ambullance"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginStart="15dp"
-                        />
-
-
-                <TextView android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="@string/report_s_photos"
-                          android:layout_below="@id/upload"
-                          android:fontFamily="@font/roboto_medium"
-                          android:textColor="#000"
-                          android:id="@+id/tv_uour_pics"
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/select_photos"
+                android:text="@string/select_photos"
+                android:layout_toEndOf="@+id/takePicture"
+                android:layout_toRightOf="@+id/takePicture"
+                android:layout_below="@+id/spinner_ambullance"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
                 />
-                <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_uour_pics"
-                        android:id="@+id/rv_photos"
+
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/report_s_photos"
+                android:layout_below="@id/upload"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#000"
+                android:id="@+id/tv_uour_pics"
                 />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/upload"
+                android:background="#FFCACACA">
+
+
+            <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/photo1"
+                    android:contentDescription="@string/photo_1"
+                    android:src="@drawable/ic_image_black_48dp"/>
+
+            <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/photo2"
+                    android:contentDescription="@string/photo_2"
+                    android:src="@drawable/ic_image_black_48dp"/>
+
+            <ImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:id="@+id/photo3"
+                    android:contentDescription="@string/photo_3"
+                    android:src="@drawable/ic_image_black_48dp"/>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

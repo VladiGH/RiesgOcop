@@ -215,31 +215,37 @@
                 android:id="@+id/tv_uour_pics"
                 />
 
-        <LinearLayout
-                android:layout_width="match_parent"
+        <HorizontalScrollView
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/upload"
-                android:background="#FFCACACA">
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/upload">
 
-            <include
-                    layout="@layout/list_item_photo"
-                    android:id="@+id/photo1"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"/>
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFCACACA"
+                    android:orientation="horizontal">
 
-            <include
-                    layout="@layout/list_item_photo"
-                    android:id="@+id/photo2"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"/>
+                <include
+                        layout="@layout/list_item_photo"
+                        android:id="@+id/photo1"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"/>
 
-            <include
-                    layout="@layout/list_item_photo"
-                    android:id="@+id/photo3"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    />
+                <include
+                        layout="@layout/list_item_photo"
+                        android:id="@+id/photo2"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"/>
 
-        </LinearLayout>
+                <include
+                        layout="@layout/list_item_photo"
+                        android:id="@+id/photo3"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        />
+            </LinearLayout>
+
+        </HorizontalScrollView>
     </RelativeLayout>
 </ScrollView>

@@ -1,6 +1,8 @@
 package com.sovize.ultracop.views.fragments
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.media.ThumbnailUtils
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -82,29 +84,55 @@ class ReportDetailFragment : Fragment() {
                 mIntent.putExtra(AppKey.longitude, report.longitude)
                 startActivity(mIntent)
             }
+
             if(report.pictures.isNotEmpty()){
-                if(report.pictures[0].isNotEmpty()){
-                    Glider.load(
-                        "${ServerInfo.baseURL}${report.pictures[0]}",
-                        it.findViewById<RelativeLayout>(R.id.photo1V)
-                            .findViewById<ImageView>(R.id.list_photo)
-                    )
+                if(report.pictures.size == 1 ){
+                    if(report.pictures[0].isNotEmpty()){
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[0]}",
+                            it.findViewById<RelativeLayout>(R.id.photo1V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                    }
                 }
-                if(report.pictures[1].isNotEmpty()){
-                    Glider.load(
-                        "${ServerInfo.baseURL}${report.pictures[1]}",
-                        it.findViewById<RelativeLayout>(R.id.photo2V)
-                            .findViewById<ImageView>(R.id.list_photo)
-                    )
+
+                if(report.pictures.size == 2){
+                    if(report.pictures[1].isNotEmpty()){
+
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[0]}",
+                            it.findViewById<RelativeLayout>(R.id.photo1V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[1]}",
+                            it.findViewById<RelativeLayout>(R.id.photo2V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                    }
                 }
-                if(report.pictures[2].isNotEmpty()){
-                    Glider.load(
-                        "${ServerInfo.baseURL}${report.pictures[2]}",
-                        it.findViewById<RelativeLayout>(R.id.photo3V)
-                            .findViewById<ImageView>(R.id.list_photo)
-                    )
+                if(report.pictures.size == 3){
+                    if(report.pictures[2].isNotEmpty()){
+
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[0]}",
+                            it.findViewById<RelativeLayout>(R.id.photo1V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[1]}",
+                            it.findViewById<RelativeLayout>(R.id.photo2V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                        Glider.load(
+                            "${ServerInfo.baseURL}${report.pictures[2]}",
+                            it.findViewById<RelativeLayout>(R.id.photo3V)
+                                .findViewById<ImageView>(R.id.list_photo)
+                        )
+                    }
                 }
             }
+
 
         }
 

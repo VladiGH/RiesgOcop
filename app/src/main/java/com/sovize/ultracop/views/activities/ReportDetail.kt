@@ -25,11 +25,11 @@ class ReportDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_report)
 
-        intent?.let{
+        intent?.let {
             report = it.extras?.getParcelable(AppKey.reportInfo) ?: AccidentReport()
         }
 
-        savedInstanceState?.let{
+        savedInstanceState?.let {
             report = it.getParcelable("KEY") ?: AccidentReport()
         }
 
@@ -39,10 +39,12 @@ class ReportDetail : AppCompatActivity() {
         itemsImages?.add(CarouselPicker.DrawableItem(R.drawable.ic_launcher_background))
 
         findViewById<ImageView>(R.id.app_bar_report_image_viewer)?.apply {
-            Glider.load(
-                "${ServerInfo.baseURL}${report.pictures[0]}",
-                this
-            )
+            if (report.pictures.isNotEmpty()) {
+                Glider.load(
+                    "${ServerInfo.baseURL}${report.pictures[0]}",
+                    this
+                )
+            }
         }
 
         viewerFragment = ReportDetailFragment()

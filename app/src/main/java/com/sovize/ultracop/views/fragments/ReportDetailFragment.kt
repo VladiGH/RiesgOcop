@@ -1,13 +1,17 @@
 package com.sovize.ultracop.views.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.sovize.ultracop.R
 import com.sovize.ultracop.models.AccidentReport
+import com.sovize.ultracop.utilities.AppKey
+import com.sovize.ultracop.views.activities.MapsActivity
 
 class ReportDetailFragment : Fragment() {
 
@@ -17,6 +21,7 @@ class ReportDetailFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val v = inflater.inflate(R.layout.viewer_report, container, false)
 
+        //this variables are created like this so Android Studio will not trigger a warning about android's translation service
         val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
         val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
         val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
@@ -33,7 +38,14 @@ class ReportDetailFragment : Fragment() {
             it.findViewById<TextView>(R.id.ambulance).text = ambulance
             it.findViewById<TextView>(R.id.tv_date).text = date
             it.findViewById<TextView>(R.id.severity).text = severity
+            it.findViewById<Button>(R.id.map_btn).setOnClickListener {
+                val mIntent = Intent(activity, MapsActivity::class.java)
+                mIntent.putExtra(AppKey.latitude, report.latitude)
+                mIntent.putExtra(AppKey.longitude, report.longitude)
+                startActivity(mIntent)
+            }
         }
+
         return v
     }
 

@@ -1,6 +1,7 @@
 package com.sovize.ultracop.utilities
 
 object AppKey {
+    //keys to be use whenever putting data on intents/bundles
     const val onIt = "on"
     const val offIt = "off"
     const val newIt = "new"

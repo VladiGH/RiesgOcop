@@ -58,7 +58,7 @@ class ViewModelMainActivity : ViewModel() {
         viewModelScope.launch {
             val newSet = mutableListOf<AccidentReport>()
             val oldSet = reportList.value
-
+//this handle what to do with each state of every document on the snapshot
             query?.documentChanges?.forEach {
                 val tempDoc = it.document.toObject(AccidentReport::class.java)
                 tempDoc.id = it.document.id

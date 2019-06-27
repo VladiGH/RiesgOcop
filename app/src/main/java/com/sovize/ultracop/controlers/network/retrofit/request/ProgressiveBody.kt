@@ -13,9 +13,11 @@ class ProgressiveBody(
     private var contentType: String
 ) : RequestBody() {
 
+    //size of the chunk to be stream in the output stream in Bytes
     private val defaultBufferSize = 1024
 
     override fun contentType(): MediaType? {
+        // "/*" is for any type wildcard
         return MediaType.parse("$contentType/*")
     }
 
@@ -33,6 +35,7 @@ class ProgressiveBody(
             while (read != -1) {
                 uploaded += read
                 sink.write(buffer, 0, read)
+                // reach the callback object animus reference
                 callBack.onProgressUpdate((100 * uploaded / fileSize).toInt())
                 read = witter.read(buffer)
             }

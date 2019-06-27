@@ -1,6 +1,7 @@
 package com.sovize.ultracop.utilities
 
 object StatusCodes {
+    //status codes for the accident reports
     const val Error = 0
     const val newReport = 1
     const val Seen = 2

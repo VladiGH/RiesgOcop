@@ -2,6 +2,7 @@ package com.sovize.ultracop.utilities
 
 object AppLogger {
 
+    //values use throughout the app on the log cat
     const val mainActivity =  "MainActivity"
     const val viewModelMainActivity = "ViewModelActivity"
     const val issuesFragment = "IssuesFragment"

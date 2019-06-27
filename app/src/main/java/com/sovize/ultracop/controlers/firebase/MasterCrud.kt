@@ -1,6 +1,7 @@
 package com.sovize.ultracop.controlers.firebase
 
 import android.util.Log
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -85,8 +86,9 @@ class MasterCrud {
                 }
             }
     }
-    fun updateReport(report: AccidentReport, state: Int) {
+
+    fun updateReport(report: AccidentReport, state: Int): Task<Void> =
         reportsDB.collection(Document.accident).document(report.id)
-            .update("state", state )
-    }
+            .update("state", state)
+
 }

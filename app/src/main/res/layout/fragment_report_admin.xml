@@ -116,17 +116,15 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/date"
-            android:textStyle="bold"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ambulance"
             android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_state"
-            android:textStyle="bold"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="12dp"
@@ -137,37 +135,17 @@
             android:text="@string/actual_state"
             android:textColor="@color/colorPrimaryDark"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_actual_state"
-            android:textSize="16sp"
-            android:text="@string/n_a_value"
-            android:textColor="@color/colorPrimaryDark"
-            android:fontFamily="@font/robotoregular"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_date"
-            app:layout_constraintStart_toEndOf="@+id/tv_state"
-            app:layout_constraintBottom_toTopOf="@+id/spinner_state"
-            />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_new_state"
-            android:textStyle="bold"
             android:fontFamily="@font/roboto_medium"
             android:textSize="16sp"
             android:text="@string/new_state"
             android:textColor="@color/colorPrimaryDark"
             app:layout_constraintBottom_toTopOf="@+id/btn_update_state"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_state"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -177,12 +155,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner_state"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/tv_state"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintLeft_toRightOf="@+id/tv_new_state"
+            app:layout_constraintTop_toBottomOf="@+id/tv_state"
     />
 
     <Button
@@ -190,27 +168,64 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/update"
-            app:layout_constraintTop_toBottomOf="@+id/tv_state"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_report_photos"
+            android:padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_new_state"
             android:background="@drawable/button_map"/>
+    <TextView
+            android:text="@string/photos"
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_update_state"/>
+    <HorizontalScrollView
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintLeft_toLeftOf="parent">
 
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFCACACA"
+                android:orientation="horizontal">
 
-    <com.synnapps.carouselview.CarouselViewPager
-            android:id="@+id/rv_report_photos"
-            android:layout_width="match_parent"
-            android:layout_height="71dp"
-            tools:layout_editor_absoluteX="0dp"
-            android:layout_marginTop="92dp"
-            app:layout_constraintTop_toBottomOf="@+id/spinner_state"
-            app:items_visible="five"
-            android:background="#DDD"/>
+            <include
+                    layout="@layout/photo_item"
+                    android:id="@+id/photo1F"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+
+            <include
+                    layout="@layout/photo_item"
+                    android:id="@+id/photo2F"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"/>
+
+            <include
+                    layout="@layout/photo_item"
+                    android:id="@+id/photo3F"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+            />
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <Button
             android:text="@string/map"

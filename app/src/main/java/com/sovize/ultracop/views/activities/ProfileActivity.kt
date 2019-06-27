@@ -92,7 +92,7 @@ class ProfileActivity : AppCompatActivity() {
 
 
     private fun reportItemClicked(item: AccidentReport) {
-        Log.d(AppLogger.issuesFragment, "${item.accidentedPersonType} + ${item.description}")
+        Log.d(AppLogger.issuesFragment, "${item.personType} + ${item.description}")
         val intent = Intent(this@ProfileActivity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo, item)
         startActivity(intent)

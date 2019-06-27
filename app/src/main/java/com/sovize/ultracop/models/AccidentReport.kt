@@ -11,15 +11,15 @@ data class AccidentReport(
     var id: String = "N/A",
     val location: String = "N/A",
     val personInjuredName: String = "N/A",
-    val personInjuredGender: String = "N/A",
-    val accidentedPersonType: String = "N/A",
+    val personInjuredGender: Int = 0,
+    val personType: Int = 0,
     val description: String = "N/A",
-    val severityLevel: String = "N/A",
-    val placeOfAttention: String = "N/A",
-    val ambullance: String = "N/A",
+    val severityLevel: Int = 0,
+    val placeOfAttention: Int = 0,
+    val ambulance: Int = 0,
     val pictures: List<String> = listOf("N/A"),
     val date: String = "0",
-    val state: Int = 1,
+    val state: Int = 0,
     val user: String = "N/A",
     val longitude: Double = 0.toDouble(),
     val latitude: Double = 0.toDouble()
@@ -29,12 +29,12 @@ data class AccidentReport(
         //parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
         parcel.readString() ?: "N/A",
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.readString() ?: "N/A",
-        parcel.readString() ?: "N/A",
-        parcel.readString() ?: "N/A",
-        parcel.readString() ?: "N/A",
-        parcel.readString() ?: "N/A",
-        parcel.readString() ?: "N/A",
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
         parcel.createStringArrayList() ?: listOf("N/A"),
         parcel.readString() ?: "N/A",
         parcel.readInt(),
@@ -45,15 +45,14 @@ data class AccidentReport(
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(id)
-        // parcel.writeString(title)
         parcel.writeString(location)
         parcel.writeString(personInjuredName)
-        parcel.writeString(personInjuredGender)
-        parcel.writeString(accidentedPersonType)
+        parcel.writeInt(personInjuredGender)
+        parcel.writeInt(personType)
         parcel.writeString(description)
-        parcel.writeString(severityLevel)
-        parcel.writeString(placeOfAttention)
-        parcel.writeString(ambullance)
+        parcel.writeInt(severityLevel)
+        parcel.writeInt(placeOfAttention)
+        parcel.writeInt(ambulance)
         parcel.writeStringList(pictures)
         parcel.writeString(date)
         parcel.writeInt(state)

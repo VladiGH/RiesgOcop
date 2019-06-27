@@ -63,13 +63,13 @@ class IssuesList : Fragment() {
 
     fun sortArrayList(): Unit? {
         //var ArrayList: MutableList<AccidentReport>? = null
-        val sortedList = ArrayList?.sortWith(compareBy { it.accidentedPersonType })
+        val sortedList = ArrayList?.sortWith(compareBy { it.personType })
         return sortedList
     }
 
     private fun UserFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
         if (Array != null) {
-            Array.sortWith(Comparator { o1, o2 -> o1.accidentedPersonType.compareTo(o2.accidentedPersonType) })
+            Array.sortWith(Comparator { o1, o2 -> o1.personType.compareTo(o2.personType) })
         }
         return Array
     }
@@ -108,7 +108,7 @@ class IssuesList : Fragment() {
     }
 
     private fun reportItemClicked(item: AccidentReport) {
-        Log.d(AppLogger.issuesFragment, "${item.accidentedPersonType} + ${item.description}")
+        Log.d(AppLogger.issuesFragment, "${item.personType} + ${item.description}")
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)
         startActivity(intent)

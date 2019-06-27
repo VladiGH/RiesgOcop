@@ -37,7 +37,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, LocationListener {
+class ReportActivity : AppCompatActivity(), LocationListener {
 
 
     private val permission = PermissionRequester()
@@ -46,9 +46,6 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
     //anchorView is just any random view that is use as anchor for the SnackBar to show up
     private var anchorView: View? = null
     private lateinit var mvReport: ViewModelReportActivity
-    private lateinit var occupationValue: String
-    private lateinit var attentionValue: String
-    private lateinit var ambulanceValue: String
     var formatFecha = SimpleDateFormat("dd-MM-yy")
     private var cUser: User? = null
     private var uidUser: String? = ""
@@ -91,11 +88,6 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
             }
 
         }
-        findViewById<Spinner>(R.id.spinner_severity).onItemSelectedListener = this
-        findViewById<Spinner>(R.id.spinner_personInjuredGender).onItemSelectedListener = this
-        findViewById<Spinner>(R.id.spinner_personInjuredType).onItemSelectedListener = this
-        findViewById<Spinner>(R.id.spinner_attentionPlace).onItemSelectedListener = this
-        findViewById<Spinner>(R.id.spinner_ambullance).onItemSelectedListener = this
 
         spinners()
 
@@ -191,11 +183,6 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-
-    }
 
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(
@@ -226,7 +213,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         val genderSpinner = findViewById<Spinner>(R.id.spinner_personInjuredGender)
         val occupationSpinner = findViewById<Spinner>(R.id.spinner_personInjuredType)
         val placeSpinner = findViewById<Spinner>(R.id.spinner_attentionPlace)
-        val ambullanceSpinner = findViewById<Spinner>(R.id.spinner_ambullance)
+        val ambulanceSpinner = findViewById<Spinner>(R.id.spinner_ambullance)
 
         val adapterS =
             ArrayAdapter.createFromResource(
@@ -269,25 +256,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
             android.R.layout.simple_spinner_item
         )
         adapterG.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
-        ambullanceSpinner.adapter = adapterA
-    }
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when (parent?.id) {
-            R.id.spinner_personInjuredType -> {
-                occupationValue = spinner_personInjuredType.selectedItem.toString()
-            }
-            R.id.spinner_attentionPlace -> {
-                attentionValue = spinner_attentionPlace.selectedItem.toString()
-            }
-            R.id.spinner_ambullance -> {
-                ambulanceValue = spinner_ambullance.selectedItem.toString()
-            }
-        }
+        ambulanceSpinner.adapter = adapterA
     }
 
     private fun createReport() {
@@ -299,12 +268,12 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         val report = AccidentReport(
             location = location,
             personInjuredName = personName,
-            personInjuredGender = spinner_personInjuredGender.selectedItem.toString(),
-            accidentedPersonType = occupationValue,
+            personInjuredGender = spinner_personInjuredGender.selectedItemPosition,
+            personType = spinner_personInjuredType.selectedItemPosition,
             description = descant,
-            severityLevel = spinner_severity.selectedItem.toString(),
-            placeOfAttention = attentionValue,
-            ambullance = ambulanceValue,
+            severityLevel = spinner_severity.selectedItemPosition,
+            placeOfAttention = spinner_attentionPlace.selectedItemPosition,
+            ambulance = spinner_ambullance.selectedItemPosition,
             pictures = mvReport.photoUrlList,
             date = date,
             user = uidUser!!,

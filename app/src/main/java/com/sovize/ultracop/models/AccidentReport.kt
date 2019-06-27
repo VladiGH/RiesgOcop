@@ -5,6 +5,9 @@ import android.os.Parcelable
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 
+/**
+ * Model of the Accident Report
+ */
 @IgnoreExtraProperties
 data class AccidentReport(
     @get:Exclude

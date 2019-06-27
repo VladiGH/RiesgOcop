@@ -29,6 +29,9 @@ class ReportDao {
             }
     }
 
+    /**
+     * @return a Query Snapshot with the items
+     */
     fun getReports(callback: (QuerySnapshot?) -> Unit) {
         reportsDB.collection(Document.accident).orderBy("date")
             .addSnapshotListener { snapshot, e ->

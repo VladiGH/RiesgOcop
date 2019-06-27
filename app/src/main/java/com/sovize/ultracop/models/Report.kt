@@ -5,6 +5,9 @@ import android.os.Parcelable
 import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 
+/**
+ * old model
+ */
 @IgnoreExtraProperties
 data class Report(
     @Exclude  var id: String = "N/A",

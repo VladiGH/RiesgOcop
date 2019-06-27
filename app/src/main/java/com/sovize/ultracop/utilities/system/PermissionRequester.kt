@@ -13,6 +13,10 @@ class PermissionRequester {
     private val tag = "PermissionRequester"
     val extStoragePermission = 1
 
+    /**
+     * This function is to verify permissions
+     * @return Boolean
+     */
     fun hasExtStoragePermission(asked: Context): Boolean {
         return if (ContextCompat.checkSelfPermission(asked, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             != PackageManager.PERMISSION_GRANTED
@@ -25,6 +29,9 @@ class PermissionRequester {
         }
     }
 
+    /**
+     * This function is to request permission to the Storage
+     */
     fun askExtStoragePermission(activity: Activity) {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(

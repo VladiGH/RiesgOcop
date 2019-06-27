@@ -7,6 +7,9 @@ import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.sovize.ultracop.utilities.system.Permissions
 
+/**
+ * Model of the User
+ */
 @IgnoreExtraProperties
 data class User(
     val email: String = "N/A",

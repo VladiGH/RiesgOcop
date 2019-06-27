@@ -65,6 +65,12 @@ class MasterCrud {
             }
     }
 
+    /**
+     * @param name of the collection
+     * @param key of the field to update
+     * @param the value of the specific field that we want to update
+     * @return query document snapshot with the items that corresponds to the third param
+     */
     fun readWhereEq(collection: String, key: String, equal: String, callback: (QuerySnapshot?) -> Unit = {}) {
         reportsDB.collection(collection)
             .whereEqualTo(key, equal).get().addOnCompleteListener { task ->

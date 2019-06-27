@@ -3,48 +3,52 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              >
 
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
+<!--
         <ImageView
                 android:id="@+id/header_cover_image"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/navigation_header_image"/>
+                android:src="@drawable/navigation_header_image"/>-->
 
-        <ImageView
-                android:id="@+id/user_profile_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_below="@+id/header_cover_image"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-60dp"
-                android:background="@drawable/circle_img_profile"
-                android:elevation="5dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profile"/>
+
 
         <RelativeLayout
                 android:id="@+id/profile_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header_cover_image"
+                android:layout_height="120dp"
                 android:background="@drawable/degradado_inicial"
-                android:elevation="4dp"
+
                 android:paddingBottom="10dp">
 
+            <ImageView
+                    android:id="@+id/user_profile_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/circle_img_profile"
 
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile"/>
             <TextView
                     android:id="@+id/user_profile_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="76dp"
                     android:text="@string/username"
+                    android:fontFamily="@font/robotoregular"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/user_profile_photo"
+                    android:layout_toEndOf="@+id/user_profile_photo"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:textColor="#fff"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
@@ -53,11 +57,13 @@
                     android:id="@+id/user_profile_short_bio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/user_profile_photo"
+                    android:layout_toRightOf="@+id/user_profile_photo"
                     android:layout_marginLeft="30dp"
                     android:layout_below="@+id/user_profile_name"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="20dp"
                     android:text="@string/tus_reportes"
                     android:textColor="#fff"
                     android:textSize="18sp"/>
@@ -66,9 +72,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/logout"
-                    android:layout_toRightOf="@+id/user_profile_name"
+                    android:layout_toRightOf="@id/user_profile_name"
                     android:layout_toEndOf="@+id/user_profile_name"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="150dp"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_map"
+                    android:textColor="#ffff"
                     android:text="@string/log_out"/>
         </RelativeLayout>
 

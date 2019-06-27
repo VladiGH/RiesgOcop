@@ -13,16 +13,17 @@ import androidx.lifecycle.viewModelScope
 import com.sovize.ultracop.R
 import com.sovize.ultracop.models.AccidentReport
 import com.sovize.ultracop.viewmodels.ViewModelMainActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class QuickBar : Fragment() {
 
     private lateinit var vmMain: ViewModelMainActivity
     private val observer = Observer<MutableList<AccidentReport>> {
-        view?.findViewById<TextView>(R.id.newIssueValue)?.text = (it.size - 2).toString()
-        view?.findViewById<TextView>(R.id.in_process)?.text = (it.size - 1).toString()
-        view?.findViewById<TextView>(R.id.close_issue_value)?.text = (it.size).toString()
+        // this observer allow to query for real time count changes on the snapshot
+        view?.findViewById<TextView>(R.id.newIssueValue)?.text = it.count { e -> e.state == 0 }.toString()
+        view?.findViewById<TextView>(R.id.in_process)?.text = it.count { e -> e.state == 1 }.toString()
+        view?.findViewById<TextView>(R.id.close_issue_value)?.text =
+            it.count { e -> e.state == 2 || e.state == 3 }.toString()
     }
 
     override fun onCreateView(
@@ -31,7 +32,6 @@ class QuickBar : Fragment() {
     ): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
         vmMain.viewModelScope.launch {
-            delay(1500)
             vmMain.getReportsData()
         }
         vmMain.reportList.observe(this, observer)

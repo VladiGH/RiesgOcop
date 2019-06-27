@@ -68,7 +68,7 @@ class IssuesList : Fragment() {
     }
 
     private fun UserFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
-        Array.sortWith(Comparator { o1, o2 -> o1.personType.compareTo(o2.personType) })
+        Array.sortWith(Comparator { o1, o2 -> o1.date.compareTo(o2.date) })
         return Array
     }
 

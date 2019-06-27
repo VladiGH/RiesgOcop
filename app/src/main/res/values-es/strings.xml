@@ -77,7 +77,7 @@
     <string name="photo_1">Foto 1</string>
     <string name="photo_2">Foto 2</string>
     <string name="photo_3">Foto 3</string>
-    <string name="fields">No están configurados los campos obligatorios</string>
+    <string name="fields">Falta llenar algunos campos</string>
     <string name="therno">No hay usuario</string>
     <string name="nophton">No se tomó la foto</string>
     <string name="failure3">Se alcanzó máximo número de fotos</string>

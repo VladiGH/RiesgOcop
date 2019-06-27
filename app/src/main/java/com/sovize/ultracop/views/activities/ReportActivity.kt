@@ -100,7 +100,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         spinners()
 
         findViewById<Button>(R.id.upload).setOnClickListener {
-            if (et_location_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty()) {
+            if (et_location_report.text.isNotEmpty() && et_descripcion_report.text.isNotEmpty() && et_personInjured.text.isNotEmpty()) {
                 createReport()
             } else {
                 Snackbar.make(findViewById(R.id.formTitle), getString(R.string.fields), Snackbar.LENGTH_LONG).show()
@@ -128,11 +128,22 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
                     .progress = percentage
             })
 
-        findViewById<Button>(R.id.select_photos).setOnClickListener {
+/*        findViewById<Button>(R.id.select_photos).setOnClickListener {
             startActivity(Intent(this@ReportActivity, MapsActivity::class.java))
-        }
+        }*/
         val vmMain = ViewModelProviders.of(this).get(ViewModelMainActivity::class.java)
+        val switchGPS = findViewById<Switch>(R.id.gps_switch)
 
+        checkPermission()
+
+        switchGPS.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                getLocation()
+            } else if(!isChecked) {
+                longitudeM = -89.054
+                latitudeM = 32.055
+            }
+        }
         val userObserver = Observer<User> { user ->
             cUser = user
             cUser.apply {
@@ -144,13 +155,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
             }
         }
         vmMain.getUserData().observe(this, userObserver)
-        val switchGPS = findViewById<Switch>(R.id.gps_switch)
 
-        switchGPS.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                checkPermission()
-            }
-        }
+        //checkPermission()
 
         mvReport.photoList.forEachIndexed { index, data ->
             val bitmap = ThumbnailUtils.extractThumbnail(
@@ -187,7 +193,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
 
     override fun onResume() {
         super.onResume()
-        getLocation()
+
+
     }
 
     private fun checkPermission() {
@@ -313,6 +320,8 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
                 , Snackbar.LENGTH_LONG
             ).show()
         }
+        finish()
+       // Toast.makeText(this@ReportActivity, "lat ${latitudeM} long ${longitudeM}", Toast.LENGTH_LONG).show()
     }
 
 

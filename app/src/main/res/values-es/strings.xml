@@ -81,4 +81,7 @@
     <string name="therno">No hay usuario</string>
     <string name="nophton">No se tomó la foto</string>
     <string name="failure3">Se alcanzó máximo número de fotos</string>
+    <string name="failure4">No se actualizó</string>
+
+    <string name="update">Actualizado</string>
 </resources>

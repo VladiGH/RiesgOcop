@@ -85,6 +85,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="photo_cover">Photo cover</string>
-    <string name="update">Update</string>
+    <string name="update">Updated</string>
     <string name="new_state">New State</string>
+    <string name="failure4">Failed to update</string>
+
 </resources>

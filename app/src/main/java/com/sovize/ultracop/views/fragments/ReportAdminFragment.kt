@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.firebase.MasterCrud
 import com.sovize.ultracop.controlers.network.Glider
@@ -145,7 +146,12 @@ class ReportAdminFragment : Fragment() {
         }
         val spi = v.findViewById<Spinner>(R.id.spinner_state)
         v.findViewById<Button>(R.id.btn_update_state).setOnClickListener {
-            masterCrud.updateReport(param1!!, spi.selectedItemPosition)
+            masterCrud.updateReport(param1!!, spi.selectedItemPosition).addOnSuccessListener {
+                Snackbar.make(v.findViewById<Button>(R.id.map_btn),resources.getString(R.string.update), Snackbar.LENGTH_LONG).show()
+            }.addOnFailureListener {
+                Snackbar.make(v.findViewById<Button>(R.id.map_btn),resources.getString(R.string.failure4), Snackbar.LENGTH_LONG).show()
+            }
+
         }
         v.findViewById<Button>(R.id.map_btn).setOnClickListener {
             val mIntent = Intent(activity, MapsActivity::class.java)

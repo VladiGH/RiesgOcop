@@ -56,6 +56,7 @@ class ReportDetailFragment : Fragment() {
             0-> arrayState[0]
             1-> arrayState[1]
             2-> arrayState[2]
+            3-> arrayState[3]
             else->"N/A"
         }
 

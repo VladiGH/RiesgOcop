@@ -71,14 +71,24 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
                     .load(R.drawable.ic_broken_image_black_48dp)
                     .into(findViewById(R.id.report_state))
             }
-            if(item.state==1){
+            if(item.state == 0){
                 Glide.with(this.context)
                     .load(R.drawable.ic_active_on)
                     .into(findViewById(R.id.estado))
             }
-            else{
+            if(item.state == 1){
                 Glide.with(this.context)
                     .load(R.drawable.ic_active_pause)
+                    .into(findViewById(R.id.estado))
+            }
+            if(item.state == 2){
+                Glide.with(this.context)
+                    .load(R.drawable.ic_active_done)
+                    .into(findViewById(R.id.estado))
+            }
+            if(item.state == 3){
+                Glide.with(this.context)
+                    .load(R.drawable.ic_error_black_24dp)
                     .into(findViewById(R.id.estado))
             }
 

@@ -25,7 +25,7 @@ class ReportDetailFragment : Fragment() {
         val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
         val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
         val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
-        val ambulance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambullance}"
+        val ambulance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambulance}"
         val date = "${resources.getString(R.string.date)}: ${report.date}"
         val severity = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
 

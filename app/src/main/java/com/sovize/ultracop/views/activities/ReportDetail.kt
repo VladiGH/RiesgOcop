@@ -3,7 +3,9 @@ package com.sovize.ultracop.views.activities
 import `in`.goodiebag.carouselpicker.CarouselPicker
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.network.Glider
 import com.sovize.ultracop.models.AccidentReport
@@ -46,6 +48,10 @@ class ReportDetail : AppCompatActivity() {
                 )
             }
         }
+        val sev = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
+        findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = sev
+        findViewById<CollapsingToolbarLayout>(R.id.collapsing_report_name).title = report.accidentedPersonType
+
 
         viewerFragment = ReportDetailFragment()
         viewerFragment.report = report

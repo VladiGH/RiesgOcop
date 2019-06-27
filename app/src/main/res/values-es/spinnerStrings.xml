@@ -31,7 +31,7 @@
     </string-array>
 
     <string-array name="state">
-        <item>Visto</item>
+        <item>Nuevo</item>
         <item>En proceso</item>
         <item>Terminado</item>
         <item>Cancelado</item>

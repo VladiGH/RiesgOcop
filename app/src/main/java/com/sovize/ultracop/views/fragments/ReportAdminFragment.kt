@@ -1,6 +1,7 @@
 package com.sovize.ultracop.views.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import com.sovize.ultracop.R
 import com.sovize.ultracop.controlers.firebase.MasterCrud
 import com.sovize.ultracop.controlers.network.Glider
 import com.sovize.ultracop.models.AccidentReport
+import com.sovize.ultracop.utilities.AppKey
 import com.sovize.ultracop.utilities.ServerInfo
+import com.sovize.ultracop.views.activities.MapsActivity
 
 private const val ARG_PARAM1 = "param1"
 
@@ -140,7 +143,16 @@ class ReportAdminFragment : Fragment() {
                 }
             }
         }
-
+        val spi = v.findViewById<Spinner>(R.id.spinner_state)
+        v.findViewById<Button>(R.id.btn_update_state).setOnClickListener {
+            masterCrud.updateReport(param1!!, spi.selectedItemPosition)
+        }
+        v.findViewById<Button>(R.id.map_btn).setOnClickListener {
+            val mIntent = Intent(activity, MapsActivity::class.java)
+            mIntent.putExtra(AppKey.latitude, param1!!.latitude)
+            mIntent.putExtra(AppKey.longitude, param1!!.longitude)
+            startActivity(mIntent)
+        }
         return v
     }
 

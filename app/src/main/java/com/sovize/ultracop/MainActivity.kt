@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         vmMain.getUserData().observe(this, userObserver)
 
-        val toggle = ActionBarDrawerToggle(
+/*        val toggle = ActionBarDrawerToggle(
             this,
             drawer_layout,
             findViewById(R.id.mainBar),
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)*/
 
         //Creating notification channel for android 8 or higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -165,6 +165,7 @@ class ReportAdminFragment : Fragment() {
 
     companion object {
 
+        //factory method to past in a new AccidentReport as a parcelable
         @JvmStatic
         fun newInstance(param1: AccidentReport) =
             ReportAdminFragment().apply {

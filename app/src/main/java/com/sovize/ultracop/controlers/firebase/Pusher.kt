@@ -10,6 +10,8 @@ import com.sovize.ultracop.utilities.Document
 
 class Pusher : FirebaseMessagingService() {
 
+    //this class handles all the push notification related stuff
+
     override fun onMessageReceived(p0: RemoteMessage?) {
         super.onMessageReceived(p0)
         Log.d(AppLogger.messenger, "new message received ${p0?.notification?.body}")

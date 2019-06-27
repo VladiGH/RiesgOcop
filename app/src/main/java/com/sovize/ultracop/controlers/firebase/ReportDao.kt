@@ -10,6 +10,7 @@ import com.sovize.ultracop.utilities.Document
 
 class ReportDao {
 
+    // legacy way to handle fireStore request
     private var reportsDB = FirebaseFirestore.getInstance()
 
     fun insertReport(report: AccidentReport, callback: (Boolean) -> Unit) {

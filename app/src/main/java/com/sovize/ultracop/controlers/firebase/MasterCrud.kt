@@ -76,6 +76,7 @@ class MasterCrud {
             }
     }
 
+    //this function allow to retrieve a particular sub set os snapshot by the ID of its parent
     fun readUid(collection: String, id: String, callback: (DocumentSnapshot?) -> Unit) {
         reportsDB.collection(collection).document(id).get()
             .addOnCompleteListener {
@@ -87,6 +88,11 @@ class MasterCrud {
             }
     }
 
+    /**
+     * @param report is th report to be updated on FireStore
+     * @return Task which it is just a closure around an IO operation to FireStore
+     * that has attachable listener onFailure and onSuccess
+     */
     fun updateReport(report: AccidentReport, state: Int): Task<Void> =
         reportsDB.collection(Document.accident).document(report.id)
             .update("state", state)

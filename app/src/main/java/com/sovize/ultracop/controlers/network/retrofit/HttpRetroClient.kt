@@ -20,6 +20,7 @@ class HttpRetroClient {
 
     fun uploadPhoto(photoFile: File, caller: Progressive): String? {
         val data = ProgressiveBody(caller, photoFile, "image")
+        //part wrap need it in order to sent the data in measurable output streams in hops or data chunks
         val partData = MultipartBody.Part.createFormData(
             "photo",
             photoFile.name,

@@ -11,6 +11,11 @@ import com.sovize.ultracop.R
 
 object Glider {
 
+    /**
+     * this class is a wrapper around the regular way of handling glide requests
+     * supporting animations ans setting a default placeholder for both erros and
+     * temporal ones
+     */
     private val factory = DrawableCrossFadeFactory.Builder().setCrossFadeEnabled(true).build()
 
     fun load(
@@ -28,6 +33,7 @@ object Glider {
             .into(v)
     }
 
+    //same as above but in a circle
     fun loadCircle(
         address: String,
         v: ImageView,

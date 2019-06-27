@@ -18,8 +18,8 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:text="@string/newIssue"
-                android:drawableStart="@drawable/ic_active_on"
-                android:drawableLeft="@drawable/ic_active_on"/>
+                android:drawableStart="@drawable/ic_fiber_new_black_48dp"
+                android:drawableLeft="@drawable/ic_fiber_new_black_48dp"/>
 
         <TextView
                 android:layout_height="50dp"

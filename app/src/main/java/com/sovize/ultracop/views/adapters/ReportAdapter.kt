@@ -73,7 +73,7 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
             }
             if(item.state == 0){
                 Glide.with(this.context)
-                    .load(R.drawable.ic_active_on)
+                    .load(R.drawable.ic_fiber_new_black_24dp)
                     .into(findViewById(R.id.estado))
             }
             if(item.state == 1){

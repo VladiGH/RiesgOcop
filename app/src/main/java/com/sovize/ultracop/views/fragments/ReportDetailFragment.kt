@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.sovize.ultracop.R
+import com.sovize.ultracop.controlers.network.Glider
 import com.sovize.ultracop.models.AccidentReport
 import com.sovize.ultracop.utilities.AppKey
+import com.sovize.ultracop.utilities.ServerInfo
 import com.sovize.ultracop.views.activities.MapsActivity
 
 class ReportDetailFragment : Fragment() {
@@ -52,9 +56,6 @@ class ReportDetailFragment : Fragment() {
             else->"N/A"
         }
 
-
-
-
         //this variables are created like this so Android Studio will not trigger a warning about android's translation service
         val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
         val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: $genderString"
@@ -80,10 +81,30 @@ class ReportDetailFragment : Fragment() {
                 mIntent.putExtra(AppKey.longitude, report.longitude)
                 startActivity(mIntent)
             }
+            if(report.pictures[0].isNotEmpty()){
+                Glider.load(
+                    "${ServerInfo.baseURL}${report.pictures[0]}",
+                    it.findViewById<RelativeLayout>(R.id.photo1V)
+                        .findViewById<ImageView>(R.id.list_photo)
+                )
+            }
+            if(report.pictures[1].isNotEmpty()){
+                Glider.load(
+                    "${ServerInfo.baseURL}${report.pictures[1]}",
+                    it.findViewById<RelativeLayout>(R.id.photo2V)
+                        .findViewById<ImageView>(R.id.list_photo)
+                )
+            }
+            if(report.pictures[2].isNotEmpty()){
+                Glider.load(
+                    "${ServerInfo.baseURL}${report.pictures[2]}",
+                    it.findViewById<RelativeLayout>(R.id.photo3V)
+                        .findViewById<ImageView>(R.id.list_photo)
+                )
+            }
         }
 
         return v
     }
-
 
 }

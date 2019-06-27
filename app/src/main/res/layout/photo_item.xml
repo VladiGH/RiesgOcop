@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        tools:showIn="@layout/viewer_report">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_photo"
+            android:src="@drawable/ic_image_black_48dp"
+            android:contentDescription="@string/report_s_photos"/>
+
+</RelativeLayout>

@@ -81,7 +81,7 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
         }
         setContentView(R.layout.activity_report)
         mvReport = ViewModelProviders.of(this).get(ViewModelReportActivity::class.java)
-        anchorView = findViewById<Button>(R.id.takePicture)
+        anchorView = findViewById(R.id.takePicture)
         anchorView?.setOnClickListener {
             if (permission.hasExtStoragePermission(this)) {
                 takeCoverPic()
@@ -343,7 +343,15 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
                                     .setImageBitmap(bitmap)
                             }
                         }
-                        mvReport.uploadNewPhoto(cPhoto)
+                        mvReport.uploadNewPhoto(cPhoto) { success, reason ->
+                            if (!success) {
+                                Snackbar.make(
+                                    anchorView!!,
+                                    reason,
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                        }
                         cPhoto = ""
                     }
                 }
@@ -361,6 +369,10 @@ class ReportActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, 
 
     private fun takeCoverPic() {
         if (permission.hasExtStoragePermission(this)) {
+            if (mvReport.uploaded >= 3) {
+                Snackbar.make(anchorView!!, getString(R.string.failure3), Snackbar.LENGTH_SHORT).show()
+                return
+            }
             val workingDir = fileKeeper.createImageFile()
             if (workingDir != "") {
                 Log.d(AppLogger.reportActivity, "Directorio de trabajo de la foto: $workingDir")

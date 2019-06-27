@@ -77,4 +77,5 @@
     <string name="fields">Obligatory fields are not set</string>
     <string name="therno">There is no user</string>
     <string name="nophton">Photo no taken</string>
+    <string name="failure3">Max number of photos reached</string>
 </resources>

@@ -24,8 +24,9 @@ class ViewModelReportActivity : ViewModel() {
         progressed.add(MutableLiveData<Int>().apply { value = 0 })
     }
 
-    fun uploadNewPhoto(photo: String) {
+    fun uploadNewPhoto(photo: String, callback: (Boolean, String) -> Unit) {
         if (uploaded > 2) {
+            callback(false, "")
             return
         }
         photoList.add(photo)
@@ -39,8 +40,9 @@ class ViewModelReportActivity : ViewModel() {
                         progressed[index].postValue(100 - percentage)
                     }
 
-                    override fun onError() {
+                    override fun onError(e: Exception) {
                         progressed[index].postValue(100)
+                        callback(false, e.message.toString())
                     }
 
                     override fun onFinish() {

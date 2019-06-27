@@ -1,8 +1,6 @@
 package com.sovize.ultracop.controlers.network.retrofit.request
 
-import android.util.Log
 import com.sovize.ultracop.controlers.network.retrofit.interfaces.drivers.Progressive
-import com.sovize.ultracop.utilities.AppLogger
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import okio.BufferedSink
@@ -40,8 +38,7 @@ class ProgressiveBody(
             }
             callBack.onFinish()
         } catch (e: Exception) {
-            Log.e(AppLogger.retrofit, "error de subida", e)
-            callBack.onError()
+            callBack.onError(e)
         } finally {
             witter.close()
         }

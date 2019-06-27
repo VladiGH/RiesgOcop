@@ -10,7 +10,6 @@ import okhttp3.MultipartBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
-import java.net.SocketTimeoutException
 
 class HttpRetroClient {
 
@@ -19,7 +18,7 @@ class HttpRetroClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun uploadPhoto(photoFile: File, caller: Progressive) : String? {
+    fun uploadPhoto(photoFile: File, caller: Progressive): String? {
         val data = ProgressiveBody(caller, photoFile, "image")
         val partData = MultipartBody.Part.createFormData(
             "photo",
@@ -28,23 +27,20 @@ class HttpRetroClient {
         )
         val call = retrofit.create(PhotoReport::class.java)
             .sentPicture(partData)
-        try {
+        return try {
             val result = call.execute()
-            return if (result.isSuccessful && result.code() == 200){
+            if (result.isSuccessful && result.code() == 200) {
                 Log.d(AppLogger.retrofit, result.message())
                 Log.d(AppLogger.retrofit, result.code().toString())
                 Log.d(AppLogger.retrofit, result.body()?.mesage)
                 result.body()?.fileDir!!.substring(1)
-            }
-            else {
-                Log.e(AppLogger.retrofit, result.message())
-                Log.e(AppLogger.retrofit, result.body()?.error)
-                Log.e(AppLogger.retrofit, result.code().toString())
+            } else {
+                caller.onError(java.lang.Exception(result.message() + result.body()?.error + result.code().toString()))
                 null
             }
-        }catch ( e: SocketTimeoutException){
-            Log.d(AppLogger.retrofit, "se jodie en subida", e)
-            return  null
+        } catch (e: Exception) {
+            caller.onError(e)
+            null
         }
     }
 

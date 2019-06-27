@@ -1,6 +1,5 @@
 package com.sovize.ultracop.views.fragments
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sovize.ultracop.R.layout.report_dash_list
 import com.sovize.ultracop.models.AccidentReport
+import com.sovize.ultracop.models.User
 import com.sovize.ultracop.utilities.AppKey
 import com.sovize.ultracop.utilities.AppLogger
 import com.sovize.ultracop.viewmodels.ViewModelMainActivity
@@ -23,7 +23,6 @@ import com.sovize.ultracop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.report_dash_list.*
 
 
-@Suppress("UNREACHABLE_CODE")
 class IssuesList : Fragment() {
 
 
@@ -38,52 +37,48 @@ class IssuesList : Fragment() {
         } else {
             viewAdapter = ReportAdapter(it){reportItem -> reportItemClicked(reportItem)}
             rv_list_issues.swapAdapter(viewAdapter,true)
-
         }
     }
+    private val userObserver = Observer<User> {
+        cUser = it
+    }
+    private var cUser: User? = null
 
     private var ArrayList: MutableList<AccidentReport> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         vmMain = ViewModelProviders.of(activity!!).get(ViewModelMainActivity::class.java)
         vmMain.reportList.observe(this, observer)
-
-        val view  =  inflater.inflate(report_dash_list, container, false)
-
-        return view
+        vmMain.getUserData().observe(this, userObserver)
+        return inflater.inflate(report_dash_list, container, false)
     }
 
     fun Context.toast(message: CharSequence) =
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
     fun myFun() {
-        val list: String = ArrayList?.size.toString()
+        val list: String = ArrayList.size.toString()
         context?.toast(list)
     }
 
     fun sortArrayList(): Unit? {
         //var ArrayList: MutableList<AccidentReport>? = null
-        val sortedList = ArrayList?.sortWith(compareBy { it.personType })
+        val sortedList = ArrayList.sortWith(compareBy { it.personType })
         return sortedList
     }
 
     private fun UserFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
-        if (Array != null) {
-            Array.sortWith(Comparator { o1, o2 -> o1.personType.compareTo(o2.personType) })
-        }
+        Array.sortWith(Comparator { o1, o2 -> o1.personType.compareTo(o2.personType) })
         return Array
     }
 
     private fun SeverityFilter(Array: MutableList<AccidentReport>): MutableList<AccidentReport>? {
-        if (Array != null) {
-            Array.sortWith(Comparator { o1, o2 -> o1.severityLevel.compareTo(o2.severityLevel) })
-        }
+        Array.sortWith(Comparator { o1, o2 -> o1.severityLevel.compareTo(o2.severityLevel) })
         return Array
     }
 
-    @SuppressLint("NewApi")
     private fun initRecycler(report: MutableList<AccidentReport>) {
-        viewAdapter = report?.let { ReportAdapter(it) { reportItem -> reportItemClicked(reportItem) } }
+        viewAdapter = report.let { ReportAdapter(it) { reportItem -> reportItemClicked(reportItem) } }
 
         rv_list_issues.apply {
             setHasFixedSize(true)
@@ -111,6 +106,7 @@ class IssuesList : Fragment() {
         Log.d(AppLogger.issuesFragment, "${item.personType} + ${item.description}")
         val intent = Intent(activity, ReportDetail::class.java)
         intent.putExtra(AppKey.reportInfo,item)
+        intent.putExtra(AppKey.userparcel, cUser)
         startActivity(intent)
 
     }

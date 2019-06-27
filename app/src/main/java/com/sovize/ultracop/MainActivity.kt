@@ -94,24 +94,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             notificationManager.createNotificationChannel(mChannel)
         }
     }
-/*
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            0 -> {
-
-            }
-
-        }
-        Log.i(AppLogger.mainActivity, item.itemId.toString())
-        return true
-    }
-*/
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             ResponseCodes.login -> {
-                if (resultCode == RESULT_OK) {
+                if (resultCode == RESULT_OK && cUser?.permission?.contains("w") == true) {
                     startActivity(Intent(this, ReportActivity::class.java))
                 }
             }

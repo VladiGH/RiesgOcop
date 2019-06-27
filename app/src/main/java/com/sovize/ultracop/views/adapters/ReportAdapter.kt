@@ -41,8 +41,22 @@ class ReportAdapter(val items: MutableList<AccidentReport>, private val clickLis
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         
         fun bind(item: AccidentReport, clickListener: (AccidentReport) -> Unit)= with(itemView){
-            val occupation = "${resources.getString(R.string.occupation_of_the_person)}: ${item.personType}"
-            val severity = "${ resources.getString(R.string.accident_s_severity)}: ${item.severityLevel}"
+            val arraySev = resources.getStringArray(R.array.severity)
+            val arrayPersonT = resources.getStringArray(R.array.ocuppation)
+            val severityString = when(item.severityLevel){
+                0-> arraySev[0]
+                1-> arraySev[1]
+                2-> arraySev[2]
+                else -> "N/A"
+            }
+            val personTypeString = when(item.personType){
+                0-> arrayPersonT[0]
+                1-> arrayPersonT[1]
+                2-> arrayPersonT[2]
+                else->"N/A"
+            }
+            val occupation = "${resources.getString(R.string.occupation_of_the_person)}: $personTypeString"
+            val severity = "${ resources.getString(R.string.accident_s_severity)}: $severityString"
 
             tv_report_date.text = item.date
             tv_report_title.text = occupation

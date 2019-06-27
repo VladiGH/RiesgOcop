@@ -21,23 +21,59 @@ class ReportDetailFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val v = inflater.inflate(R.layout.viewer_report, container, false)
 
+        val arrayGender = resources.getStringArray(R.array.gender)
+        val arrayPlace = resources.getStringArray(R.array.placeOfAttention)
+        val arrayAmbullance = resources.getStringArray(R.array.ambullance)
+        val arrayState = resources.getStringArray(R.array.state)
+
+        val genderString = when(report.personInjuredGender){
+            0-> arrayGender[0]
+            1-> arrayGender[1]
+            else -> "N/A"
+        }
+
+        val placeString = when(report.placeOfAttention){
+            0-> arrayPlace[0]
+            1-> arrayPlace[1]
+            2-> arrayPlace[2]
+            else->"N/A"
+        }
+
+        val ambulanceString = when(report.ambulance){
+            0-> arrayAmbullance[0]
+            1-> arrayAmbullance[1]
+            2-> arrayAmbullance[2]
+            else->"N/A"
+        }
+        val stateString = when(report.state){
+            0-> arrayState[0]
+            1-> arrayState[1]
+            2-> arrayState[2]
+            else->"N/A"
+        }
+
+
+
+
         //this variables are created like this so Android Studio will not trigger a warning about android's translation service
         val name = "${resources.getString(R.string.person_injured_name)}: ${report.personInjuredName}"
-        val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: ${report.personInjuredGender}"
-        val place = "${resources.getString(R.string.place_of_attention)}: ${report.placeOfAttention}"
-        val ambulance = "${resources.getString(R.string.was_necessary_an_ambulance)}: ${report.ambulance}"
+        val gender = "${resources.getString(R.string.gender_of_the_person_injured)}: $genderString"
+        val place = "${resources.getString(R.string.place_of_attention)}: $placeString"
+        val ambulance = "${resources.getString(R.string.was_necessary_an_ambulance)}: $ambulanceString"
         val date = "${resources.getString(R.string.date)}: ${report.date}"
-        val severity = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
+        val state = "${resources.getString(R.string.actual_state)}: $stateString"
+        val loc = "${resources.getString(R.string.location)}: ${report.location}"
+        val descrip = "${resources.getString(R.string.description)}: ${report.description}"
 
         v?.let {
+            it.findViewById<TextView>(R.id.location).text = loc
             it.findViewById<TextView>(R.id.nameOfPerson).text = name
             it.findViewById<TextView>(R.id.genderOfPerson).text = gender
-            it.findViewById<TextView>(R.id.description_report_viewer).text = resources.getString(R.string.description)
-            it.findViewById<TextView>(R.id.description_content).text = report.description
+            it.findViewById<TextView>(R.id.description_report_viewer).text = descrip
             it.findViewById<TextView>(R.id.placeAttention).text = place
             it.findViewById<TextView>(R.id.ambulance).text = ambulance
             it.findViewById<TextView>(R.id.tv_date).text = date
-            it.findViewById<TextView>(R.id.severity).text = severity
+            it.findViewById<TextView>(R.id.severity).text = state
             it.findViewById<Button>(R.id.map_btn).setOnClickListener {
                 val mIntent = Intent(activity, MapsActivity::class.java)
                 mIntent.putExtra(AppKey.latitude, report.latitude)

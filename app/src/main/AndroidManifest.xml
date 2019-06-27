@@ -43,7 +43,8 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.sovize.ultracop.views.activities.ReportDetail"/>
         </activity>
-        <activity android:name="com.sovize.ultracop.views.activities.ProfileActivity">
+        <activity android:name="com.sovize.ultracop.views.activities.ProfileActivity"
+        android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name="com.sovize.ultracop.views.activities.Login">
         </activity>

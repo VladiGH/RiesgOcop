@@ -48,9 +48,24 @@ class ReportDetail : AppCompatActivity() {
                 )
             }
         }
-        val sev = "${resources.getString(R.string.severity)}: ${report.severityLevel}"
+        val arraySev = resources.getStringArray(R.array.severity)
+        val arrayPersonT = resources.getStringArray(R.array.ocuppation)
+        val severityString = when(report.severityLevel){
+            0-> arraySev[0]
+            1-> arraySev[1]
+            2-> arraySev[2]
+            else -> "N/A"
+        }
+
+        val sev = "${resources.getString(R.string.severity)}: $severityString"
+       val personTypeString = when(report.personType){
+           0-> arrayPersonT[0]
+           1-> arrayPersonT[1]
+           2-> arrayPersonT[2]
+           else->"N/A"
+        }
         findViewById<TextView>(R.id.app_bar_rating_danger_viewer).text = sev
-        findViewById<CollapsingToolbarLayout>(R.id.collapsing_report_name).title = report.accidentedPersonType
+        findViewById<CollapsingToolbarLayout>(R.id.collapsing_report_name).title = personTypeString
 
 
         viewerFragment = ReportDetailFragment()

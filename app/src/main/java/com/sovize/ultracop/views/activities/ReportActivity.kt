@@ -36,7 +36,10 @@ import kotlinx.android.synthetic.main.activity_report.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
+/**
+ * This class is for the report activity's behavior and extends
+ * to the Location Listener
+ */
 class ReportActivity : AppCompatActivity(), LocationListener {
 
 
@@ -55,6 +58,9 @@ class ReportActivity : AppCompatActivity(), LocationListener {
     private var cPhoto = ""
     private lateinit var location: LocationManager
 
+    /**
+     * is for get the coordinates
+     */
     override fun onLocationChanged(location: Location) {
         longitudeM = location.longitude
         latitudeM = location.latitude
@@ -63,10 +69,16 @@ class ReportActivity : AppCompatActivity(), LocationListener {
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
     }
 
+    /**
+     * this override it's used to verify if the provider is enabled
+     */
     override fun onProviderEnabled(provider: String?) {
         Toast.makeText(this@ReportActivity, resources.getString(R.string.gps_provider_on), Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * this override it's used to verify if the provider is disabled
+     */
     override fun onProviderDisabled(provider: String?) {
         Toast.makeText(this@ReportActivity, resources.getString(R.string.gps_provider_off), Toast.LENGTH_LONG).show()
     }
@@ -174,6 +186,9 @@ class ReportActivity : AppCompatActivity(), LocationListener {
         }
     }
 
+    /**
+     * This function get the user's location if the provider is enabled
+     */
     private fun getLocation() {
         try {
             location = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -183,7 +198,9 @@ class ReportActivity : AppCompatActivity(), LocationListener {
         }
     }
 
-
+    /**
+     * This function verify the localization's permission
+     */
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -206,7 +223,7 @@ class ReportActivity : AppCompatActivity(), LocationListener {
     }
 
     /**
-     * this function is only use to assign the options to the spiners
+     * this function is only use to assign the options to the spinners
      */
     private fun spinners() {
         val severitySpinner = findViewById<Spinner>(R.id.spinner_severity)

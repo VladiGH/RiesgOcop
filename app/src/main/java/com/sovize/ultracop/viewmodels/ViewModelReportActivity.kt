@@ -24,6 +24,9 @@ class ViewModelReportActivity : ViewModel() {
         progressed.add(MutableLiveData<Int>().apply { value = 0 })
     }
 
+    /**
+     * this function is to handle the progress of the taken photos
+     */
     fun uploadNewPhoto(photo: String, callback: (Boolean, String) -> Unit) {
         if (uploaded > 2) {
             callback(false, "")

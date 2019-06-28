@@ -24,6 +24,9 @@ import com.sovize.ultracop.utilities.Document
 import com.sovize.ultracop.views.adapters.ReportAdapter
 import kotlinx.android.synthetic.main.profile.*
 
+/**
+ * This class is for the profile activity's behavior
+ */
 class ProfileActivity : AppCompatActivity() {
 
     private val user = MutableLiveData<FirebaseUser>()
